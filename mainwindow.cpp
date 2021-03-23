@@ -56,7 +56,7 @@ void MainWindow::change_map()
 void MainWindow::timer_update()
 {
     *vtime = vtime->addSecs(1);
-    time_display->setText(vtime->toString("yyyy-MM-dd hh:mm:ss"));
+    time_display->setText(vtime->toString("yyyy-MM-dd hh:mm:ss ddd"));
     time_display->update();
 }
 
@@ -65,7 +65,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
 
     setWindowTitle("CampusGuide");
-    setFixedSize(1400, 672);
+    setFixedSize(1600, 672);
 
     main_campus = new Map("main_campus", this);
     shahe_campus = new Map("shahe_campus", this);
@@ -91,15 +91,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(timer, &QTimer::timeout, this, &MainWindow::timer_update);
     timer->start(166);
 
-    vtime = new QDateTime(QDate(2021, 4, 10),QTime(7, 30, 0));
+    vtime = new QDateTime;
+    *vtime = QDateTime::currentDateTime();
 
     time_display = new QLabel(this);
-    time_display->setFixedWidth(400);
+    time_display->setFixedWidth(600);
     time_display->move(1100, 650);
     QFont font;
     font.setBold(true);
     time_display->setFont(font);
-    time_display->setText("当前时间：" + vtime->toString("yyyy-MM-dd hh:mm:ss"));
+    time_display->setText("当前时间：" + vtime->toString("yyyy-MM-dd hh:mm:ss ddd"));
 }
 
 MainWindow::~MainWindow()
