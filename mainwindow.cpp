@@ -3,6 +3,8 @@ QComboBox* des;
 Player* me;
 Map* main_campus, *shahe_campus;
 QPushButton* navi, *map_switch;
+QDateTime* vtime;
+QLabel* time_display;
 
 void MainWindow::navi_switch()
 {
@@ -51,6 +53,13 @@ void MainWindow::change_map()
         me->show();
 }
 
+void MainWindow::timer_update()
+{
+    *vtime = vtime->addSecs(1);
+    time_display->setText(vtime->toString("yyyy-MM-dd hh:mm:ss"));
+    time_display->update();
+}
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -78,6 +87,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     map_switch->move(1200, 0);
     connect(map_switch, &QPushButton::clicked, this, &MainWindow::change_map);
 
+    QTimer* timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &MainWindow::timer_update);
+    timer->start(166);
+
+    vtime = new QDateTime(QDate(2021, 4, 10),QTime(7, 30, 0));
+
+    time_display = new QLabel(this);
+    time_display->setFixedWidth(400);
+    time_display->move(1100, 650);
+    QFont font;
+    font.setBold(true);
+    time_display->setFont(font);
+    time_display->setText("当前时间：" + vtime->toString("yyyy-MM-dd hh:mm:ss"));
 }
 
 MainWindow::~MainWindow()

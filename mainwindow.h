@@ -5,6 +5,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QComboBox>
+#include <QTimer>
 #include <QDebug>
 #include "./ui_mainwindow.h"
 #include "map.h"
@@ -23,6 +24,7 @@ public:
     ~MainWindow();
     void navi_switch();
     void change_map();
+    void timer_update();
 private:
     Ui::MainWindow *ui;
 };

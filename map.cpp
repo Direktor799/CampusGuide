@@ -77,13 +77,13 @@ void Map::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
-    //map
+
     QPixmap pix;
     pix.load(QString::fromStdString(filename + ".png"));
     painter.drawPixmap(0,0,pix);
     QPen pen;
     QString text;
-    //routes
+
     pen.setWidth(5);
     pen.setColor(QColor(255,0,0));
     painter.setPen(pen);
@@ -99,50 +99,25 @@ void Map::paintEvent(QPaintEvent *)
                 vertices[edges[*i].from].pos_y*my_ratio+my_drift),
                 QPointF(vertices[edges[*i].to].pos_x*my_ratio+my_drift,
                 vertices[edges[*i].to].pos_y*my_ratio+my_drift));
-    //name
+
+    pen.setWidth(1);
+    pen.setColor(QColor(0,0,0));
     painter.setPen(pen);
     QFont font = painter.font();
     font.setBold(true);
-    QFontMetrics fm(font);
     painter.setFont(font);
+    QFontMetrics fm(font);
     for(auto i = vertices.begin(); i < vertices.end(); i++)
     {
         if(i->name != "Crossing")
         {
             text = text.asprintf("%s", i->name.c_str());
             QRectF rec = fm.boundingRect(text);
-            painter.fillRect(QRectF(i->pos_x * my_ratio + my_drift - rec.width() / 2, i->pos_y * my_ratio + my_drift - rec.height() / 2, rec.width(), rec.height()), Qt::white);
+            QPainterPath path;
+            path.addRoundedRect(QRectF(i->pos_x * my_ratio + my_drift - rec.width() / 2 - 2, i->pos_y * my_ratio + my_drift - rec.height() / 2, rec.width() + 4, rec.height()), 5, 5);
+            painter.drawPath(path);
+            painter.fillPath(path, QColor(255,255,255,210));
             painter.drawText(i->pos_x * my_ratio + my_drift - rec.width() / 2, i->pos_y * my_ratio + my_drift + rec.height() / 2 - 3, text);
         }
     }
-//    //edges
-//    for(auto i = edges.begin(); i < edges.end(); i++)
-//        painter.drawLine(QPointF(vertices[i->from].pos_x*my_ratio+my_drift,
-//                         vertices[i->from].pos_y*my_ratio+my_drift),
-//                QPointF(vertices[i->to].pos_x*my_ratio+my_drift,
-//                vertices[i->to].pos_y*my_ratio+my_drift));
-//    //vertices
-//    pen.setWidth(10);
-//    pen.setColor(QColor(0,0,0));
-//    painter.setPen(pen);
-//    for(auto i = vertices.begin(); i < vertices.end(); i++)
-//        painter.drawEllipse(i->pos_x*my_ratio+my_drift-4,i->pos_y*my_ratio+my_drift-4,10,10);
-//    //numbers
-//    pen.setColor(QColor(255,0,0));
-//    pen.setWidth(2);
-//    painter.setPen(pen);
-//    for(auto i = main_campus_vertices.begin(); i < main_campus_vertices.end(); i++)
-//    {
-//        text = text.asprintf("%d", i->number);
-//        painter.drawText(i->pos_x*my_ratio+my_drift-6,i->pos_y*my_ratio+my_drift+2,text);
-//    }
-//    //distants
-//    pen.setColor(QColor(0,255,0));
-//    painter.setPen(pen);
-//    for(auto i = main_campus_edges.begin(); i < main_campus_edges.end(); i++)
-//    {
-//        text = text.asprintf("%d", i->length);
-//        painter.drawText((main_campus_vertices[i->from].pos_x + main_campus_vertices[i->to].pos_x)/2*my_ratio+my_drift,
-//                         (main_campus_vertices[i->from].pos_y + main_campus_vertices[i->to].pos_y)/2*my_ratio+my_drift, text);
-//    }
 }
