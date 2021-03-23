@@ -1,3 +1,0 @@
-"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\21_DSCourseProject_CampusGuide.dir/objects.a
-C:\PROGRA~1\MINGW-~1\X86_64~1.0-W\mingw64\bin\ar.exe cr CMakeFiles\21_DSCourseProject_CampusGuide.dir/objects.a @CMakeFiles\21_DSCourseProject_CampusGuide.dir\objects1.rsp
-C:\PROGRA~1\MINGW-~1\X86_64~1.0-W\mingw64\bin\X86_64~2.EXE -g -Wl,--whole-archive CMakeFiles\21_DSCourseProject_CampusGuide.dir/objects.a -Wl,--no-whole-archive -o 21_DSCourseProject_CampusGuide.exe -Wl,--out-implib,lib21_DSCourseProject_CampusGuide.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\21_DSCourseProject_CampusGuide.dir\linklibs.rsp
