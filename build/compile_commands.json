@@ -1,0 +1,32 @@
+[
+{
+  "directory": "C:/Users/Price/Desktop/Codes/21_DSCourseProject_CampusGuide/build",
+  "command": "C:\\PROGRA~1\\MINGW-~1\\X86_64~1.0-W\\mingw64\\bin\\X86_64~2.EXE -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0601 -D_WIN64 @CMakeFiles/21_DSCourseProject_CampusGuide.dir/includes_CXX.rsp -g -pthread -std=gnu++17 -o CMakeFiles\\21_DSCourseProject_CampusGuide.dir\\21_DSCourseProject_CampusGuide_autogen\\mocs_compilation.cpp.obj -c C:\\Users\\Price\\Desktop\\Codes\\21_DSCourseProject_CampusGuide\\build\\21_DSCourseProject_CampusGuide_autogen\\mocs_compilation.cpp",
+  "file": "C:/Users/Price/Desktop/Codes/21_DSCourseProject_CampusGuide/build/21_DSCourseProject_CampusGuide_autogen/mocs_compilation.cpp"
+},
+{
+  "directory": "C:/Users/Price/Desktop/Codes/21_DSCourseProject_CampusGuide/build",
+  "command": "C:\\PROGRA~1\\MINGW-~1\\X86_64~1.0-W\\mingw64\\bin\\X86_64~2.EXE -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0601 -D_WIN64 @CMakeFiles/21_DSCourseProject_CampusGuide.dir/includes_CXX.rsp -g -pthread -std=gnu++17 -o CMakeFiles\\21_DSCourseProject_CampusGuide.dir\\main.cpp.obj -c C:\\Users\\Price\\Desktop\\Codes\\21_DSCourseProject_CampusGuide\\main.cpp",
+  "file": "C:/Users/Price/Desktop/Codes/21_DSCourseProject_CampusGuide/main.cpp"
+},
+{
+  "directory": "C:/Users/Price/Desktop/Codes/21_DSCourseProject_CampusGuide/build",
+  "command": "C:\\PROGRA~1\\MINGW-~1\\X86_64~1.0-W\\mingw64\\bin\\X86_64~2.EXE -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0601 -D_WIN64 @CMakeFiles/21_DSCourseProject_CampusGuide.dir/includes_CXX.rsp -g -pthread -std=gnu++17 -o CMakeFiles\\21_DSCourseProject_CampusGuide.dir\\mainwindow.cpp.obj -c C:\\Users\\Price\\Desktop\\Codes\\21_DSCourseProject_CampusGuide\\mainwindow.cpp",
+  "file": "C:/Users/Price/Desktop/Codes/21_DSCourseProject_CampusGuide/mainwindow.cpp"
+},
+{
+  "directory": "C:/Users/Price/Desktop/Codes/21_DSCourseProject_CampusGuide/build",
+  "command": "C:\\PROGRA~1\\MINGW-~1\\X86_64~1.0-W\\mingw64\\bin\\X86_64~2.EXE -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0601 -D_WIN64 @CMakeFiles/21_DSCourseProject_CampusGuide.dir/includes_CXX.rsp -g -pthread -std=gnu++17 -o CMakeFiles\\21_DSCourseProject_CampusGuide.dir\\functions.cpp.obj -c C:\\Users\\Price\\Desktop\\Codes\\21_DSCourseProject_CampusGuide\\functions.cpp",
+  "file": "C:/Users/Price/Desktop/Codes/21_DSCourseProject_CampusGuide/functions.cpp"
+},
+{
+  "directory": "C:/Users/Price/Desktop/Codes/21_DSCourseProject_CampusGuide/build",
+  "command": "C:\\PROGRA~1\\MINGW-~1\\X86_64~1.0-W\\mingw64\\bin\\X86_64~2.EXE -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0601 -D_WIN64 @CMakeFiles/21_DSCourseProject_CampusGuide.dir/includes_CXX.rsp -g -pthread -std=gnu++17 -o CMakeFiles\\21_DSCourseProject_CampusGuide.dir\\map.cpp.obj -c C:\\Users\\Price\\Desktop\\Codes\\21_DSCourseProject_CampusGuide\\map.cpp",
+  "file": "C:/Users/Price/Desktop/Codes/21_DSCourseProject_CampusGuide/map.cpp"
+},
+{
+  "directory": "C:/Users/Price/Desktop/Codes/21_DSCourseProject_CampusGuide/build",
+  "command": "C:\\PROGRA~1\\MINGW-~1\\X86_64~1.0-W\\mingw64\\bin\\X86_64~2.EXE -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN32_WINNT=0x0601 -D_WIN64 @CMakeFiles/21_DSCourseProject_CampusGuide.dir/includes_CXX.rsp -g -pthread -std=gnu++17 -o CMakeFiles\\21_DSCourseProject_CampusGuide.dir\\player.cpp.obj -c C:\\Users\\Price\\Desktop\\Codes\\21_DSCourseProject_CampusGuide\\player.cpp",
+  "file": "C:/Users/Price/Desktop/Codes/21_DSCourseProject_CampusGuide/player.cpp"
+}
+]

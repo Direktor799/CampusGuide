@@ -1,0 +1,4 @@
+C:/Users/Price/Desktop/Codes/21_DSCourseProject_CampusGuide/build/CMakeFiles/21_DSCourseProject_CampusGuide.dir
+C:/Users/Price/Desktop/Codes/21_DSCourseProject_CampusGuide/build/CMakeFiles/edit_cache.dir
+C:/Users/Price/Desktop/Codes/21_DSCourseProject_CampusGuide/build/CMakeFiles/rebuild_cache.dir
+C:/Users/Price/Desktop/Codes/21_DSCourseProject_CampusGuide/build/CMakeFiles/21_DSCourseProject_CampusGuide_autogen.dir
