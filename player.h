@@ -8,12 +8,16 @@ class Player : public QWidget
     Q_OBJECT
 public:
     Map* now_on;
-    int number;
+    int pos_number;
     int pos_x, pos_y;
+    route_info distance_first;
+    route_info time_first;
+    vector<route_info> ridable;
+    vector<route_info> multi_des;
 
     Player(QWidget *parent = nullptr);
     bool is_on_vertex();
-    void navigation(int des, int strategy);
+    void navigation(int des);
     void move();
     void teleport(int des);
 

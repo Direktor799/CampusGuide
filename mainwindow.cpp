@@ -15,15 +15,14 @@ void MainWindow::navi_switch()
         for(auto i = me->now_on->vertices.begin(); i < me->now_on->vertices.end(); i++)
             if(i->name == s)
             {
-                me->navigation(i - me->now_on->vertices.begin(), 1);
+                me->navigation(i - me->now_on->vertices.begin());
                 break;
             }
         navi->setText("开始导航");
     }
     else
     {
-        me->now_on->route.second.resize(0);
-        me->now_on->passed = me->now_on->route.second.begin();
+        me->distance_first.edges.resize(0);
         me->now_on->update();
         navi->setText("开始导航");
     }

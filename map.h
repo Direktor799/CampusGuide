@@ -38,14 +38,25 @@ struct vertex
 class pq_cmp
 {
 public:
-    bool operator()(edge a, edge b)
+    bool operator()(edge* a, edge* b)
     {
-        if(a.length > b.length)
+        if(a->length > b->length)
             return true;
-        if(a.length == b.length && a.number > b.number)
+        if(a->length == b->length && a->number > b->number)
             return true;
         return false;
     }
+};
+
+class Map;
+
+struct route_info
+{
+    int distance;
+    double time;
+    bool is_riding;
+    Map* on;
+    vector<edge*> edges;
 };
 
 class Map : public QWidget
@@ -55,12 +66,9 @@ public:
     string filename;
     vector<vertex> vertices;
     vector<edge> edges;
-    pair<int, vector<int> > route;
-    vector<int>::iterator passed;
     QStringList list;
-
     Map(string s, QWidget *parent = nullptr);
-    pair<int, vector<int> > dijkstra_dis(int src, int des);
+    route_info dijkstra(int src, int des);
 protected:
     void paintEvent(QPaintEvent *);
 
