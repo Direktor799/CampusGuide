@@ -42,36 +42,71 @@ Map::Map(string s, QWidget *parent) : QWidget(parent)
     std::sort(list.begin(), list.end(), string_less);
 }
 
-route_info Map::dijkstra(int src, int des)
+route_info Map::distance_first_dijkstra(int src, int des)
 {
-    priority_queue<edge*, vector<edge*>, pq_cmp> q;
+    priority_queue<dij_tmp, vector<dij_tmp>, distance_first_cmp> q;
     vector<int> dis(vertices.size(), INT32_MAX);
+    vector<double> time(vertices.size(), INT32_MAX);
     vector<edge*> _path(vertices.size(), NULL);
     vector<edge*> route;
     dis[src] = 0;
+    time[src] = 0;
     for(auto i = vertices[src].adjlist.begin(); i < vertices[src].adjlist.end(); i++)
-        q.push(&*i);
+        q.push({&*i, i->length, i->length / i->congestion / walk_speed});
     while(dis[des] == INT32_MAX)
     {
-        edge* tmp = q.top();
+        dij_tmp tmp = q.top();
         q.pop();
-        if(dis[tmp->to] != INT32_MAX)
+        if(dis[tmp.edge_ptr->to] != INT32_MAX)
             continue;
-        dis[tmp->to] = tmp->length;
-        _path[tmp->to] = tmp;
-        for(auto i = vertices[tmp->to].adjlist.begin(); i < vertices[tmp->to].adjlist.end(); i++)
+        dis[tmp.edge_ptr->to] = tmp.total_dis;
+        time[tmp.edge_ptr->to] = tmp.total_time;
+        _path[tmp.edge_ptr->to] = tmp.edge_ptr;
+        for(auto i = vertices[tmp.edge_ptr->to].adjlist.begin(); i < vertices[tmp.edge_ptr->to].adjlist.end(); i++)
             if(dis[i->to] == INT32_MAX)
-            {
-                edge* dij = &*i;
-                dij->length += dis[dij->from];
-                q.push(dij);
-            }
+                q.push({&*i, i->length + dis[i->from], i->length / i->congestion / walk_speed + time[i->from]});
     }
     for(int i = des; i != src; i = _path[i]->from)
         route.push_back(_path[i]);
     reverse(route.begin(), route.end());
     route_info ret;
     ret.distance = dis[des];
+    ret.time = time[des];
+    ret.on = this;
+    ret.edges = route;
+    return ret;
+}
+
+route_info Map::time_first_dijkstra(int src, int des)
+{
+    priority_queue<dij_tmp, vector<dij_tmp>, time_first_cmp> q;
+    vector<int> dis(vertices.size(), INT32_MAX);
+    vector<double> time(vertices.size(), INT32_MAX);
+    vector<edge*> _path(vertices.size(), NULL);
+    vector<edge*> route;
+    dis[src] = 0;
+    time[src] = 0;
+    for(auto i = vertices[src].adjlist.begin(); i < vertices[src].adjlist.end(); i++)
+        q.push({&*i, i->length, i->length / i->congestion / walk_speed});
+    while(dis[des] == INT32_MAX)
+    {
+        dij_tmp tmp = q.top();
+        q.pop();
+        if(dis[tmp.edge_ptr->to] != INT32_MAX)
+            continue;
+        dis[tmp.edge_ptr->to] = tmp.total_dis;
+        time[tmp.edge_ptr->to] = tmp.total_time;
+        _path[tmp.edge_ptr->to] = tmp.edge_ptr;
+        for(auto i = vertices[tmp.edge_ptr->to].adjlist.begin(); i < vertices[tmp.edge_ptr->to].adjlist.end(); i++)
+            if(dis[i->to] == INT32_MAX)
+                q.push({&*i, i->length + dis[i->from], i->length / i->congestion / walk_speed + time[i->from]});
+    }
+    for(int i = des; i != src; i = _path[i]->from)
+        route.push_back(_path[i]);
+    reverse(route.begin(), route.end());
+    route_info ret;
+    ret.distance = dis[des];
+    ret.time = time[des];
     ret.on = this;
     ret.edges = route;
     return ret;

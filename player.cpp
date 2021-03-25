@@ -2,7 +2,7 @@
 
 Player::Player(QWidget *parent) : QWidget(parent)
 {
-    pos_number = 0;
+    pos_number = 3;
     pos_x = 0;
     pos_y = 0;
     resize(1080, 672);
@@ -52,9 +52,8 @@ void Player::teleport(int des)
 
 void Player::navigation(int des)
 {
-    if (is_on_vertex())
-        distance_first = now_on->dijkstra(pos_number, des);
-    move();
+    distance_first = now_on->distance_first_dijkstra(pos_number, des);
+    time_first = now_on->time_first_dijkstra(pos_number, des);
 }
 
 void Player::move()

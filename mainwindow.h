@@ -22,8 +22,9 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void navi_switch();
-    void change_map();
+    void route_calcu();
+    void move_switch();
+    void map_switch();
     void timer_update();
 private:
     Ui::MainWindow *ui;

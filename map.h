@@ -13,9 +13,10 @@
 using namespace std;
 using json = nlohmann::json;
 
-const int ideal_speed = 12;
+const int walk_speed = 60;
 const int my_ratio = 24;
 const int my_drift = 12;
+const int map_ratio = 18;
 
 struct edge
 {
@@ -35,14 +36,34 @@ struct vertex
     vector<edge> adjlist;
 };
 
-class pq_cmp
+struct dij_tmp
+{
+    edge* edge_ptr;
+    int total_dis;
+    double total_time;
+};
+
+class distance_first_cmp
 {
 public:
-    bool operator()(edge* a, edge* b)
+    bool operator()(dij_tmp a, dij_tmp b)
     {
-        if(a->length > b->length)
+        if(a.total_dis > b.total_dis)
             return true;
-        if(a->length == b->length && a->number > b->number)
+        if(a.total_dis == b.total_dis && a.edge_ptr->number > b.edge_ptr->number)
+            return true;
+        return false;
+    }
+};
+
+class time_first_cmp
+{
+public:
+    bool operator()(dij_tmp a, dij_tmp b)
+    {
+        if(a.total_time > b.total_time)
+            return true;
+        if(a.total_time == b.total_time && a.edge_ptr->number > b.edge_ptr->number)
             return true;
         return false;
     }
@@ -68,7 +89,8 @@ public:
     vector<edge> edges;
     QStringList list;
     Map(string s, QWidget *parent = nullptr);
-    route_info dijkstra(int src, int des);
+    route_info distance_first_dijkstra(int src, int des);
+    route_info time_first_dijkstra(int src, int des);
 protected:
     void paintEvent(QPaintEvent *);
 
