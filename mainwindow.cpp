@@ -2,10 +2,10 @@
 QComboBox* des;
 Player* me;
 Map* main_campus, *shahe_campus;
-QPushButton* move_btn, *map_switch_btn, *route_calcu_btn;
+QPushButton* map_switch_btn, *route_calcu_btn;
 QDateTime* vtime;
 QLabel* time_display;
-QLabel* distance_first_display, *time_first_display;
+RouteLabel* distance_first_display, *time_first_display;
 
 void MainWindow::route_calcu()
 {
@@ -28,18 +28,7 @@ void MainWindow::route_calcu()
 
 void MainWindow::move_switch()
 {
-    if(move_btn->text() == "开始导航")
-    {
-        move_btn->setText("停止导航");
-        me->move();
-        move_btn->setText("开始导航");
-    }
-    else
-    {
-        me->distance_first.edges.resize(0);
-        me->now_on->update();
-        move_btn->setText("开始导航");
-    }
+    me->move();
 }
 
 void MainWindow::map_switch()
@@ -100,19 +89,21 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     route_calcu_btn->move(1100, 30);
     connect(route_calcu_btn, &QPushButton::clicked, this, &MainWindow::route_calcu);
 
-    distance_first_display = new QLabel(this);
+    distance_first_display = new RouteLabel(&me->distance_first, this);
     distance_first_display->setStyleSheet("border:1px solid black;");
     distance_first_display->move(1100, 200);
     distance_first_display->hide();
+    connect(distance_first_display, &RouteLabel::hover_in, me, &Player::show_route);
+    connect(distance_first_display, &RouteLabel::hover_out, me, &Player::hide_route);
+    connect(distance_first_display, &RouteLabel::clicked, this, &MainWindow::move_switch);
 
-    time_first_display = new QLabel(this);
+    time_first_display = new RouteLabel(&me->time_first, this);
     time_first_display->setStyleSheet("border:1px solid black;");
     time_first_display->move(1100, 300);
     time_first_display->hide();
-
-    move_btn = new QPushButton("开始导航", this);
-    move_btn->move(1300, 300);
-    connect(move_btn, &QPushButton::clicked, this, &MainWindow::move_switch);
+    connect(time_first_display, &RouteLabel::hover_in, me, &Player::show_route);
+    connect(time_first_display, &RouteLabel::hover_out, me, &Player::hide_route);
+    connect(time_first_display, &RouteLabel::clicked, this, &MainWindow::move_switch);
 
     QTimer* timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::timer_update);

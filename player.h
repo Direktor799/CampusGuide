@@ -20,7 +20,8 @@ public:
     void navigation(int des);
     void move();
     void teleport(int des);
-
+    void show_route(route_info* route);
+    void hide_route(route_info* route);
 protected:
     void paintEvent(QPaintEvent *);
 

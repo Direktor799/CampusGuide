@@ -39,6 +39,8 @@ set(PROJECT_SOURCES
         map.cpp
         player.h
         player.cpp
+        route_label.h
+        route_label.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

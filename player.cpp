@@ -62,6 +62,18 @@ void Player::move()
         teleport((*i)->to);
 }
 
+void Player::show_route(route_info* route)
+{
+    route->visable = true;
+    update();
+}
+
+void Player::hide_route(route_info* route)
+{
+    route->visable = false;
+    update();
+}
+
 void Player::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
@@ -71,12 +83,18 @@ void Player::paintEvent(QPaintEvent *)
     pen.setWidth(5);
     pen.setColor(QColor(25, 25, 25));
     painter.setPen(pen);
+    if(distance_first.visable)
     for (auto i = distance_first.edges.begin(); i < distance_first.edges.end(); i++)
         painter.drawLine(QPointF(now_on->vertices[(*i)->from].pos_x * my_ratio + my_drift,
                                  now_on->vertices[(*i)->from].pos_y * my_ratio + my_drift),
                          QPointF(now_on->vertices[(*i)->to].pos_x * my_ratio + my_drift,
                                  now_on->vertices[(*i)->to].pos_y * my_ratio + my_drift));
-
+    if(time_first.visable)
+    for (auto i = time_first.edges.begin(); i < time_first.edges.end(); i++)
+        painter.drawLine(QPointF(now_on->vertices[(*i)->from].pos_x * my_ratio + my_drift,
+                                 now_on->vertices[(*i)->from].pos_y * my_ratio + my_drift),
+                         QPointF(now_on->vertices[(*i)->to].pos_x * my_ratio + my_drift,
+                                 now_on->vertices[(*i)->to].pos_y * my_ratio + my_drift));
     QPixmap pix;
     pix.load("me.png");
     painter.drawPixmap(pos_x * my_ratio + my_drift - 20, pos_y * my_ratio + my_drift - 30, 40, 40, pix);

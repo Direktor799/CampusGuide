@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QPushButton>
-#include <QLabel>
 #include <QComboBox>
 #include <QTimer>
 #include <QDebug>
@@ -11,6 +10,7 @@
 #include "map.h"
 #include "player.h"
 #include "functions.h"
+#include "route_label.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE

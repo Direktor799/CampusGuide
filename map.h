@@ -76,6 +76,7 @@ struct route_info
     int distance;
     double time;
     bool is_riding;
+    bool visable = false;
     Map* on;
     vector<edge*> edges;
 };
