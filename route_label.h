@@ -17,7 +17,7 @@ protected:
     virtual void enterEvent(QEnterEvent *ev);
     virtual void leaveEvent(QEvent *ev);
 signals:
-    void clicked();
+    void clicked(route_info* route);
     void hover_in(route_info* route);
     void hover_out(route_info* route);
 };

@@ -26,11 +26,6 @@ void MainWindow::route_calcu()
     time_first_display->show();
 }
 
-void MainWindow::move_switch()
-{
-    me->move();
-}
-
 void MainWindow::map_switch()
 {
     if(!main_campus->isHidden())
@@ -95,7 +90,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     distance_first_display->hide();
     connect(distance_first_display, &RouteLabel::hover_in, me, &Player::show_route);
     connect(distance_first_display, &RouteLabel::hover_out, me, &Player::hide_route);
-    connect(distance_first_display, &RouteLabel::clicked, this, &MainWindow::move_switch);
+    connect(distance_first_display, &RouteLabel::clicked, me, &Player::move);
 
     time_first_display = new RouteLabel(&me->time_first, this);
     time_first_display->setStyleSheet("border:1px solid black;");
@@ -103,7 +98,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     time_first_display->hide();
     connect(time_first_display, &RouteLabel::hover_in, me, &Player::show_route);
     connect(time_first_display, &RouteLabel::hover_out, me, &Player::hide_route);
-    connect(time_first_display, &RouteLabel::clicked, this, &MainWindow::move_switch);
+    connect(time_first_display, &RouteLabel::clicked, me, &Player::move);
 
     QTimer* timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::timer_update);

@@ -18,7 +18,7 @@ public:
     Player(QWidget *parent = nullptr);
     bool is_on_vertex();
     void navigation(int des);
-    void move();
+    void move(route_info* route);
     void teleport(int des);
     void show_route(route_info* route);
     void hide_route(route_info* route);

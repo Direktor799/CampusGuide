@@ -56,19 +56,25 @@ void Player::navigation(int des)
     time_first = now_on->time_first_dijkstra(pos_number, des);
 }
 
-void Player::move()
+void Player::move(route_info *route)
 {
-    for (auto i = distance_first.edges.begin(); i < distance_first.edges.end(); i++)
+    if(route->moving)
+        return;
+    route->moving = true;
+    update();
+    for (auto i = route->edges.begin(); i < distance_first.edges.end(); i++)
         teleport((*i)->to);
+    route->moving = false;
+    update();
 }
 
-void Player::show_route(route_info* route)
+void Player::show_route(route_info *route)
 {
     route->visable = true;
     update();
 }
 
-void Player::hide_route(route_info* route)
+void Player::hide_route(route_info *route)
 {
     route->visable = false;
     update();
@@ -83,18 +89,18 @@ void Player::paintEvent(QPaintEvent *)
     pen.setWidth(5);
     pen.setColor(QColor(25, 25, 25));
     painter.setPen(pen);
-    if(distance_first.visable)
-    for (auto i = distance_first.edges.begin(); i < distance_first.edges.end(); i++)
-        painter.drawLine(QPointF(now_on->vertices[(*i)->from].pos_x * my_ratio + my_drift,
-                                 now_on->vertices[(*i)->from].pos_y * my_ratio + my_drift),
-                         QPointF(now_on->vertices[(*i)->to].pos_x * my_ratio + my_drift,
-                                 now_on->vertices[(*i)->to].pos_y * my_ratio + my_drift));
-    if(time_first.visable)
-    for (auto i = time_first.edges.begin(); i < time_first.edges.end(); i++)
-        painter.drawLine(QPointF(now_on->vertices[(*i)->from].pos_x * my_ratio + my_drift,
-                                 now_on->vertices[(*i)->from].pos_y * my_ratio + my_drift),
-                         QPointF(now_on->vertices[(*i)->to].pos_x * my_ratio + my_drift,
-                                 now_on->vertices[(*i)->to].pos_y * my_ratio + my_drift));
+    if (distance_first.moving || distance_first.visable)
+        for (auto i = distance_first.edges.begin(); i < distance_first.edges.end(); i++)
+            painter.drawLine(QPointF(now_on->vertices[(*i)->from].pos_x * my_ratio + my_drift,
+                                     now_on->vertices[(*i)->from].pos_y * my_ratio + my_drift),
+                             QPointF(now_on->vertices[(*i)->to].pos_x * my_ratio + my_drift,
+                                     now_on->vertices[(*i)->to].pos_y * my_ratio + my_drift));
+    if (time_first.moving || time_first.visable)
+        for (auto i = time_first.edges.begin(); i < time_first.edges.end(); i++)
+            painter.drawLine(QPointF(now_on->vertices[(*i)->from].pos_x * my_ratio + my_drift,
+                                     now_on->vertices[(*i)->from].pos_y * my_ratio + my_drift),
+                             QPointF(now_on->vertices[(*i)->to].pos_x * my_ratio + my_drift,
+                                     now_on->vertices[(*i)->to].pos_y * my_ratio + my_drift));
     QPixmap pix;
     pix.load("me.png");
     painter.drawPixmap(pos_x * my_ratio + my_drift - 20, pos_y * my_ratio + my_drift - 30, 40, 40, pix);

@@ -30,5 +30,5 @@ void RouteLabel::leaveEvent(QEvent *ev)
 void RouteLabel::mouseReleaseEvent(QMouseEvent *ev)
 {
     Q_UNUSED(ev)
-    emit clicked();
+    emit clicked(route);
 }

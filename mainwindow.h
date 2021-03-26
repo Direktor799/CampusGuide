@@ -23,7 +23,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void route_calcu();
-    void move_switch();
     void map_switch();
     void timer_update();
 private:
