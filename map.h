@@ -80,7 +80,6 @@ struct route_info
     double time;
     bool is_riding = false;
     bool visable = false;
-    bool moving = false;
     bool canceled = false;
     Map* on;
     edge* now = nullptr;

@@ -35,11 +35,11 @@ void MainWindow::route_calcu()
         }
     if (is_valid)
     {
-        distance_first_display->setText("<div style = 'font-weight:bold;'>最短距离：</div><br>" + QString::number(me->distance_first.distance * map_ratio) + "米   约" + QString::number(ceil(me->distance_first.time * map_ratio)) + "分钟");
+        distance_first_display->setText("<div style = 'font-weight:bold;'>最短距离：</div><br>" + QString::number(me->distance_first.distance) + "米   约" + QString::number(ceil(me->distance_first.time)) + "分钟");
         distance_first_display->adjustSize();
         distance_first_display->show();
 
-        time_first_display->setText("<div style = 'font-weight:bold;'>最短时间：</div><br>" + QString::number(me->time_first.distance * map_ratio) + "米   约" + QString::number(ceil(me->time_first.time * map_ratio)) + "分钟");
+        time_first_display->setText("<div style = 'font-weight:bold;'>最短时间：</div><br>" + QString::number(me->time_first.distance) + "米   约" + QString::number(ceil(me->time_first.time)) + "分钟");
         time_first_display->adjustSize();
         time_first_display->show();
     }

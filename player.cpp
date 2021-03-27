@@ -29,11 +29,11 @@ void Player::navigation(int des)
         pos_number = now_on->vertices.size() - 1;
         edge tmp = *now_route.now;
         tmp.from = pos_number;
-        tmp.length = get_length(pos_x, pos_y, now_on->vertices[tmp.to].pos_x, now_on->vertices[tmp.to].pos_y);
+        tmp.length = map_ratio * get_length(pos_x, pos_y, now_on->vertices[tmp.to].pos_x, now_on->vertices[tmp.to].pos_y);
         now_on->vertices.back().adjlist.push_back(tmp);
 
         tmp.to = now_route.now->from;
-        tmp.length = get_length(pos_x, pos_y, now_on->vertices[tmp.to].pos_x, now_on->vertices[tmp.to].pos_y);
+        tmp.length = map_ratio * get_length(pos_x, pos_y, now_on->vertices[tmp.to].pos_x, now_on->vertices[tmp.to].pos_y);
         now_on->vertices.back().adjlist.push_back(tmp);
     }
     distance_first = now_on->distance_first_dijkstra(pos_number, des);
@@ -42,9 +42,6 @@ void Player::navigation(int des)
 
 void Player::move()
 {
-    if (now_route.moving)
-        return;
-    now_route.moving = true;
     update();
     for (auto i = now_route.edges.begin(); i < now_route.edges.end(); i++)
     {
@@ -70,10 +67,10 @@ void Player::move()
         {
             if (now_route.canceled)
                 break;
+            sleep(map_ratio * 1.0 / now_route.now->congestion / walk_speed * 10000);
             pos_x += x_move;
             pos_y += y_move;
-            now_on->update();
-            sleep(100);
+            update();
         }
         if (now_route.canceled)
             break;
@@ -81,7 +78,7 @@ void Player::move()
         pos_x = now_on->vertices[(*i)->to].pos_x;
         pos_y = now_on->vertices[(*i)->to].pos_y;
     }
-    now_route.moving = false;
+    now_route.visable = false;
     now_route.canceled = false;
     update();
 }
@@ -107,18 +104,24 @@ void Player::paintEvent(QPaintEvent *)
     pen.setWidth(5);
     pen.setColor(QColor(25, 25, 25));
     painter.setPen(pen);
-    if (distance_first.moving || distance_first.visable)
+    if (distance_first.visable)
         for (auto i = distance_first.edges.begin(); i < distance_first.edges.end(); i++)
             painter.drawLine(QPointF(now_on->vertices[(*i)->from].pos_x * my_ratio + my_drift,
                                      now_on->vertices[(*i)->from].pos_y * my_ratio + my_drift),
                              QPointF(now_on->vertices[(*i)->to].pos_x * my_ratio + my_drift,
                                      now_on->vertices[(*i)->to].pos_y * my_ratio + my_drift));
-    if (time_first.moving || time_first.visable)
+    if (time_first.visable)
         for (auto i = time_first.edges.begin(); i < time_first.edges.end(); i++)
             painter.drawLine(QPointF(now_on->vertices[(*i)->from].pos_x * my_ratio + my_drift,
                                      now_on->vertices[(*i)->from].pos_y * my_ratio + my_drift),
                              QPointF(now_on->vertices[(*i)->to].pos_x * my_ratio + my_drift,
                                      now_on->vertices[(*i)->to].pos_y * my_ratio + my_drift));
+    if (now_route.visable)
+        for (auto i = now_route.edges.begin(); i < now_route.edges.end(); i++)
+            painter.drawLine(QPointF(now_on->vertices[(*i)->from].pos_x * my_ratio + my_drift,
+                                     now_on->vertices[(*i)->from].pos_y * my_ratio + my_drift),
+                             QPointF(now_on->vertices[(*i)->to].pos_x * my_ratio + my_drift,
+                                     now_on->vertices[(*i)->to].pos_y * my_ratio + my_drift));         
     QPixmap pix;
     pix.load("me.png");
     painter.drawPixmap(pos_x * my_ratio + my_drift - 20, pos_y * my_ratio + my_drift - 30, 40, 40, pix);

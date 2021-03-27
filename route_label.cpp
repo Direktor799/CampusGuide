@@ -4,7 +4,6 @@ RouteLabel::RouteLabel(route_info *tmp, QWidget *parent) : QLabel(parent)
 {
     route = tmp;
     hover = false;
-    setAttribute(Qt::WA_Hover, true);
 }
 
 void RouteLabel::enterEvent(QEnterEvent *ev)

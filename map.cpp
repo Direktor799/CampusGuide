@@ -24,7 +24,7 @@ Map::Map(string s, QWidget *parent) : QWidget(parent)
         tmp.to = (*i)["to"];
         tmp.congestion = (*i)["congestion"];
         tmp.is_bike_allowed = (*i)["is_bike_allowed"];
-        tmp.length = get_length(vertices[tmp.from].pos_x, vertices[tmp.from].pos_y, vertices[tmp.to].pos_x, vertices[tmp.to].pos_y);
+        tmp.length = map_ratio * get_length(vertices[tmp.from].pos_x, vertices[tmp.from].pos_y, vertices[tmp.to].pos_x, vertices[tmp.to].pos_y);
         edges.push_back(tmp);
     }
     for(auto i = edges.begin(); i < edges.end(); i++)
