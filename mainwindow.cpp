@@ -18,6 +18,7 @@ void MainWindow::move_switch(route_info* route)
     me->now_route = *route;
     move_cancel_btn->show();
     me->move();
+    route_calcu();
     move_cancel_btn->hide();
 }
 
