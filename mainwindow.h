@@ -24,6 +24,8 @@ public:
     ~MainWindow();
     void route_calcu();
     void map_switch();
+    void move_switch(route_info* route);
+    void move_cancel();
     void timer_update();
 private:
     Ui::MainWindow *ui;

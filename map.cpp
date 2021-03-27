@@ -20,12 +20,11 @@ Map::Map(string s, QWidget *parent) : QWidget(parent)
     for(auto i = j.begin(); i < j.end(); i++)
     {
         edge tmp;
-        tmp.number = (*i)["number"];
         tmp.from = (*i)["from"];
         tmp.to = (*i)["to"];
         tmp.congestion = (*i)["congestion"];
         tmp.is_bike_allowed = (*i)["is_bike_allowed"];
-        tmp.length = abs(vertices[tmp.from].pos_x - vertices[tmp.to].pos_x) + abs(vertices[tmp.from].pos_y - vertices[tmp.to].pos_y);
+        tmp.length = get_length(vertices[tmp.from].pos_x, vertices[tmp.from].pos_y, vertices[tmp.to].pos_x, vertices[tmp.to].pos_y);
         edges.push_back(tmp);
     }
     for(auto i = edges.begin(); i < edges.end(); i++)
@@ -36,6 +35,8 @@ Map::Map(string s, QWidget *parent) : QWidget(parent)
         i->to = tmp;
         vertices[i->from].adjlist.push_back(*i);
     }
+    vertices_size = vertices.size();
+    list << "";
     for(auto i = vertices.begin(); i < vertices.end(); i++)
         if(i->name != "Crossing")
             list << QString::fromStdString(i->name);

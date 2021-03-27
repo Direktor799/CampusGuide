@@ -20,7 +20,6 @@ const int map_ratio = 18;
 
 struct edge
 {
-    int number;
     int from;
     int to;
     int length;
@@ -50,7 +49,9 @@ public:
     {
         if(a.total_dis > b.total_dis)
             return true;
-        if(a.total_dis == b.total_dis && a.edge_ptr->number > b.edge_ptr->number)
+        if(a.total_dis == b.total_dis && a.edge_ptr->from > b.edge_ptr->from)
+            return true;
+        if(a.total_dis == b.total_dis && a.edge_ptr->from == b.edge_ptr->from && a.edge_ptr->to > b.edge_ptr->to)
             return true;
         return false;
     }
@@ -63,7 +64,9 @@ public:
     {
         if(a.total_time > b.total_time)
             return true;
-        if(a.total_time == b.total_time && a.edge_ptr->number > b.edge_ptr->number)
+        if(a.total_time == b.total_time && a.edge_ptr->from > b.edge_ptr->from)
+            return true;
+        if(a.total_time == b.total_time && a.edge_ptr->from == b.edge_ptr->from && a.edge_ptr->to > b.edge_ptr->to)
             return true;
         return false;
     }
@@ -75,10 +78,12 @@ struct route_info
 {
     int distance;
     double time;
-    bool is_riding;
+    bool is_riding = false;
     bool visable = false;
     bool moving = false;
+    bool canceled = false;
     Map* on;
+    edge* now = nullptr;
     vector<edge*> edges;
 };
 
@@ -87,6 +92,7 @@ class Map : public QWidget
     Q_OBJECT
 public:
     string filename;
+    int vertices_size;
     vector<vertex> vertices;
     vector<edge> edges;
     QStringList list;

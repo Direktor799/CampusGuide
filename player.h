@@ -14,12 +14,12 @@ public:
     route_info time_first;
     vector<route_info> ridable;
     vector<route_info> multi_des;
+    route_info now_route;
 
     Player(QWidget *parent = nullptr);
     bool is_on_vertex();
     void navigation(int des);
-    void move(route_info* route);
-    void teleport(int des);
+    void move();
     void show_route(route_info* route);
     void hide_route(route_info* route);
 protected:

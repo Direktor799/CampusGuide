@@ -6,7 +6,7 @@ Player::Player(QWidget *parent) : QWidget(parent)
     pos_x = 0;
     pos_y = 0;
     resize(1080, 672);
-};
+}
 
 bool Player::is_on_vertex()
 {
@@ -19,52 +19,70 @@ bool Player::is_on_vertex()
     return false;
 }
 
-void Player::teleport(int des)
-{
-    int distance = fabs(now_on->vertices[des].pos_x - pos_x) + fabs(now_on->vertices[des].pos_y - pos_y);
-    int x_move = 0;
-    int y_move = 0;
-    if (fabs(now_on->vertices[des].pos_x - pos_x) == 0)
-    {
-        if (now_on->vertices[des].pos_y - pos_y > 0)
-            y_move = 1;
-        else
-            y_move = -1;
-    }
-    else
-    {
-        if (now_on->vertices[des].pos_x - pos_x > 0)
-            x_move = 1;
-        else
-            x_move = -1;
-    }
-    for (auto i = 0; i < distance; i++)
-    {
-        pos_x += x_move;
-        pos_y += y_move;
-        now_on->update();
-        sleep(100);
-    }
-    pos_number = now_on->vertices[des].number;
-    pos_x = now_on->vertices[des].pos_x;
-    pos_y = now_on->vertices[des].pos_y;
-}
-
 void Player::navigation(int des)
 {
+    if (!is_on_vertex())
+    {
+        if (now_on->vertices_size < now_on->vertices.size())
+            now_on->vertices.pop_back();
+        now_on->vertices.push_back({int(now_on->vertices.size()), "Crossing", pos_x, pos_y});
+        pos_number = now_on->vertices.size() - 1;
+        edge tmp = *now_route.now;
+        tmp.from = pos_number;
+        tmp.length = get_length(pos_x, pos_y, now_on->vertices[tmp.to].pos_x, now_on->vertices[tmp.to].pos_y);
+        now_on->vertices.back().adjlist.push_back(tmp);
+
+        tmp.to = now_route.now->from;
+        tmp.length = get_length(pos_x, pos_y, now_on->vertices[tmp.to].pos_x, now_on->vertices[tmp.to].pos_y);
+        now_on->vertices.back().adjlist.push_back(tmp);
+    }
     distance_first = now_on->distance_first_dijkstra(pos_number, des);
     time_first = now_on->time_first_dijkstra(pos_number, des);
 }
 
-void Player::move(route_info *route)
+void Player::move()
 {
-    if(route->moving)
+    if (now_route.moving)
         return;
-    route->moving = true;
+    now_route.moving = true;
     update();
-    for (auto i = route->edges.begin(); i < distance_first.edges.end(); i++)
-        teleport((*i)->to);
-    route->moving = false;
+    for (auto i = now_route.edges.begin(); i < now_route.edges.end(); i++)
+    {
+        now_route.now = *i;
+        int distance = fabs(now_on->vertices[(*i)->to].pos_x - pos_x) + fabs(now_on->vertices[(*i)->to].pos_y - pos_y);
+        int x_move = 0;
+        int y_move = 0;
+        if (fabs(now_on->vertices[(*i)->to].pos_x - pos_x) == 0)
+        {
+            if (now_on->vertices[(*i)->to].pos_y - pos_y > 0)
+                y_move = 1;
+            else
+                y_move = -1;
+        }
+        else
+        {
+            if (now_on->vertices[(*i)->to].pos_x - pos_x > 0)
+                x_move = 1;
+            else
+                x_move = -1;
+        }
+        for (auto i = 0; i < distance; i++)
+        {
+            if (now_route.canceled)
+                break;
+            pos_x += x_move;
+            pos_y += y_move;
+            now_on->update();
+            sleep(100);
+        }
+        if (now_route.canceled)
+            break;
+        pos_number = now_on->vertices[(*i)->to].number;
+        pos_x = now_on->vertices[(*i)->to].pos_x;
+        pos_y = now_on->vertices[(*i)->to].pos_y;
+    }
+    now_route.moving = false;
+    now_route.canceled = false;
     update();
 }
 
