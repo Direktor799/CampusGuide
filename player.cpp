@@ -68,7 +68,10 @@ void Player::move()
         {
             if (now_route.canceled)
                 break;
-            sleep(map_ratio * 1.0 / now_route.now->congestion / walk_speed * 10000);
+            if(now_route.now->is_bike_allowed)
+                sleep(map_ratio * 1.0 / (now_route.now->congestion * walk_speed * ride_multiplier) * 10000);
+            else
+                sleep(map_ratio * 1.0 / (now_route.now->congestion * walk_speed) * 10000);
             pos_x += x_move;
             pos_y += y_move;
             update();
