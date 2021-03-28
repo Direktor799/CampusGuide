@@ -155,6 +155,7 @@ route_info Map::bike_allowed_dijkstra(int src, int des)
     ret.time = time[des];
     ret.on = this;
     ret.edges = route;
+    ret.is_riding = true;
     return ret;
 }
 

@@ -81,6 +81,7 @@ struct route_info
 {
     int distance;
     double time;
+    bool is_riding = false;
     bool visable = false;
     bool canceled = false;
     Map* on;
