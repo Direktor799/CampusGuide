@@ -14,6 +14,7 @@ using namespace std;
 using json = nlohmann::json;
 
 const int walk_speed = 60;
+const int ride_multiplier = 3;
 const int my_ratio = 24;
 const int my_drift = 12;
 const int map_ratio = 18;
@@ -49,9 +50,11 @@ public:
     {
         if(a.total_dis > b.total_dis)
             return true;
-        if(a.total_dis == b.total_dis && a.edge_ptr->from > b.edge_ptr->from)
+        if(a.total_dis == b.total_dis && a.total_time > b.total_time)
             return true;
-        if(a.total_dis == b.total_dis && a.edge_ptr->from == b.edge_ptr->from && a.edge_ptr->to > b.edge_ptr->to)
+        if(a.total_dis == b.total_dis && a.total_time == b.total_time&& a.edge_ptr->from > b.edge_ptr->from)
+            return true;
+        if(a.total_dis == b.total_dis && a.total_time == b.total_time&& a.edge_ptr->from == b.edge_ptr->from && a.edge_ptr->to > b.edge_ptr->to)
             return true;
         return false;
     }
@@ -78,7 +81,6 @@ struct route_info
 {
     int distance;
     double time;
-    bool is_riding = false;
     bool visable = false;
     bool canceled = false;
     Map* on;
@@ -98,6 +100,7 @@ public:
     Map(string s, QWidget *parent = nullptr);
     route_info distance_first_dijkstra(int src, int des);
     route_info time_first_dijkstra(int src, int des);
+    route_info bike_allowed_dijkstra(int src, int des);
 protected:
     void paintEvent(QPaintEvent *);
 

@@ -5,7 +5,7 @@ Map *main_campus, *shahe_campus;
 QPushButton *map_switch_btn, *move_cancel_btn;
 QDateTime *vtime;
 QLabel *time_display;
-RouteLabel *distance_first_display, *time_first_display;
+RouteLabel *distance_first_display, *time_first_display, *bike_allowed_display;
 
 void MainWindow::move_cancel()
 {
@@ -42,11 +42,16 @@ void MainWindow::route_calcu()
         time_first_display->setText("<div style = 'font-weight:bold;'>最短时间：</div><br>" + QString::number(me->time_first.distance) + "米   约" + QString::number(ceil(me->time_first.time)) + "分钟");
         time_first_display->adjustSize();
         time_first_display->show();
+
+        bike_allowed_display->setText("<div style = 'font-weight:bold;'>骑车最短时间：</div><br>" + QString::number(me->bike_allowed.distance) + "米   约" + QString::number(ceil(me->bike_allowed.time)) + "分钟");
+        bike_allowed_display->adjustSize();
+        bike_allowed_display->show();
     }
     else
     {
         distance_first_display->hide();
         time_first_display->hide();
+        bike_allowed_display->hide();
     }
 }
 
@@ -126,6 +131,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(time_first_display, &RouteLabel::hover_in, me, &Player::show_route);
     connect(time_first_display, &RouteLabel::hover_out, me, &Player::hide_route);
     connect(time_first_display, &RouteLabel::clicked, this, &MainWindow::move_switch);
+
+    bike_allowed_display = new RouteLabel(&me->bike_allowed, this);
+    bike_allowed_display->setStyleSheet("border:1px solid black;");
+    bike_allowed_display->move(1100, 200);
+    bike_allowed_display->hide();
+    connect(bike_allowed_display, &RouteLabel::hover_in, me, &Player::show_route);
+    connect(bike_allowed_display, &RouteLabel::hover_out, me, &Player::hide_route);
+    connect(bike_allowed_display, &RouteLabel::clicked, this, &MainWindow::move_switch);
 
     QTimer *timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::timer_update);

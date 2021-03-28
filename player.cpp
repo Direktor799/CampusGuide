@@ -38,6 +38,7 @@ void Player::navigation(int des)
     }
     distance_first = now_on->distance_first_dijkstra(pos_number, des);
     time_first = now_on->time_first_dijkstra(pos_number, des);
+    bike_allowed = now_on->bike_allowed_dijkstra(pos_number, des);
 }
 
 void Player::move()
@@ -112,6 +113,12 @@ void Player::paintEvent(QPaintEvent *)
                                      now_on->vertices[(*i)->to].pos_y * my_ratio + my_drift));
     if (time_first.visable)
         for (auto i = time_first.edges.begin(); i < time_first.edges.end(); i++)
+            painter.drawLine(QPointF(now_on->vertices[(*i)->from].pos_x * my_ratio + my_drift,
+                                     now_on->vertices[(*i)->from].pos_y * my_ratio + my_drift),
+                             QPointF(now_on->vertices[(*i)->to].pos_x * my_ratio + my_drift,
+                                     now_on->vertices[(*i)->to].pos_y * my_ratio + my_drift));
+    if (bike_allowed.visable)
+        for (auto i = bike_allowed.edges.begin(); i < bike_allowed.edges.end(); i++)
             painter.drawLine(QPointF(now_on->vertices[(*i)->from].pos_x * my_ratio + my_drift,
                                      now_on->vertices[(*i)->from].pos_y * my_ratio + my_drift),
                              QPointF(now_on->vertices[(*i)->to].pos_x * my_ratio + my_drift,

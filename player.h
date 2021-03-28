@@ -12,8 +12,7 @@ public:
     int pos_x, pos_y;
     route_info distance_first;
     route_info time_first;
-    vector<route_info> bike_allowed;
-    vector<route_info> multi_des;
+    route_info bike_allowed;
     route_info now_route;
 
     Player(QWidget *parent = nullptr);
