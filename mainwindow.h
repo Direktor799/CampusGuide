@@ -9,8 +9,7 @@
 #include "./ui_mainwindow.h"
 #include "map.h"
 #include "player.h"
-#include "functions.h"
-#include "route_label.h"
+#include "labels.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE

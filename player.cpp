@@ -2,6 +2,7 @@
 
 Player::Player(QWidget *parent) : QWidget(parent)
 {
+    lower();
     pos_number = 3;
     pos_x = 0;
     pos_y = 0;
@@ -68,7 +69,7 @@ void Player::move()
         {
             if (now_route.canceled)
                 break;
-            if(now_route.is_riding && now_route.now->is_bike_allowed)
+            if (now_route.is_riding && now_route.now->is_bike_allowed)
                 sleep(map_ratio * 1.0 / (now_route.now->congestion * walk_speed * ride_multiplier) * 10000);
             else
                 sleep(map_ratio * 1.0 / (now_route.now->congestion * walk_speed) * 10000);
@@ -131,8 +132,8 @@ void Player::paintEvent(QPaintEvent *)
             painter.drawLine(QPointF(now_on->vertices[(*i)->from].pos_x * my_ratio + my_drift,
                                      now_on->vertices[(*i)->from].pos_y * my_ratio + my_drift),
                              QPointF(now_on->vertices[(*i)->to].pos_x * my_ratio + my_drift,
-                                     now_on->vertices[(*i)->to].pos_y * my_ratio + my_drift));         
-    QPixmap pix;
-    pix.load("me.png");
-    painter.drawPixmap(pos_x * my_ratio + my_drift - 20, pos_y * my_ratio + my_drift - 30, 40, 40, pix);
-};
+                                     now_on->vertices[(*i)->to].pos_y * my_ratio + my_drift));
+    QPixmap player_img;
+    player_img.load("me.png");
+    painter.drawPixmap(pos_x * my_ratio + my_drift - 20, pos_y * my_ratio + my_drift - 30, 40, 40, player_img);
+}

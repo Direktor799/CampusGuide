@@ -4,6 +4,73 @@
 #include <QString>
 #include <QTime>
 #include <QApplication>
+#include <vector>
+#include <string>
+using namespace std;
+
+const int walk_speed = 80;
+const int ride_multiplier = 3;
+const int my_ratio = 24;
+const int my_drift = 12;
+const int map_ratio = 18;
+
+struct edge
+{
+    int from;
+    int to;
+    int length;
+    double congestion;
+    bool is_bike_allowed;
+};
+
+struct vertex
+{
+    int number;
+    string name;
+    int pos_x, pos_y;
+    vector<edge> adjlist;
+};
+
+struct dij_tmp
+{
+    edge* edge_ptr;
+    int total_dis;
+    double total_time;
+};
+
+class distance_first_cmp
+{
+public:
+    bool operator()(dij_tmp a, dij_tmp b)
+    {
+        if(a.total_dis > b.total_dis)
+            return true;
+        if(a.total_dis == b.total_dis && a.total_time > b.total_time)
+            return true;
+        if(a.total_dis == b.total_dis && a.total_time == b.total_time&& a.edge_ptr->from > b.edge_ptr->from)
+            return true;
+        if(a.total_dis == b.total_dis && a.total_time == b.total_time&& a.edge_ptr->from == b.edge_ptr->from && a.edge_ptr->to > b.edge_ptr->to)
+            return true;
+        return false;
+    }
+};
+
+class time_first_cmp
+{
+public:
+    bool operator()(dij_tmp a, dij_tmp b)
+    {
+        if(a.total_time > b.total_time)
+            return true;
+        if(a.total_time == b.total_time && a.edge_ptr->from > b.edge_ptr->from)
+            return true;
+        if(a.total_time == b.total_time && a.edge_ptr->from == b.edge_ptr->from && a.edge_ptr->to > b.edge_ptr->to)
+            return true;
+        return false;
+    }
+};
+
+struct route_info;
 
 bool string_less(const QString &s1, const QString &s2);
 bool sleep(unsigned int msec);

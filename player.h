@@ -23,7 +23,6 @@ public:
     void hide_route(route_info* route);
 protected:
     void paintEvent(QPaintEvent *);
-
 signals:
 
 };

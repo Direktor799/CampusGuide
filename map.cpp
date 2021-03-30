@@ -1,4 +1,5 @@
 #include "map.h"
+#include <QLabel>
 
 Map::Map(string s, QWidget *parent) : QWidget(parent)
 {
@@ -41,6 +42,17 @@ Map::Map(string s, QWidget *parent) : QWidget(parent)
         if (i->name != "Crossing")
             list << QString::fromStdString(i->name);
     std::sort(list.begin(), list.end(), string_less);
+
+    for (auto i = vertices.begin(); i < vertices.end(); i++)
+    {
+        if (i->name != "Crossing")
+        {
+            BuildingLabel *bl = new BuildingLabel(i->name, i->pos_x, i->pos_y, parent);
+            connect(bl, BuildingLabel::hover_in, bl, BuildingLabel::choose);
+            connect(bl, BuildingLabel::hover_out, bl, BuildingLabel::unchoose);
+            bllist.push_back(bl);
+        }
+    }
 }
 
 route_info Map::distance_first_dijkstra(int src, int des)
@@ -166,25 +178,4 @@ void Map::paintEvent(QPaintEvent *)
     QPixmap pix;
     pix.load(QString::fromStdString(filename + ".png"));
     painter.drawPixmap(0, 0, pix);
-    QPen pen;
-    pen.setWidth(1);
-    pen.setColor(QColor(0, 0, 0));
-    painter.setPen(pen);
-    QFont font = painter.font();
-    font.setBold(true);
-    painter.setFont(font);
-    for (auto i = vertices.begin(); i < vertices.end(); i++)
-    {
-        if (i->name != "Crossing")
-        {
-            QString text = QString::asprintf("%s", i->name.c_str());
-            QFontMetrics fm(font);
-            QRectF rec = fm.boundingRect(text);
-            QPainterPath path;
-            path.addRoundedRect(QRectF(i->pos_x * my_ratio + my_drift - rec.width() / 2 - 2, i->pos_y * my_ratio + my_drift - rec.height() / 2, rec.width() + 4, rec.height()), 5, 5);
-            painter.drawPath(path);
-            painter.fillPath(path, QColor(255, 255, 255, 210));
-            painter.drawText(i->pos_x * my_ratio + my_drift - rec.width() / 2, i->pos_y * my_ratio + my_drift + rec.height() / 2 - 3, text);
-        }
-    }
 }

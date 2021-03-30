@@ -60,7 +60,11 @@ void MainWindow::map_switch()
     if (!main_campus->isHidden())
     {
         main_campus->hide();
+        for(auto i = main_campus->bllist.begin(); i < main_campus->bllist.end(); i++)
+            (*i)->hide();
         shahe_campus->show();
+        for(auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
+            (*i)->show();
         des->clear();
         des->addItems(shahe_campus->list);
         map_switch_btn->setText("切换至本部地图");
@@ -68,7 +72,11 @@ void MainWindow::map_switch()
     else
     {
         shahe_campus->hide();
+        for(auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
+            (*i)->hide();
         main_campus->show();
+        for(auto i = main_campus->bllist.begin(); i < main_campus->bllist.end(); i++)
+            (*i)->show();
         des->clear();
         des->addItems(main_campus->list);
         map_switch_btn->setText("切换至沙河地图");
@@ -96,14 +104,23 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     main_campus = new Map("main_campus", this);
     shahe_campus = new Map("shahe_campus", this);
     shahe_campus->hide();
+    for(auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
+        (*i)->hide();
 
     me = new Player(this);
     me->now_on = main_campus;
+
+    main_campus->stackUnder(me);
+    shahe_campus->stackUnder(me);
 
     des = new QComboBox(this);
     des->move(1100, 0);
     des->setFixedSize(150, 30);
     des->addItems(main_campus->list);
+    for(auto i = main_campus->bllist.begin(); i < main_campus->bllist.end(); i++)
+        connect(*i, &BuildingLabel::clicked, des, &QComboBox::setCurrentText);
+    for(auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
+        (*i)->hide();
 
     map_switch_btn = new QPushButton("切换至沙河地图", this);
     map_switch_btn->move(1300, 0);
@@ -117,25 +134,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(move_cancel_btn, &QPushButton::clicked, this, &MainWindow::move_cancel);
 
     distance_first_display = new RouteLabel(&me->distance_first, this);
-    distance_first_display->setStyleSheet("border:1px solid black;");
     distance_first_display->move(1100, 100);
-    distance_first_display->hide();
     connect(distance_first_display, &RouteLabel::hover_in, me, &Player::show_route);
     connect(distance_first_display, &RouteLabel::hover_out, me, &Player::hide_route);
     connect(distance_first_display, &RouteLabel::clicked, this, &MainWindow::move_switch);
 
     time_first_display = new RouteLabel(&me->time_first, this);
-    time_first_display->setStyleSheet("border:1px solid black;");
     time_first_display->move(1100, 150);
-    time_first_display->hide();
     connect(time_first_display, &RouteLabel::hover_in, me, &Player::show_route);
     connect(time_first_display, &RouteLabel::hover_out, me, &Player::hide_route);
     connect(time_first_display, &RouteLabel::clicked, this, &MainWindow::move_switch);
 
     bike_allowed_display = new RouteLabel(&me->bike_allowed, this);
-    bike_allowed_display->setStyleSheet("border:1px solid black;");
     bike_allowed_display->move(1100, 200);
-    bike_allowed_display->hide();
     connect(bike_allowed_display, &RouteLabel::hover_in, me, &Player::show_route);
     connect(bike_allowed_display, &RouteLabel::hover_out, me, &Player::hide_route);
     connect(bike_allowed_display, &RouteLabel::clicked, this, &MainWindow::move_switch);
