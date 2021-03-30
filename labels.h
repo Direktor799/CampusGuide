@@ -9,6 +9,7 @@ class RouteLabel : public QLabel
 public:
     route_info *route;
     bool hover;
+    bool enable;
 
     RouteLabel(route_info *tmp, QWidget *parent = nullptr);
 
@@ -26,12 +27,12 @@ class BuildingLabel : public QLabel
 {
     Q_OBJECT
 public:
-    string name;
+    QString name;
     int pos_x;
     int pos_y;
     bool hover;
 
-    BuildingLabel(string s, int x, int y, QWidget *parent = nullptr);
+    BuildingLabel(QString s, int x, int y, QWidget *parent = nullptr);
     void choose();
     void unchoose();
 protected:

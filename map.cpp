@@ -1,18 +1,18 @@
 #include "map.h"
 #include <QLabel>
 
-Map::Map(string s, QWidget *parent) : QWidget(parent)
+Map::Map(QString s, QWidget *parent) : QWidget(parent)
 {
     resize(1080, 672);
     filename = s;
     json data, j;
-    ifstream(filename + ".json") >> data;
+    ifstream(filename.toStdString() + ".json") >> data;
     j = data["vertices"];
     for (auto i = j.begin(); i < j.end(); i++)
     {
         vertex tmp;
         tmp.number = (*i)["number"];
-        tmp.name = (*i)["name"];
+        tmp.name = QString::asprintf(string((*i)["name"]).c_str());
         tmp.pos_x = (*i)["pos_x"];
         tmp.pos_y = (*i)["pos_y"];
         vertices.push_back(tmp);
@@ -40,7 +40,7 @@ Map::Map(string s, QWidget *parent) : QWidget(parent)
     list << "";
     for (auto i = vertices.begin(); i < vertices.end(); i++)
         if (i->name != "Crossing")
-            list << QString::fromStdString(i->name);
+            list << i->name;
     std::sort(list.begin(), list.end(), string_less);
 
     for (auto i = vertices.begin(); i < vertices.end(); i++)
@@ -176,6 +176,6 @@ void Map::paintEvent(QPaintEvent *)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
     QPixmap pix;
-    pix.load(QString::fromStdString(filename + ".png"));
+    pix.load(filename + ".png");
     painter.drawPixmap(0, 0, pix);
 }

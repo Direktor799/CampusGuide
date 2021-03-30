@@ -5,7 +5,6 @@
 #include <QTime>
 #include <QApplication>
 #include <vector>
-#include <string>
 using namespace std;
 
 const int walk_speed = 80;
@@ -26,7 +25,7 @@ struct edge
 struct vertex
 {
     int number;
-    string name;
+    QString name;
     int pos_x, pos_y;
     vector<edge> adjlist;
 };

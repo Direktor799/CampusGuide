@@ -14,13 +14,13 @@ class Map : public QWidget
 {
     Q_OBJECT
 public:
-    string filename;
+    QString filename;
     int vertices_size;
     vector<vertex> vertices;
     vector<edge> edges;
     QStringList list;
     vector<BuildingLabel *> bllist;
-    Map(string s, QWidget *parent = nullptr);
+    Map(QString s, QWidget *parent = nullptr);
     route_info distance_first_dijkstra(int src, int des);
     route_info time_first_dijkstra(int src, int des);
     route_info bike_allowed_dijkstra(int src, int des);

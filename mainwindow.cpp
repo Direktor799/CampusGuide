@@ -16,16 +16,22 @@ void MainWindow::move_cancel()
 void MainWindow::move_switch(route_info* route)
 {
     me->now_route = *route;
+    distance_first_display->enable = false;
+    time_first_display->enable = false;
+    bike_allowed_display->enable = false;
     move_cancel_btn->show();
     me->move();
     route_calcu();
     move_cancel_btn->hide();
+    distance_first_display->enable = true;
+    time_first_display->enable = true;
+    bike_allowed_display->enable = true;
 }
 
 void MainWindow::route_calcu()
 {
     bool is_valid = false;
-    string s = des->currentText().toStdString();
+    QString s = des->currentText();
     for (auto i = me->now_on->vertices.begin(); i < me->now_on->vertices.end(); i++)
         if (i->name == s)
         {

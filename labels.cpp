@@ -4,6 +4,7 @@ RouteLabel::RouteLabel(route_info *tmp, QWidget *parent) : QLabel(parent)
 {
     route = tmp;
     hover = false;
+    enable = true;
     setStyleSheet("border:1px solid black;");
     hide();
 }
@@ -31,27 +32,27 @@ void RouteLabel::leaveEvent(QEvent *ev)
 void RouteLabel::mouseReleaseEvent(QMouseEvent *ev)
 {
     Q_UNUSED(ev)
-    emit clicked(route);
+    if(enable)
+        emit clicked(route);
 }
 
-BuildingLabel::BuildingLabel(string s, int x, int y, QWidget *parent) : QLabel(parent)
+BuildingLabel::BuildingLabel(QString s, int x, int y, QWidget *parent) : QLabel(parent)
 {
     hover = false;
     name = s;
     pos_x = x;
     pos_y = y;
-    QString text = QString::asprintf("%s", name.c_str());
     QFont font = this->font();
     font.setBold(true);
     setFont(font);
     QFontMetrics fm(font);
-    QRectF rec = fm.boundingRect(text);
+    QRectF rec = fm.boundingRect(name);
     setAutoFillBackground(true);
     setStyleSheet("border-radius: 5px; border:1px solid black; background-color:rgba(255,255,255,150);");
     raise();
     show();
     setFont(font);
-    setText(text);
+    setText(name);
     adjustSize();
     move(pos_x * my_ratio + my_drift - rec.width() / 2 - 5, pos_y * my_ratio + my_drift - rec.height() / 2 - 1);
 }
@@ -90,5 +91,5 @@ void BuildingLabel::leaveEvent(QEvent *ev)
 void BuildingLabel::mouseReleaseEvent(QMouseEvent *ev)
 {
     Q_UNUSED(ev)
-    emit clicked(QString::asprintf("%s", name.c_str()));
+    emit clicked(name);
 }
