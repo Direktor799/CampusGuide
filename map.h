@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QPainter>
+#include <QComboBox>
 #include <fstream>
 #include <queue>
 #include "json.hpp"
@@ -18,6 +19,7 @@ public:
     int vertices_size;
     vector<vertex> vertices;
     vector<edge> edges;
+    QComboBox* combobox;
     QStringList list;
     vector<BuildingLabel *> bllist;
     Map(QString s, QWidget *parent = nullptr);

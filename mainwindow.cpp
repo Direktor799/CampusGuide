@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-QComboBox *des;
 Player *me;
 Map *main_campus, *shahe_campus;
 QPushButton *map_switch_btn, *move_cancel_btn;
@@ -31,7 +30,7 @@ void MainWindow::move_switch(route_info* route)
 void MainWindow::route_calcu()
 {
     bool is_valid = false;
-    QString s = des->currentText();
+    QString s = me->now_on->combobox->currentText();
     for (auto i = me->now_on->vertices.begin(); i < me->now_on->vertices.end(); i++)
         if (i->name == s)
         {
@@ -66,25 +65,25 @@ void MainWindow::map_switch()
     if (!main_campus->isHidden())
     {
         main_campus->hide();
+        main_campus->combobox->hide();
         for(auto i = main_campus->bllist.begin(); i < main_campus->bllist.end(); i++)
             (*i)->hide();
         shahe_campus->show();
+        shahe_campus->combobox->show();
         for(auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
             (*i)->show();
-        des->clear();
-        des->addItems(shahe_campus->list);
         map_switch_btn->setText("切换至本部地图");
     }
     else
     {
         shahe_campus->hide();
+        shahe_campus->combobox->hide();
         for(auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
             (*i)->hide();
         main_campus->show();
+        main_campus->combobox->show();
         for(auto i = main_campus->bllist.begin(); i < main_campus->bllist.end(); i++)
             (*i)->show();
-        des->clear();
-        des->addItems(main_campus->list);
         map_switch_btn->setText("切换至沙河地图");
     }
     if (me->now_on->isHidden())
@@ -113,26 +112,22 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     for(auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
         (*i)->hide();
 
+    connect(main_campus->combobox, &QComboBox::currentTextChanged, this, &MainWindow::route_calcu);
+    connect(shahe_campus->combobox, &QComboBox::currentTextChanged, this, &MainWindow::route_calcu);
+
     me = new Player(this);
     me->now_on = main_campus;
 
     main_campus->stackUnder(me);
     shahe_campus->stackUnder(me);
 
-    des = new QComboBox(this);
-    des->move(1100, 0);
-    des->setFixedSize(150, 30);
-    des->addItems(main_campus->list);
-    for(auto i = main_campus->bllist.begin(); i < main_campus->bllist.end(); i++)
-        connect(*i, &BuildingLabel::clicked, des, &QComboBox::setCurrentText);
     for(auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
         (*i)->hide();
+    shahe_campus->combobox->hide();
 
     map_switch_btn = new QPushButton("切换至沙河地图", this);
     map_switch_btn->move(1300, 0);
     connect(map_switch_btn, &QPushButton::clicked, this, &MainWindow::map_switch);
-
-    connect(des, &QComboBox::currentTextChanged, this, &MainWindow::route_calcu);
 
     move_cancel_btn = new QPushButton("停止导航", this);
     move_cancel_btn->move(1200, 150);

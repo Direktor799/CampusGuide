@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QPushButton>
-#include <QComboBox>
 #include <QTimer>
 #include <QDebug>
 #include "./ui_mainwindow.h"

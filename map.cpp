@@ -53,6 +53,13 @@ Map::Map(QString s, QWidget *parent) : QWidget(parent)
             bllist.push_back(bl);
         }
     }
+
+    combobox = new QComboBox(parent);
+    combobox->move(1100, 0);
+    combobox->setFixedSize(150, 30);
+    combobox->addItems(list);
+    for(auto i = bllist.begin(); i < bllist.end(); i++)
+        connect(*i, &BuildingLabel::clicked, combobox, &QComboBox::setCurrentText);
 }
 
 route_info Map::distance_first_dijkstra(int src, int des)
