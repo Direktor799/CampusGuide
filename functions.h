@@ -71,6 +71,16 @@ public:
 
 struct route_info;
 
+struct multi_routes
+{
+    int distance = 0;
+    double time = 0;
+    bool visable = false;
+    bool canceled = false;
+    route_info* now = nullptr;
+    vector<route_info> routes; 
+};
+
 bool string_less(const QString &s1, const QString &s2);
 bool sleep(unsigned int msec);
 int get_length(int a_pos_x, int a_pos_y, int b_pos_x, int b_pos_y);

@@ -7,20 +7,21 @@ class RouteLabel : public QLabel
 {
     Q_OBJECT
 public:
-    route_info *route;
+    multi_routes *routes;
+    QString text;
     bool hover;
     bool enable;
 
-    RouteLabel(route_info *tmp, QWidget *parent = nullptr);
-
+    RouteLabel(multi_routes *tmp, QString string, QWidget *parent = nullptr);
+    void display();
 protected:
     virtual void mouseReleaseEvent(QMouseEvent *ev);
     virtual void enterEvent(QEnterEvent *ev);
     virtual void leaveEvent(QEvent *ev);
 signals:
-    void clicked(route_info* route);
-    void hover_in(route_info* route);
-    void hover_out(route_info* route);
+    void clicked(multi_routes* route);
+    void hover_in(multi_routes* route);
+    void hover_out(multi_routes* route);
 };
 
 class BuildingLabel : public QLabel

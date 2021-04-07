@@ -19,7 +19,7 @@ public:
     int vertices_size;
     vector<vertex> vertices;
     vector<edge> edges;
-    QComboBox* combobox;
+    vector<QComboBox*> comboboxs;
     QStringList list;
     vector<BuildingLabel *> bllist;
     Map(QString s, QWidget *parent = nullptr);
@@ -38,8 +38,6 @@ struct route_info
     int distance;
     double time;
     bool is_riding = false;
-    bool visable = false;
-    bool canceled = false;
     Map *on;
     edge *now = nullptr;
     vector<edge *> edges;

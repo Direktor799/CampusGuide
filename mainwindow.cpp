@@ -8,13 +8,13 @@ RouteLabel *distance_first_display, *time_first_display, *bike_allowed_display;
 
 void MainWindow::move_cancel()
 {
-    me->now_route.canceled = true;
+    me->now_routes.canceled = true;
     route_calcu();
 }
 
-void MainWindow::move_switch(route_info* route)
+void MainWindow::move_switch(multi_routes *routes)
 {
-    me->now_route = *route;
+    me->now_routes = *routes;
     distance_first_display->enable = false;
     time_first_display->enable = false;
     bike_allowed_display->enable = false;
@@ -30,27 +30,21 @@ void MainWindow::move_switch(route_info* route)
 void MainWindow::route_calcu()
 {
     bool is_valid = false;
-    QString s = me->now_on->combobox->currentText();
-    for (auto i = me->now_on->vertices.begin(); i < me->now_on->vertices.end(); i++)
-        if (i->name == s)
-        {
-            is_valid = true;
-            me->navigation(i - me->now_on->vertices.begin());
-            break;
-        }
+    vector<int> des;
+    for (auto i = me->now_on->comboboxs.begin(); i < me->now_on->comboboxs.end(); i++)
+        for (auto j = me->now_on->vertices.begin(); j < me->now_on->vertices.end(); j++)
+            if (j->name == (*i)->currentText())
+            {
+                is_valid = true;
+                des.push_back(j - me->now_on->vertices.begin());
+                break;
+            }
+    me->navigation(des);
     if (is_valid)
     {
-        distance_first_display->setText("<div style = 'font-weight:bold;'>最短距离：</div><br>" + QString::number(me->distance_first.distance) + "米   约" + QString::number(ceil(me->distance_first.time)) + "分钟");
-        distance_first_display->adjustSize();
-        distance_first_display->show();
-
-        time_first_display->setText("<div style = 'font-weight:bold;'>最短时间：</div><br>" + QString::number(me->time_first.distance) + "米   约" + QString::number(ceil(me->time_first.time)) + "分钟");
-        time_first_display->adjustSize();
-        time_first_display->show();
-
-        bike_allowed_display->setText("<div style = 'font-weight:bold;'>骑车最短时间：</div><br>" + QString::number(me->bike_allowed.distance) + "米   约" + QString::number(ceil(me->bike_allowed.time)) + "分钟");
-        bike_allowed_display->adjustSize();
-        bike_allowed_display->show();
+        distance_first_display->display();
+        time_first_display->display();
+        bike_allowed_display->display();
     }
     else
     {
@@ -65,24 +59,28 @@ void MainWindow::map_switch()
     if (!main_campus->isHidden())
     {
         main_campus->hide();
-        main_campus->combobox->hide();
-        for(auto i = main_campus->bllist.begin(); i < main_campus->bllist.end(); i++)
+        for (auto i = main_campus->comboboxs.begin(); i < main_campus->comboboxs.end(); i++)
+            (*i)->hide();
+        for (auto i = main_campus->bllist.begin(); i < main_campus->bllist.end(); i++)
             (*i)->hide();
         shahe_campus->show();
-        shahe_campus->combobox->show();
-        for(auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
+        for (auto i = shahe_campus->comboboxs.begin(); i < shahe_campus->comboboxs.end(); i++)
+            (*i)->show();
+        for (auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
             (*i)->show();
         map_switch_btn->setText("切换至本部地图");
     }
     else
     {
         shahe_campus->hide();
-        shahe_campus->combobox->hide();
-        for(auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
+        for (auto i = shahe_campus->comboboxs.begin(); i < shahe_campus->comboboxs.end(); i++)
+            (*i)->hide();
+        for (auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
             (*i)->hide();
         main_campus->show();
-        main_campus->combobox->show();
-        for(auto i = main_campus->bllist.begin(); i < main_campus->bllist.end(); i++)
+        for (auto i = main_campus->comboboxs.begin(); i < main_campus->comboboxs.end(); i++)
+            (*i)->show();
+        for (auto i = main_campus->bllist.begin(); i < main_campus->bllist.end(); i++)
             (*i)->show();
         map_switch_btn->setText("切换至沙河地图");
     }
@@ -109,21 +107,22 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     main_campus = new Map("main_campus", this);
     shahe_campus = new Map("shahe_campus", this);
     shahe_campus->hide();
-    for(auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
+    for (auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
         (*i)->hide();
-
-    connect(main_campus->combobox, &QComboBox::currentTextChanged, this, &MainWindow::route_calcu);
-    connect(shahe_campus->combobox, &QComboBox::currentTextChanged, this, &MainWindow::route_calcu);
-
+    for (auto i = main_campus->comboboxs.begin(); i < main_campus->comboboxs.end(); i++)
+        connect((*i), &QComboBox::currentTextChanged, this, &MainWindow::route_calcu);
+    for (auto i = shahe_campus->comboboxs.begin(); i < shahe_campus->comboboxs.end(); i++)
+        connect((*i), &QComboBox::currentTextChanged, this, &MainWindow::route_calcu);
     me = new Player(this);
     me->now_on = main_campus;
 
     main_campus->stackUnder(me);
     shahe_campus->stackUnder(me);
 
-    for(auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
+    for (auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
         (*i)->hide();
-    shahe_campus->combobox->hide();
+    for (auto i = shahe_campus->comboboxs.begin(); i < shahe_campus->comboboxs.end(); i++)
+        (*i)->hide();
 
     map_switch_btn = new QPushButton("切换至沙河地图", this);
     map_switch_btn->move(1300, 0);
@@ -134,19 +133,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     move_cancel_btn->hide();
     connect(move_cancel_btn, &QPushButton::clicked, this, &MainWindow::move_cancel);
 
-    distance_first_display = new RouteLabel(&me->distance_first, this);
-    distance_first_display->move(1100, 100);
+    distance_first_display = new RouteLabel(&me->distance_first, "最短距离", this);
+    distance_first_display->move(1100, 120);
     connect(distance_first_display, &RouteLabel::hover_in, me, &Player::show_route);
     connect(distance_first_display, &RouteLabel::hover_out, me, &Player::hide_route);
     connect(distance_first_display, &RouteLabel::clicked, this, &MainWindow::move_switch);
 
-    time_first_display = new RouteLabel(&me->time_first, this);
-    time_first_display->move(1100, 150);
+    time_first_display = new RouteLabel(&me->time_first, "最短时间", this);
+    time_first_display->move(1100, 160);
     connect(time_first_display, &RouteLabel::hover_in, me, &Player::show_route);
     connect(time_first_display, &RouteLabel::hover_out, me, &Player::hide_route);
     connect(time_first_display, &RouteLabel::clicked, this, &MainWindow::move_switch);
 
-    bike_allowed_display = new RouteLabel(&me->bike_allowed, this);
+    bike_allowed_display = new RouteLabel(&me->bike_allowed, "骑车最短时间", this);
     bike_allowed_display->move(1100, 200);
     connect(bike_allowed_display, &RouteLabel::hover_in, me, &Player::show_route);
     connect(bike_allowed_display, &RouteLabel::hover_out, me, &Player::hide_route);

@@ -54,12 +54,20 @@ Map::Map(QString s, QWidget *parent) : QWidget(parent)
         }
     }
 
-    combobox = new QComboBox(parent);
-    combobox->move(1100, 0);
-    combobox->setFixedSize(150, 30);
-    combobox->addItems(list);
+    comboboxs.push_back(new QComboBox(parent));
+    comboboxs.back()->move(1100, 0);
+    comboboxs.back()->setFixedSize(150, 30);
+    comboboxs.back()->addItems(list);
+    comboboxs.push_back(new QComboBox(parent));
+    comboboxs.back()->move(1100, 40);
+    comboboxs.back()->setFixedSize(150, 30);
+    comboboxs.back()->addItems(list);
+    comboboxs.push_back(new QComboBox(parent));
+    comboboxs.back()->move(1100, 80);
+    comboboxs.back()->setFixedSize(150, 30);
+    comboboxs.back()->addItems(list);
     for(auto i = bllist.begin(); i < bllist.end(); i++)
-        connect(*i, &BuildingLabel::clicked, combobox, &QComboBox::setCurrentText);
+        connect(*i, &BuildingLabel::clicked, comboboxs[0], &QComboBox::setCurrentText);
 }
 
 route_info Map::distance_first_dijkstra(int src, int des)

@@ -1,8 +1,9 @@
 #include "labels.h"
 
-RouteLabel::RouteLabel(route_info *tmp, QWidget *parent) : QLabel(parent)
+RouteLabel::RouteLabel(multi_routes *tmp, QString string, QWidget *parent) : QLabel(parent)
 {
-    route = tmp;
+    text = string;
+    routes = tmp;
     hover = false;
     enable = true;
     setStyleSheet("border:1px solid black;");
@@ -14,7 +15,7 @@ void RouteLabel::enterEvent(QEnterEvent *ev)
     if (!hover)
     {
         hover = true;
-        emit hover_in(route);
+        emit hover_in(routes);
     }
     QLabel::enterEvent(ev);
 };
@@ -24,7 +25,7 @@ void RouteLabel::leaveEvent(QEvent *ev)
     if (hover)
     {
         hover = false;
-        emit hover_out(route);
+        emit hover_out(routes);
     }
     QLabel::leaveEvent(ev);
 };
@@ -33,7 +34,14 @@ void RouteLabel::mouseReleaseEvent(QMouseEvent *ev)
 {
     Q_UNUSED(ev)
     if(enable)
-        emit clicked(route);
+        emit clicked(routes);
+}
+
+void RouteLabel::display()
+{
+    setText("<div style = 'font-weight:bold;'>" + text + "</div><br>" + QString::number(routes->distance) + "米   约" + QString::number(ceil(routes->time)) + "分钟");
+    adjustSize();
+    show();
 }
 
 BuildingLabel::BuildingLabel(QString s, int x, int y, QWidget *parent) : QLabel(parent)
