@@ -20,13 +20,18 @@ public:
     vector<vertex> vertices;
     vector<edge> edges;
     vector<QComboBox*> comboboxs;
+    QPushButton* add_btn;
+    QPushButton* delete_btn;
     QStringList list;
     vector<BuildingLabel *> bllist;
     Map(QString s, QWidget *parent = nullptr);
     route_info distance_first_dijkstra(int src, int des);
     route_info time_first_dijkstra(int src, int des);
     route_info bike_allowed_dijkstra(int src, int des);
-
+    QWidget* parent_ptr;
+    void add_combobox();
+    void delete_combobox();
+    
 protected:
     void paintEvent(QPaintEvent *);
 

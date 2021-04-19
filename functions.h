@@ -4,6 +4,7 @@
 #include <QString>
 #include <QTime>
 #include <QApplication>
+#include <QPushButton>
 #include <vector>
 using namespace std;
 

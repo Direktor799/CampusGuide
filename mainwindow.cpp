@@ -63,11 +63,16 @@ void MainWindow::map_switch()
             (*i)->hide();
         for (auto i = main_campus->bllist.begin(); i < main_campus->bllist.end(); i++)
             (*i)->hide();
+        main_campus->add_btn->hide();
+        main_campus->delete_btn->hide();
+
         shahe_campus->show();
         for (auto i = shahe_campus->comboboxs.begin(); i < shahe_campus->comboboxs.end(); i++)
             (*i)->show();
         for (auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
             (*i)->show();
+        shahe_campus->add_btn->show();
+        shahe_campus->delete_btn->show();
         map_switch_btn->setText("切换至本部地图");
     }
     else
@@ -77,11 +82,16 @@ void MainWindow::map_switch()
             (*i)->hide();
         for (auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
             (*i)->hide();
+        shahe_campus->add_btn->hide();
+        shahe_campus->delete_btn->hide();
+        
         main_campus->show();
         for (auto i = main_campus->comboboxs.begin(); i < main_campus->comboboxs.end(); i++)
             (*i)->show();
         for (auto i = main_campus->bllist.begin(); i < main_campus->bllist.end(); i++)
             (*i)->show();
+        main_campus->add_btn->show();
+        main_campus->delete_btn->show();
         map_switch_btn->setText("切换至沙河地图");
     }
     if (me->now_on->isHidden())
@@ -109,6 +119,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     shahe_campus->hide();
     for (auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
         (*i)->hide();
+    shahe_campus->add_btn->hide();
+    shahe_campus->delete_btn->hide();
     for (auto i = main_campus->comboboxs.begin(); i < main_campus->comboboxs.end(); i++)
         connect((*i), &QComboBox::currentTextChanged, this, &MainWindow::route_calcu);
     for (auto i = shahe_campus->comboboxs.begin(); i < shahe_campus->comboboxs.end(); i++)

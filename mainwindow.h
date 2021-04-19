@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QPushButton>
 #include <QTimer>
 #include <QDebug>
 #include "./ui_mainwindow.h"
