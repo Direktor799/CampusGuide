@@ -1,10 +1,37 @@
 #include "mainwindow.h"
 Player *me;
-Map *main_campus, *shahe_campus;
-QPushButton *map_switch_btn, *move_cancel_btn;
+Map *main_campus, *shahe_campus, *now_show;
+QPushButton *map_switch_btn, *move_cancel_btn, *add_btn, *delete_btn;
 QDateTime *vtime;
 QLabel *time_display;
 RouteLabel *distance_first_display, *time_first_display, *bike_allowed_display;
+vector<QComboBox*> comboboxs;
+
+void MainWindow::add_combobox()
+{
+    QPoint pos = comboboxs.back()->pos() + QPoint(0, 30);
+    comboboxs.push_back(new QComboBox(this));
+    comboboxs.back()->move(pos);
+    comboboxs.back()->setFixedSize(100, 30);
+    comboboxs.back()->addItems(now_show->list);
+    comboboxs.back()->show();
+    add_btn->move(add_btn->pos() + QPoint(0, 30));
+    delete_btn->move(delete_btn->pos() + QPoint(0, 30));
+    delete_btn->setEnabled(true);
+    if(comboboxs.size() == 5)
+        add_btn->setEnabled(false);
+}
+
+void MainWindow::delete_combobox()
+{
+    delete comboboxs.back();
+    comboboxs.pop_back();
+    add_btn->move(add_btn->pos() - QPoint(0, 30));
+    delete_btn->move(delete_btn->pos() - QPoint(0, 30));
+    add_btn->setEnabled(true);
+    if(comboboxs.size() == 1)
+        delete_btn->setEnabled(false);
+}
 
 void MainWindow::move_cancel()
 {
@@ -31,7 +58,7 @@ void MainWindow::route_calcu()
 {
     bool is_valid = false;
     vector<int> des;
-    for (auto i = me->now_on->comboboxs.begin(); i < me->now_on->comboboxs.end(); i++)
+    for (auto i = comboboxs.begin(); i < comboboxs.end(); i++)
         for (auto j = me->now_on->vertices.begin(); j < me->now_on->vertices.end(); j++)
             if (j->name == (*i)->currentText())
             {
@@ -59,39 +86,23 @@ void MainWindow::map_switch()
     if (!main_campus->isHidden())
     {
         main_campus->hide();
-        for (auto i = main_campus->comboboxs.begin(); i < main_campus->comboboxs.end(); i++)
-            (*i)->hide();
         for (auto i = main_campus->bllist.begin(); i < main_campus->bllist.end(); i++)
             (*i)->hide();
-        main_campus->add_btn->hide();
-        main_campus->delete_btn->hide();
-
+        now_show = shahe_campus;
         shahe_campus->show();
-        for (auto i = shahe_campus->comboboxs.begin(); i < shahe_campus->comboboxs.end(); i++)
-            (*i)->show();
         for (auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
             (*i)->show();
-        shahe_campus->add_btn->show();
-        shahe_campus->delete_btn->show();
         map_switch_btn->setText("切换至本部地图");
     }
     else
     {
         shahe_campus->hide();
-        for (auto i = shahe_campus->comboboxs.begin(); i < shahe_campus->comboboxs.end(); i++)
-            (*i)->hide();
         for (auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
             (*i)->hide();
-        shahe_campus->add_btn->hide();
-        shahe_campus->delete_btn->hide();
-        
+        now_show = main_campus;
         main_campus->show();
-        for (auto i = main_campus->comboboxs.begin(); i < main_campus->comboboxs.end(); i++)
-            (*i)->show();
         for (auto i = main_campus->bllist.begin(); i < main_campus->bllist.end(); i++)
             (*i)->show();
-        main_campus->add_btn->show();
-        main_campus->delete_btn->show();
         map_switch_btn->setText("切换至沙河地图");
     }
     if (me->now_on->isHidden())
@@ -115,16 +126,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     setFixedSize(1600, 672);
 
     main_campus = new Map("main_campus", this);
+    now_show = main_campus;
     shahe_campus = new Map("shahe_campus", this);
     shahe_campus->hide();
     for (auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
         (*i)->hide();
-    shahe_campus->add_btn->hide();
-    shahe_campus->delete_btn->hide();
-    for (auto i = main_campus->comboboxs.begin(); i < main_campus->comboboxs.end(); i++)
-        connect((*i), &QComboBox::currentTextChanged, this, &MainWindow::route_calcu);
-    for (auto i = shahe_campus->comboboxs.begin(); i < shahe_campus->comboboxs.end(); i++)
-        connect((*i), &QComboBox::currentTextChanged, this, &MainWindow::route_calcu);
     me = new Player(this);
     me->now_on = main_campus;
 
@@ -132,8 +138,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     shahe_campus->stackUnder(me);
 
     for (auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
-        (*i)->hide();
-    for (auto i = shahe_campus->comboboxs.begin(); i < shahe_campus->comboboxs.end(); i++)
         (*i)->hide();
 
     map_switch_btn = new QPushButton("切换至沙河地图", this);
@@ -177,6 +181,36 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     time_display->setFont(font);
     time_display->setText("当前时间：" + vtime->toString("yyyy-MM-dd hh:mm:ss ddd"));
     time_display->adjustSize();
+
+    for (auto i = main_campus->vertices.begin(); i < main_campus->vertices.end(); i++)
+    {
+        if (i->name != "Crossing")
+        {
+            BuildingLabel *bl = new BuildingLabel(i->name, i->pos_x, i->pos_y, this);
+            connect(bl, BuildingLabel::hover_in, bl, BuildingLabel::choose);
+            connect(bl, BuildingLabel::hover_out, bl, BuildingLabel::unchoose);
+            main_campus->bllist.push_back(bl);
+        }
+    }
+
+    comboboxs.push_back(new QComboBox(this));
+    comboboxs.back()->move(1100, 0);
+    comboboxs.back()->setFixedSize(100, 30);
+    comboboxs.back()->addItems(main_campus->list);
+    for(auto i = main_campus->bllist.begin(); i < main_campus->bllist.end(); i++)
+        connect(*i, &BuildingLabel::clicked, comboboxs.back(), &QComboBox::setCurrentText);
+    //connect((*i), &QComboBox::currentTextChanged, this, &MainWindow::route_calcu);
+
+    add_btn = new QPushButton("+", parent);
+    add_btn->move(1100, 30);
+    add_btn->setFixedSize(50, 30);
+    connect(add_btn, &QPushButton::clicked, this, &MainWindow::add_combobox);
+
+    delete_btn = new QPushButton("-", parent);
+    delete_btn->move(1150, 30);
+    delete_btn->setFixedSize(50, 30);
+    delete_btn->setEnabled(false);
+    connect(delete_btn, &QPushButton::clicked, this, &MainWindow::delete_combobox);
 }
 
 MainWindow::~MainWindow()

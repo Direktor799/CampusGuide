@@ -3,7 +3,6 @@
 
 Map::Map(QString s, QWidget *parent) : QWidget(parent)
 {
-    parent_ptr = parent;
     resize(1080, 672);
     filename = s;
     json data, j;
@@ -44,34 +43,6 @@ Map::Map(QString s, QWidget *parent) : QWidget(parent)
             list << i->name;
     std::sort(list.begin(), list.end(), string_less);
 
-    for (auto i = vertices.begin(); i < vertices.end(); i++)
-    {
-        if (i->name != "Crossing")
-        {
-            BuildingLabel *bl = new BuildingLabel(i->name, i->pos_x, i->pos_y, parent);
-            connect(bl, BuildingLabel::hover_in, bl, BuildingLabel::choose);
-            connect(bl, BuildingLabel::hover_out, bl, BuildingLabel::unchoose);
-            bllist.push_back(bl);
-        }
-    }
-
-    comboboxs.push_back(new QComboBox(parent));
-    comboboxs.back()->move(1100, 0);
-    comboboxs.back()->setFixedSize(100, 30);
-    comboboxs.back()->addItems(list);
-    for(auto i = bllist.begin(); i < bllist.end(); i++)
-        connect(*i, &BuildingLabel::clicked, comboboxs.back(), &QComboBox::setCurrentText);
-
-    add_btn = new QPushButton("+", parent);
-    add_btn->move(1100, 30);
-    add_btn->setFixedSize(50, 30);
-    connect(add_btn, &QPushButton::clicked, this, &Map::add_combobox);
-
-    delete_btn = new QPushButton("-", parent);
-    delete_btn->move(1150, 30);
-    delete_btn->setFixedSize(50, 30);
-    delete_btn->setEnabled(false);
-    connect(delete_btn, &QPushButton::clicked, this, &Map::delete_combobox);
 }
 
 route_info Map::distance_first_dijkstra(int src, int des)
@@ -188,32 +159,6 @@ route_info Map::bike_allowed_dijkstra(int src, int des)
     ret.edges = route;
     ret.is_riding = true;
     return ret;
-}
-
-void Map::add_combobox()
-{
-    QPoint pos = comboboxs.back()->pos() + QPoint(0, 30);
-    comboboxs.push_back(new QComboBox(parent_ptr));
-    comboboxs.back()->move(pos);
-    comboboxs.back()->setFixedSize(100, 30);
-    comboboxs.back()->addItems(list);
-    comboboxs.back()->show();
-    add_btn->move(add_btn->pos() + QPoint(0, 30));
-    delete_btn->move(delete_btn->pos() + QPoint(0, 30));
-    delete_btn->setEnabled(true);
-    if(comboboxs.size() == 5)
-        add_btn->setEnabled(false);
-}
-
-void Map::delete_combobox()
-{
-    delete comboboxs.back();
-    comboboxs.pop_back();
-    add_btn->move(add_btn->pos() - QPoint(0, 30));
-    delete_btn->move(delete_btn->pos() - QPoint(0, 30));
-    add_btn->setEnabled(true);
-    if(comboboxs.size() == 1)
-        delete_btn->setEnabled(false);
 }
 
 void Map::paintEvent(QPaintEvent *)

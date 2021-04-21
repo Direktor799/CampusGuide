@@ -24,6 +24,8 @@ public:
     void move_switch(multi_routes* routes);
     void move_cancel();
     void timer_update();
+    void add_combobox();
+    void delete_combobox();
 private:
     Ui::MainWindow *ui;
 };
