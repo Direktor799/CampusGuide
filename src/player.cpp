@@ -6,6 +6,7 @@ Player::Player(QWidget *parent) : QWidget(parent)
     pos_number = 3;
     pos_x = 0;
     pos_y = 0;
+    speedfactor = 6;
     resize(1080, 672);
 }
 
@@ -208,9 +209,9 @@ void Player::move()
                 if (now_routes.canceled)
                     break;
                 if (now_routes.now->is_riding && now_routes.now->now->is_bike_allowed)
-                    sleep(map_ratio * 1.0 / (now_routes.now->now->congestion * walk_speed * ride_multiplier) * 1000);
+                    sleep(map_ratio * 1.0 / (now_routes.now->now->congestion * walk_speed * speedfactor / 60 * ride_multiplier) * 1000);
                 else
-                    sleep(map_ratio * 1.0 / (now_routes.now->now->congestion * walk_speed) * 1000);
+                    sleep(map_ratio * 1.0 / (now_routes.now->now->congestion * walk_speed * speedfactor / 60) * 1000);
                 pos_x += x_move;
                 pos_y += y_move;
                 update();

@@ -8,6 +8,7 @@ class Player : public QWidget
     Q_OBJECT
 public:
     Map* now_on;
+    int speedfactor;
     int pos_number;
     int pos_x, pos_y;
     multi_routes distance_first;

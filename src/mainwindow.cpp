@@ -6,6 +6,8 @@ QDateTime *vtime;
 QLabel *time_display;
 RouteLabel *distance_first_display, *time_first_display, *bike_allowed_display;
 DesWidget *deswidget;
+QSlider *slider;
+QLabel *sliderleftlabel, *sliderrightlabel;
 
 void MainWindow::move_cancel()
 {
@@ -84,9 +86,21 @@ void MainWindow::map_switch()
 
 void MainWindow::timer_update()
 {
-    *vtime = vtime->addSecs(1);
+    *vtime = vtime->addMSecs(100 * me->speedfactor);
     time_display->setText(vtime->toString("yyyy-MM-dd hh:mm:ss ddd"));
     time_display->update();
+}
+
+void MainWindow::setFactor()
+{
+    if(slider->value() == 0)
+        me->speedfactor = 1;
+    else if(slider->value() == 1)
+        me->speedfactor = 6;
+    else if(slider->value() == 2)
+        me->speedfactor = 60;
+    me->speedfactor = me->speedfactor;
+    sliderrightlabel->setText(QString::number(me->speedfactor) + "x");
 }
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -162,7 +176,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     QTimer *timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::timer_update);
-    timer->start(166);
+    timer->start(100);
 
     vtime = new QDateTime;
     *vtime = QDateTime::currentDateTime();
@@ -174,6 +188,23 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     time_display->setFont(font);
     time_display->setText("当前时间：" + vtime->toString("yyyy-MM-dd hh:mm:ss ddd"));
     time_display->adjustSize();
+
+    sliderleftlabel = new QLabel(this);
+    sliderleftlabel->setText("加速倍数：");
+    sliderleftlabel->move(1100, 620);
+
+    sliderrightlabel = new QLabel(this);
+    sliderrightlabel->setText("6x");
+    sliderrightlabel->move(1245, 620);
+
+    slider = new QSlider(Qt::Horizontal, this);
+    slider->move(1160, 630);
+    slider->resize(80, 15);
+    slider->setTickPosition(QSlider::TicksBelow);
+    slider->setRange(0, 2);
+    slider->setPageStep(1);
+    slider->setValue(1);
+    connect(slider, &QSlider::valueChanged, this, &MainWindow::setFactor);
 }
 
 MainWindow::~MainWindow()

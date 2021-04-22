@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QTimer>
 #include <QComboBox>
-#include <QDebug>
+#include <QSlider>
 #include "./ui_mainwindow.h"
 #include "map.h"
 #include "player.h"
@@ -25,6 +25,7 @@ public:
     void move_switch(multi_routes* routes);
     void move_cancel();
     void timer_update();
+    void setFactor();
 private:
     Ui::MainWindow *ui;
 };
