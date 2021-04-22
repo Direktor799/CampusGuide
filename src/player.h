@@ -22,10 +22,11 @@ public:
     void move();
     void show_route(multi_routes* routes);
     void hide_route(multi_routes* routes);
+    vector<route_info> checkSurrounding();
 protected:
     void paintEvent(QPaintEvent *);
 signals:
-
+    void moving();
 };
 
 #endif // PLAYER_H

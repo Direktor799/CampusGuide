@@ -221,6 +221,7 @@ void Player::move()
             pos_number = now_on->vertices[(*i)->to].number;
             pos_x = now_on->vertices[(*i)->to].pos_x;
             pos_y = now_on->vertices[(*i)->to].pos_y;
+            emit moving();
         }
     }
     now_routes.visable = false;
@@ -238,6 +239,18 @@ void Player::hide_route(multi_routes *route)
 {
     route->visable = false;
     update();
+}
+
+vector<route_info> Player::checkSurrounding()
+{
+    vector<route_info> surrounding;
+    for(auto i = now_on->vertices.begin(); i < now_on->vertices.end(); i++)
+    {
+        if(i->name != "Crossing" && get_distance(pos_x, pos_y, i->pos_x, i->pos_y) * map_ratio <= 200 && i->number != pos_number)
+            surrounding.push_back(now_on->distance_first_dijkstra(pos_number, i->number));
+    }
+    sort(surrounding.begin(), surrounding.end());
+    return surrounding;
 }
 
 void Player::paintEvent(QPaintEvent *)

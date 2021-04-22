@@ -8,6 +8,7 @@ RouteLabel *distance_first_display, *time_first_display, *bike_allowed_display;
 DesWidget *deswidget;
 QSlider *slider;
 QLabel *sliderleftlabel, *sliderrightlabel;
+QListWidget *listwidget;
 
 void MainWindow::move_cancel()
 {
@@ -103,6 +104,15 @@ void MainWindow::setFactor()
     sliderrightlabel->setText(QString::number(me->speedfactor) + "x");
 }
 
+void MainWindow::updateListWidget()
+{
+    listwidget->clear();
+    vector<route_info> surrounding = me->checkSurrounding();
+    for(auto i = surrounding.begin(); i < surrounding.end() && i < surrounding.begin() + 10; i++)
+        listwidget->addItem(me->now_on->vertices[i->edges.back()->to].name + "(" + QString::number(i->distance) + "m)");
+    listwidget->resize(125, listwidget->count() * 18 + 4);
+}
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -173,6 +183,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(bike_allowed_display, &RouteLabel::hover_in, me, &Player::show_route);
     connect(bike_allowed_display, &RouteLabel::hover_out, me, &Player::hide_route);
     connect(bike_allowed_display, &RouteLabel::clicked, this, &MainWindow::move_switch);
+
+    listwidget = new QListWidget(this);
+    listwidget->move(1100, 430);
+    updateListWidget();
+    connect(me, &Player::moving, this, &MainWindow::updateListWidget);
 
     QTimer *timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::timer_update);

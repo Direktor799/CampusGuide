@@ -5,6 +5,7 @@
 #include <QTimer>
 #include <QComboBox>
 #include <QSlider>
+#include <QListWidget>
 #include "./ui_mainwindow.h"
 #include "map.h"
 #include "player.h"
@@ -26,6 +27,7 @@ public:
     void move_cancel();
     void timer_update();
     void setFactor();
+    void updateListWidget();
 private:
     Ui::MainWindow *ui;
 };

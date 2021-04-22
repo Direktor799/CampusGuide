@@ -39,6 +39,14 @@ struct route_info
     Map *on = nullptr;
     edge *now = nullptr;
     vector<edge *> edges;
+
+    bool operator < (route_info x)
+    {
+        if(distance < x.distance)
+            return true;
+        else
+            return false;
+    };
 };
 
 #endif // MAP_H
