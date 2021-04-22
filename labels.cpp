@@ -65,23 +65,13 @@ BuildingLabel::BuildingLabel(QString s, int x, int y, QWidget *parent) : QLabel(
     move(pos_x * my_ratio + my_drift - rec.width() / 2 - 5, pos_y * my_ratio + my_drift - rec.height() / 2 - 1);
 }
 
-void BuildingLabel::choose()
-{
-    raise();
-    setStyleSheet("border-radius: 5px; border:2px solid black; background-color:rgba(255,255,255,255);");
-}
-
-void BuildingLabel::unchoose()
-{
-    setStyleSheet("border-radius: 5px; border:1px solid black; background-color:rgba(255,255,255,150);");
-}
-
 void BuildingLabel::enterEvent(QEnterEvent *ev)
 {
     if (!hover)
     {
         hover = true;
-        emit hover_in();
+        raise();
+        setStyleSheet("border-radius: 5px; border:2px solid black; background-color:rgba(255,255,255,255);");
     }
     QLabel::enterEvent(ev);
 };
@@ -91,7 +81,7 @@ void BuildingLabel::leaveEvent(QEvent *ev)
     if (hover)
     {
         hover = false;
-        emit hover_out();
+        setStyleSheet("border-radius: 5px; border:1px solid black; background-color:rgba(255,255,255,150);");
     }
     QLabel::leaveEvent(ev);
 };

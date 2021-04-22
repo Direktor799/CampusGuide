@@ -32,17 +32,14 @@ public:
     int pos_x;
     int pos_y;
     bool hover;
-
     BuildingLabel(QString s, int x, int y, QWidget *parent = nullptr);
-    void choose();
-    void unchoose();
+    
 protected:
     virtual void mouseReleaseEvent(QMouseEvent *ev);
     virtual void enterEvent(QEnterEvent *ev);
     virtual void leaveEvent(QEvent *ev);
 signals:
     void clicked(QString text);
-    void hover_in();
-    void hover_out();
 };
+
 #endif // LABELS_H

@@ -1,0 +1,1992 @@
+{
+    "vertices": [
+        {
+            "name": "地铁站",
+            "number": 0,
+            "pos_x": 0,
+            "pos_y": 27
+        },
+        {
+            "name": "北门",
+            "number": 1,
+            "pos_x": 0,
+            "pos_y": 17
+        },
+        {
+            "name": "Crossing",
+            "number": 2,
+            "pos_x": 0,
+            "pos_y": 9
+        },
+        {
+            "name": "Crossing",
+            "number": 3,
+            "pos_x": 0,
+            "pos_y": 0
+        },
+        {
+            "name": "Crossing",
+            "number": 4,
+            "pos_x": 1,
+            "pos_y": 21
+        },
+        {
+            "name": "Crossing",
+            "number": 5,
+            "pos_x": 1,
+            "pos_y": 17
+        },
+        {
+            "name": "学十一公寓",
+            "number": 6,
+            "pos_x": 2,
+            "pos_y": 23
+        },
+        {
+            "name": "Crossing",
+            "number": 7,
+            "pos_x": 2,
+            "pos_y": 17
+        },
+        {
+            "name": "经管楼",
+            "number": 8,
+            "pos_x": 2,
+            "pos_y": 16
+        },
+        {
+            "name": "北邮科技酒店",
+            "number": 9,
+            "pos_x": 3,
+            "pos_y": 25
+        },
+        {
+            "name": "Crossing",
+            "number": 10,
+            "pos_x": 3,
+            "pos_y": 23
+        },
+        {
+            "name": "Crossing",
+            "number": 11,
+            "pos_x": 3,
+            "pos_y": 21
+        },
+        {
+            "name": "学十公寓",
+            "number": 12,
+            "pos_x": 3,
+            "pos_y": 20
+        },
+        {
+            "name": "学六公寓",
+            "number": 13,
+            "pos_x": 3,
+            "pos_y": 12
+        },
+        {
+            "name": "Crossing",
+            "number": 14,
+            "pos_x": 3,
+            "pos_y": 9
+        },
+        {
+            "name": "青年教师公寓",
+            "number": 15,
+            "pos_x": 3,
+            "pos_y": 3
+        },
+        {
+            "name": "学九公寓",
+            "number": 16,
+            "pos_x": 4,
+            "pos_y": 23
+        },
+        {
+            "name": "Crossing",
+            "number": 17,
+            "pos_x": 4,
+            "pos_y": 9
+        },
+        {
+            "name": "Crossing",
+            "number": 18,
+            "pos_x": 4,
+            "pos_y": 7
+        },
+        {
+            "name": "Crossing",
+            "number": 19,
+            "pos_x": 4,
+            "pos_y": 3
+        },
+        {
+            "name": "Crossing",
+            "number": 20,
+            "pos_x": 4,
+            "pos_y": 1
+        },
+        {
+            "name": "东北门",
+            "number": 21,
+            "pos_x": 4,
+            "pos_y": 0
+        },
+        {
+            "name": "Crossing",
+            "number": 22,
+            "pos_x": 5,
+            "pos_y": 25
+        },
+        {
+            "name": "Crossing",
+            "number": 23,
+            "pos_x": 5,
+            "pos_y": 23
+        },
+        {
+            "name": "Crossing",
+            "number": 24,
+            "pos_x": 5,
+            "pos_y": 21
+        },
+        {
+            "name": "Crossing",
+            "number": 25,
+            "pos_x": 5,
+            "pos_y": 17
+        },
+        {
+            "name": "学生活动中心",
+            "number": 26,
+            "pos_x": 5,
+            "pos_y": 16
+        },
+        {
+            "name": "科研大楼",
+            "number": 27,
+            "pos_x": 5,
+            "pos_y": 7
+        },
+        {
+            "name": "青年公寓",
+            "number": 28,
+            "pos_x": 6,
+            "pos_y": 26
+        },
+        {
+            "name": "Crossing",
+            "number": 29,
+            "pos_x": 6,
+            "pos_y": 25
+        },
+        {
+            "name": "留学生公寓",
+            "number": 30,
+            "pos_x": 6,
+            "pos_y": 23
+        },
+        {
+            "name": "综合食堂",
+            "number": 31,
+            "pos_x": 6,
+            "pos_y": 19
+        },
+        {
+            "name": "澡堂",
+            "number": 32,
+            "pos_x": 6,
+            "pos_y": 11
+        },
+        {
+            "name": "Crossing",
+            "number": 33,
+            "pos_x": 7,
+            "pos_y": 25
+        },
+        {
+            "name": "Crossing",
+            "number": 34,
+            "pos_x": 7,
+            "pos_y": 23
+        },
+        {
+            "name": "Crossing",
+            "number": 35,
+            "pos_x": 7,
+            "pos_y": 21
+        },
+        {
+            "name": "Crossing",
+            "number": 36,
+            "pos_x": 7,
+            "pos_y": 19
+        },
+        {
+            "name": "Crossing",
+            "number": 37,
+            "pos_x": 7,
+            "pos_y": 17
+        },
+        {
+            "name": "Crossing",
+            "number": 38,
+            "pos_x": 7,
+            "pos_y": 14
+        },
+        {
+            "name": "Crossing",
+            "number": 39,
+            "pos_x": 7,
+            "pos_y": 13
+        },
+        {
+            "name": "Crossing",
+            "number": 40,
+            "pos_x": 7,
+            "pos_y": 11
+        },
+        {
+            "name": "Crossing",
+            "number": 41,
+            "pos_x": 7,
+            "pos_y": 10
+        },
+        {
+            "name": "Crossing",
+            "number": 42,
+            "pos_x": 7,
+            "pos_y": 9
+        },
+        {
+            "name": "学五公寓",
+            "number": 43,
+            "pos_x": 8,
+            "pos_y": 23
+        },
+        {
+            "name": "学八公寓",
+            "number": 44,
+            "pos_x": 8,
+            "pos_y": 19
+        },
+        {
+            "name": "学苑超市",
+            "number": 45,
+            "pos_x": 8,
+            "pos_y": 13
+        },
+        {
+            "name": "教工餐厅",
+            "number": 46,
+            "pos_x": 8,
+            "pos_y": 10
+        },
+        {
+            "name": "学生食堂",
+            "number": 47,
+            "pos_x": 9,
+            "pos_y": 7
+        },
+        {
+            "name": "保卫处",
+            "number": 48,
+            "pos_x": 9,
+            "pos_y": 2
+        },
+        {
+            "name": "Crossing",
+            "number": 49,
+            "pos_x": 10,
+            "pos_y": 25
+        },
+        {
+            "name": "Crossing",
+            "number": 50,
+            "pos_x": 10,
+            "pos_y": 23
+        },
+        {
+            "name": "Crossing",
+            "number": 51,
+            "pos_x": 10,
+            "pos_y": 21
+        },
+        {
+            "name": "Crossing",
+            "number": 52,
+            "pos_x": 10,
+            "pos_y": 19
+        },
+        {
+            "name": "Crossing",
+            "number": 53,
+            "pos_x": 10,
+            "pos_y": 17
+        },
+        {
+            "name": "Crossing",
+            "number": 54,
+            "pos_x": 10,
+            "pos_y": 14
+        },
+        {
+            "name": "Crossing",
+            "number": 55,
+            "pos_x": 10,
+            "pos_y": 9
+        },
+        {
+            "name": "Crossing",
+            "number": 56,
+            "pos_x": 10,
+            "pos_y": 7
+        },
+        {
+            "name": "Crossing",
+            "number": 57,
+            "pos_x": 10,
+            "pos_y": 3
+        },
+        {
+            "name": "Crossing",
+            "number": 58,
+            "pos_x": 10,
+            "pos_y": 2
+        },
+        {
+            "name": "Crossing",
+            "number": 59,
+            "pos_x": 10,
+            "pos_y": 1
+        },
+        {
+            "name": "Crossing",
+            "number": 60,
+            "pos_x": 10,
+            "pos_y": 0
+        },
+        {
+            "name": "学三公寓",
+            "number": 61,
+            "pos_x": 11,
+            "pos_y": 23
+        },
+        {
+            "name": "学四公寓",
+            "number": 62,
+            "pos_x": 11,
+            "pos_y": 19
+        },
+        {
+            "name": "学十三公寓",
+            "number": 63,
+            "pos_x": 12,
+            "pos_y": 26
+        },
+        {
+            "name": "Crossing",
+            "number": 64,
+            "pos_x": 12,
+            "pos_y": 25
+        },
+        {
+            "name": "图书馆",
+            "number": 65,
+            "pos_x": 12,
+            "pos_y": 10
+        },
+        {
+            "name": "Crossing",
+            "number": 66,
+            "pos_x": 12,
+            "pos_y": 9
+        },
+        {
+            "name": "篮球场",
+            "number": 67,
+            "pos_x": 12,
+            "pos_y": 8
+        },
+        {
+            "name": "学一公寓",
+            "number": 68,
+            "pos_x": 14,
+            "pos_y": 23
+        },
+        {
+            "name": "学二公寓",
+            "number": 69,
+            "pos_x": 14,
+            "pos_y": 19
+        },
+        {
+            "name": "网球场",
+            "number": 70,
+            "pos_x": 14,
+            "pos_y": 4
+        },
+        {
+            "name": "学二十九公寓",
+            "number": 71,
+            "pos_x": 14,
+            "pos_y": 2
+        },
+        {
+            "name": "Crossing",
+            "number": 72,
+            "pos_x": 15,
+            "pos_y": 25
+        },
+        {
+            "name": "Crossing",
+            "number": 73,
+            "pos_x": 15,
+            "pos_y": 23
+        },
+        {
+            "name": "Crossing",
+            "number": 74,
+            "pos_x": 15,
+            "pos_y": 21
+        },
+        {
+            "name": "Crossing",
+            "number": 75,
+            "pos_x": 15,
+            "pos_y": 19
+        },
+        {
+            "name": "Crossing",
+            "number": 76,
+            "pos_x": 15,
+            "pos_y": 17
+        },
+        {
+            "name": "Crossing",
+            "number": 77,
+            "pos_x": 15,
+            "pos_y": 13
+        },
+        {
+            "name": "Crossing",
+            "number": 78,
+            "pos_x": 15,
+            "pos_y": 9
+        },
+        {
+            "name": "Crossing",
+            "number": 79,
+            "pos_x": 15,
+            "pos_y": 5
+        },
+        {
+            "name": "Crossing",
+            "number": 80,
+            "pos_x": 15,
+            "pos_y": 4
+        },
+        {
+            "name": "Crossing",
+            "number": 81,
+            "pos_x": 15,
+            "pos_y": 3
+        },
+        {
+            "name": "Crossing",
+            "number": 82,
+            "pos_x": 15,
+            "pos_y": 2
+        },
+        {
+            "name": "Crossing",
+            "number": 83,
+            "pos_x": 15,
+            "pos_y": 1
+        },
+        {
+            "name": "东门",
+            "number": 84,
+            "pos_x": 15,
+            "pos_y": 0
+        },
+        {
+            "name": "行政办公楼",
+            "number": 85,
+            "pos_x": 16,
+            "pos_y": 13
+        },
+        {
+            "name": "游泳馆",
+            "number": 86,
+            "pos_x": 16,
+            "pos_y": 1
+        },
+        {
+            "name": "Crossing",
+            "number": 87,
+            "pos_x": 17,
+            "pos_y": 17
+        },
+        {
+            "name": "财务处",
+            "number": 88,
+            "pos_x": 17,
+            "pos_y": 16
+        },
+        {
+            "name": "邮局",
+            "number": 89,
+            "pos_x": 18,
+            "pos_y": 26
+        },
+        {
+            "name": "Crossing",
+            "number": 90,
+            "pos_x": 18,
+            "pos_y": 25
+        },
+        {
+            "name": "Crossing",
+            "number": 91,
+            "pos_x": 18,
+            "pos_y": 5
+        },
+        {
+            "name": "体育馆",
+            "number": 92,
+            "pos_x": 18,
+            "pos_y": 4
+        },
+        {
+            "name": "教四楼",
+            "number": 93,
+            "pos_x": 20,
+            "pos_y": 21
+        },
+        {
+            "name": "教一楼",
+            "number": 94,
+            "pos_x": 20,
+            "pos_y": 13
+        },
+        {
+            "name": "移动营业厅",
+            "number": 95,
+            "pos_x": 22,
+            "pos_y": 26
+        },
+        {
+            "name": "Crossing",
+            "number": 96,
+            "pos_x": 22,
+            "pos_y": 25
+        },
+        {
+            "name": "Crossing",
+            "number": 97,
+            "pos_x": 22,
+            "pos_y": 21
+        },
+        {
+            "name": "Crossing",
+            "number": 98,
+            "pos_x": 22,
+            "pos_y": 17
+        },
+        {
+            "name": "Crossing",
+            "number": 99,
+            "pos_x": 22,
+            "pos_y": 13
+        },
+        {
+            "name": "Crossing",
+            "number": 100,
+            "pos_x": 22,
+            "pos_y": 9
+        },
+        {
+            "name": "Crossing",
+            "number": 101,
+            "pos_x": 22,
+            "pos_y": 7
+        },
+        {
+            "name": "Crossing",
+            "number": 102,
+            "pos_x": 22,
+            "pos_y": 5
+        },
+        {
+            "name": "科学会堂",
+            "number": 103,
+            "pos_x": 23,
+            "pos_y": 7
+        },
+        {
+            "name": "西门",
+            "number": 104,
+            "pos_x": 25,
+            "pos_y": 27
+        },
+        {
+            "name": "Crossing",
+            "number": 105,
+            "pos_x": 25,
+            "pos_y": 25
+        },
+        {
+            "name": "主楼",
+            "number": 106,
+            "pos_x": 25,
+            "pos_y": 10
+        },
+        {
+            "name": "Crossing",
+            "number": 107,
+            "pos_x": 25,
+            "pos_y": 9
+        },
+        {
+            "name": "Crossing",
+            "number": 108,
+            "pos_x": 26,
+            "pos_y": 5
+        },
+        {
+            "name": "体育场",
+            "number": 109,
+            "pos_x": 26,
+            "pos_y": 4
+        },
+        {
+            "name": "Crossing",
+            "number": 110,
+            "pos_x": 28,
+            "pos_y": 25
+        },
+        {
+            "name": "Crossing",
+            "number": 111,
+            "pos_x": 28,
+            "pos_y": 21
+        },
+        {
+            "name": "Crossing",
+            "number": 112,
+            "pos_x": 28,
+            "pos_y": 17
+        },
+        {
+            "name": "Crossing",
+            "number": 113,
+            "pos_x": 28,
+            "pos_y": 9
+        },
+        {
+            "name": "Crossing",
+            "number": 114,
+            "pos_x": 28,
+            "pos_y": 5
+        },
+        {
+            "name": "教三楼",
+            "number": 115,
+            "pos_x": 29,
+            "pos_y": 21
+        },
+        {
+            "name": "停车坪",
+            "number": 116,
+            "pos_x": 30,
+            "pos_y": 26
+        },
+        {
+            "name": "Crossing",
+            "number": 117,
+            "pos_x": 30,
+            "pos_y": 25
+        },
+        {
+            "name": "教二楼",
+            "number": 118,
+            "pos_x": 30,
+            "pos_y": 13
+        },
+        {
+            "name": "可信网络通信协同创新中心",
+            "number": 119,
+            "pos_x": 31,
+            "pos_y": 7
+        },
+        {
+            "name": "Crossing",
+            "number": 120,
+            "pos_x": 32,
+            "pos_y": 25
+        },
+        {
+            "name": "Crossing",
+            "number": 121,
+            "pos_x": 32,
+            "pos_y": 17
+        },
+        {
+            "name": "Crossing",
+            "number": 122,
+            "pos_x": 32,
+            "pos_y": 13
+        },
+        {
+            "name": "Crossing",
+            "number": 123,
+            "pos_x": 32,
+            "pos_y": 9
+        },
+        {
+            "name": "Crossing",
+            "number": 124,
+            "pos_x": 32,
+            "pos_y": 7
+        },
+        {
+            "name": "Crossing",
+            "number": 125,
+            "pos_x": 32,
+            "pos_y": 5
+        },
+        {
+            "name": "Crossing",
+            "number": 126,
+            "pos_x": 33,
+            "pos_y": 17
+        },
+        {
+            "name": "中门邮局",
+            "number": 127,
+            "pos_x": 33,
+            "pos_y": 16
+        },
+        {
+            "name": "校医院",
+            "number": 128,
+            "pos_x": 34,
+            "pos_y": 19
+        },
+        {
+            "name": "Crossing",
+            "number": 129,
+            "pos_x": 35,
+            "pos_y": 23
+        },
+        {
+            "name": "Crossing",
+            "number": 130,
+            "pos_x": 35,
+            "pos_y": 19
+        },
+        {
+            "name": "中门",
+            "number": 131,
+            "pos_x": 35,
+            "pos_y": 17
+        },
+        {
+            "name": "Crossing",
+            "number": 132,
+            "pos_x": 35,
+            "pos_y": 7
+        },
+        {
+            "name": "Crossing",
+            "number": 133,
+            "pos_x": 35,
+            "pos_y": 5
+        },
+        {
+            "name": "壹零时光咖啡",
+            "number": 134,
+            "pos_x": 36,
+            "pos_y": 23
+        },
+        {
+            "name": "北邮幼儿园",
+            "number": 135,
+            "pos_x": 36,
+            "pos_y": 7
+        },
+        {
+            "name": "南区超市",
+            "number": 136,
+            "pos_x": 37,
+            "pos_y": 18
+        },
+        {
+            "name": "Crossing",
+            "number": 137,
+            "pos_x": 37,
+            "pos_y": 17
+        },
+        {
+            "name": "Crossing",
+            "number": 138,
+            "pos_x": 37,
+            "pos_y": 5
+        },
+        {
+            "name": "Crossing",
+            "number": 139,
+            "pos_x": 37,
+            "pos_y": 2
+        },
+        {
+            "name": "明光楼出版社",
+            "number": 140,
+            "pos_x": 38,
+            "pos_y": 2
+        },
+        {
+            "name": "电信营业厅",
+            "number": 141,
+            "pos_x": 39,
+            "pos_y": 18
+        },
+        {
+            "name": "Crossing",
+            "number": 142,
+            "pos_x": 39,
+            "pos_y": 17
+        },
+        {
+            "name": "Crossing",
+            "number": 143,
+            "pos_x": 41,
+            "pos_y": 17
+        },
+        {
+            "name": "Crossing",
+            "number": 144,
+            "pos_x": 41,
+            "pos_y": 13
+        },
+        {
+            "name": "火车票代售点",
+            "number": 145,
+            "pos_x": 43,
+            "pos_y": 14
+        },
+        {
+            "name": "北京交通大学附属中学",
+            "number": 146,
+            "pos_x": 43,
+            "pos_y": 5
+        },
+        {
+            "name": "Crossing",
+            "number": 147,
+            "pos_x": 44,
+            "pos_y": 27
+        },
+        {
+            "name": "Crossing",
+            "number": 148,
+            "pos_x": 44,
+            "pos_y": 14
+        },
+        {
+            "name": "南门",
+            "number": 149,
+            "pos_x": 44,
+            "pos_y": 13
+        },
+        {
+            "name": "Crossing",
+            "number": 150,
+            "pos_x": 44,
+            "pos_y": 5
+        },
+        {
+            "name": "Crossing",
+            "number": 151,
+            "pos_x": 44,
+            "pos_y": 0
+        }
+    ],
+    "edges": [
+        {
+            "congestion": 1.0,
+            "from": 0,
+            "is_bike_allowed": true,
+            "to": 1
+        },
+        {
+            "congestion": 1.0,
+            "from": 0,
+            "is_bike_allowed": true,
+            "to": 104
+        },
+        {
+            "congestion": 1.0,
+            "from": 1,
+            "is_bike_allowed": true,
+            "to": 2
+        },
+        {
+            "congestion": 1.0,
+            "from": 1,
+            "is_bike_allowed": true,
+            "to": 5
+        },
+        {
+            "congestion": 1.0,
+            "from": 2,
+            "is_bike_allowed": true,
+            "to": 3
+        },
+        {
+            "congestion": 0.91,
+            "from": 2,
+            "is_bike_allowed": false,
+            "to": 14
+        },
+        {
+            "congestion": 1.0,
+            "from": 3,
+            "is_bike_allowed": true,
+            "to": 21
+        },
+        {
+            "congestion": 0.55,
+            "from": 4,
+            "is_bike_allowed": false,
+            "to": 5
+        },
+        {
+            "congestion": 0.6,
+            "from": 4,
+            "is_bike_allowed": false,
+            "to": 11
+        },
+        {
+            "congestion": 1.0,
+            "from": 5,
+            "is_bike_allowed": true,
+            "to": 7
+        },
+        {
+            "congestion": 0.81,
+            "from": 6,
+            "is_bike_allowed": false,
+            "to": 10
+        },
+        {
+            "congestion": 0.94,
+            "from": 7,
+            "is_bike_allowed": false,
+            "to": 8
+        },
+        {
+            "congestion": 1.0,
+            "from": 7,
+            "is_bike_allowed": true,
+            "to": 25
+        },
+        {
+            "congestion": 0.66,
+            "from": 9,
+            "is_bike_allowed": false,
+            "to": 10
+        },
+        {
+            "congestion": 0.53,
+            "from": 10,
+            "is_bike_allowed": false,
+            "to": 11
+        },
+        {
+            "congestion": 0.83,
+            "from": 10,
+            "is_bike_allowed": false,
+            "to": 16
+        },
+        {
+            "congestion": 0.84,
+            "from": 11,
+            "is_bike_allowed": false,
+            "to": 12
+        },
+        {
+            "congestion": 0.85,
+            "from": 11,
+            "is_bike_allowed": false,
+            "to": 24
+        },
+        {
+            "congestion": 0.94,
+            "from": 13,
+            "is_bike_allowed": false,
+            "to": 14
+        },
+        {
+            "congestion": 0.94,
+            "from": 14,
+            "is_bike_allowed": false,
+            "to": 17
+        },
+        {
+            "congestion": 0.75,
+            "from": 15,
+            "is_bike_allowed": false,
+            "to": 19
+        },
+        {
+            "congestion": 0.98,
+            "from": 17,
+            "is_bike_allowed": false,
+            "to": 18
+        },
+        {
+            "congestion": 0.66,
+            "from": 17,
+            "is_bike_allowed": false,
+            "to": 42
+        },
+        {
+            "congestion": 0.82,
+            "from": 18,
+            "is_bike_allowed": false,
+            "to": 19
+        },
+        {
+            "congestion": 0.87,
+            "from": 18,
+            "is_bike_allowed": false,
+            "to": 27
+        },
+        {
+            "congestion": 0.58,
+            "from": 19,
+            "is_bike_allowed": false,
+            "to": 20
+        },
+        {
+            "congestion": 0.83,
+            "from": 20,
+            "is_bike_allowed": false,
+            "to": 21
+        },
+        {
+            "congestion": 0.8,
+            "from": 20,
+            "is_bike_allowed": false,
+            "to": 59
+        },
+        {
+            "congestion": 1.0,
+            "from": 21,
+            "is_bike_allowed": true,
+            "to": 60
+        },
+        {
+            "congestion": 0.56,
+            "from": 22,
+            "is_bike_allowed": false,
+            "to": 23
+        },
+        {
+            "congestion": 0.68,
+            "from": 22,
+            "is_bike_allowed": false,
+            "to": 29
+        },
+        {
+            "congestion": 0.76,
+            "from": 23,
+            "is_bike_allowed": false,
+            "to": 24
+        },
+        {
+            "congestion": 0.5,
+            "from": 23,
+            "is_bike_allowed": false,
+            "to": 30
+        },
+        {
+            "congestion": 0.87,
+            "from": 24,
+            "is_bike_allowed": false,
+            "to": 25
+        },
+        {
+            "congestion": 0.9,
+            "from": 24,
+            "is_bike_allowed": false,
+            "to": 35
+        },
+        {
+            "congestion": 0.8,
+            "from": 25,
+            "is_bike_allowed": false,
+            "to": 26
+        },
+        {
+            "congestion": 1.0,
+            "from": 25,
+            "is_bike_allowed": true,
+            "to": 37
+        },
+        {
+            "congestion": 0.1,
+            "from": 28,
+            "is_bike_allowed": false,
+            "to": 29
+        },
+        {
+            "congestion": 0.82,
+            "from": 29,
+            "is_bike_allowed": false,
+            "to": 33
+        },
+        {
+            "congestion": 0.55,
+            "from": 31,
+            "is_bike_allowed": false,
+            "to": 36
+        },
+        {
+            "congestion": 0.91,
+            "from": 32,
+            "is_bike_allowed": false,
+            "to": 40
+        },
+        {
+            "congestion": 0.5,
+            "from": 33,
+            "is_bike_allowed": false,
+            "to": 34
+        },
+        {
+            "congestion": 0.82,
+            "from": 33,
+            "is_bike_allowed": false,
+            "to": 49
+        },
+        {
+            "congestion": 0.62,
+            "from": 34,
+            "is_bike_allowed": false,
+            "to": 35
+        },
+        {
+            "congestion": 0.83,
+            "from": 34,
+            "is_bike_allowed": false,
+            "to": 43
+        },
+        {
+            "congestion": 0.72,
+            "from": 35,
+            "is_bike_allowed": false,
+            "to": 36
+        },
+        {
+            "congestion": 0.64,
+            "from": 35,
+            "is_bike_allowed": false,
+            "to": 51
+        },
+        {
+            "congestion": 0.84,
+            "from": 36,
+            "is_bike_allowed": false,
+            "to": 37
+        },
+        {
+            "congestion": 0.51,
+            "from": 36,
+            "is_bike_allowed": false,
+            "to": 44
+        },
+        {
+            "congestion": 0.5,
+            "from": 37,
+            "is_bike_allowed": false,
+            "to": 38
+        },
+        {
+            "congestion": 1.0,
+            "from": 37,
+            "is_bike_allowed": true,
+            "to": 53
+        },
+        {
+            "congestion": 0.91,
+            "from": 38,
+            "is_bike_allowed": false,
+            "to": 39
+        },
+        {
+            "congestion": 0.95,
+            "from": 38,
+            "is_bike_allowed": false,
+            "to": 54
+        },
+        {
+            "congestion": 0.58,
+            "from": 39,
+            "is_bike_allowed": false,
+            "to": 40
+        },
+        {
+            "congestion": 0.89,
+            "from": 39,
+            "is_bike_allowed": false,
+            "to": 45
+        },
+        {
+            "congestion": 0.77,
+            "from": 40,
+            "is_bike_allowed": false,
+            "to": 41
+        },
+        {
+            "congestion": 0.73,
+            "from": 41,
+            "is_bike_allowed": false,
+            "to": 42
+        },
+        {
+            "congestion": 0.95,
+            "from": 41,
+            "is_bike_allowed": false,
+            "to": 46
+        },
+        {
+            "congestion": 0.6,
+            "from": 42,
+            "is_bike_allowed": false,
+            "to": 55
+        },
+        {
+            "congestion": 0.1,
+            "from": 47,
+            "is_bike_allowed": false,
+            "to": 56
+        },
+        {
+            "congestion": 0.84,
+            "from": 48,
+            "is_bike_allowed": false,
+            "to": 58
+        },
+        {
+            "congestion": 0.97,
+            "from": 49,
+            "is_bike_allowed": false,
+            "to": 50
+        },
+        {
+            "congestion": 0.52,
+            "from": 49,
+            "is_bike_allowed": false,
+            "to": 64
+        },
+        {
+            "congestion": 0.72,
+            "from": 50,
+            "is_bike_allowed": false,
+            "to": 51
+        },
+        {
+            "congestion": 0.65,
+            "from": 50,
+            "is_bike_allowed": false,
+            "to": 61
+        },
+        {
+            "congestion": 0.95,
+            "from": 51,
+            "is_bike_allowed": false,
+            "to": 52
+        },
+        {
+            "congestion": 0.57,
+            "from": 51,
+            "is_bike_allowed": false,
+            "to": 74
+        },
+        {
+            "congestion": 0.52,
+            "from": 52,
+            "is_bike_allowed": false,
+            "to": 53
+        },
+        {
+            "congestion": 0.5,
+            "from": 52,
+            "is_bike_allowed": false,
+            "to": 62
+        },
+        {
+            "congestion": 0.9,
+            "from": 53,
+            "is_bike_allowed": false,
+            "to": 54
+        },
+        {
+            "congestion": 1.0,
+            "from": 53,
+            "is_bike_allowed": true,
+            "to": 76
+        },
+        {
+            "congestion": 0.63,
+            "from": 54,
+            "is_bike_allowed": false,
+            "to": 55
+        },
+        {
+            "congestion": 0.75,
+            "from": 55,
+            "is_bike_allowed": false,
+            "to": 56
+        },
+        {
+            "congestion": 0.76,
+            "from": 55,
+            "is_bike_allowed": false,
+            "to": 66
+        },
+        {
+            "congestion": 0.55,
+            "from": 56,
+            "is_bike_allowed": false,
+            "to": 57
+        },
+        {
+            "congestion": 0.56,
+            "from": 57,
+            "is_bike_allowed": false,
+            "to": 58
+        },
+        {
+            "congestion": 0.83,
+            "from": 57,
+            "is_bike_allowed": false,
+            "to": 81
+        },
+        {
+            "congestion": 0.66,
+            "from": 58,
+            "is_bike_allowed": false,
+            "to": 59
+        },
+        {
+            "congestion": 0.63,
+            "from": 59,
+            "is_bike_allowed": false,
+            "to": 60
+        },
+        {
+            "congestion": 1.0,
+            "from": 60,
+            "is_bike_allowed": true,
+            "to": 84
+        },
+        {
+            "congestion": 0.67,
+            "from": 63,
+            "is_bike_allowed": false,
+            "to": 64
+        },
+        {
+            "congestion": 0.87,
+            "from": 64,
+            "is_bike_allowed": false,
+            "to": 72
+        },
+        {
+            "congestion": 0.54,
+            "from": 65,
+            "is_bike_allowed": false,
+            "to": 66
+        },
+        {
+            "congestion": 0.58,
+            "from": 66,
+            "is_bike_allowed": false,
+            "to": 67
+        },
+        {
+            "congestion": 0.89,
+            "from": 66,
+            "is_bike_allowed": false,
+            "to": 78
+        },
+        {
+            "congestion": 0.79,
+            "from": 68,
+            "is_bike_allowed": false,
+            "to": 73
+        },
+        {
+            "congestion": 0.98,
+            "from": 69,
+            "is_bike_allowed": false,
+            "to": 75
+        },
+        {
+            "congestion": 0.93,
+            "from": 70,
+            "is_bike_allowed": false,
+            "to": 80
+        },
+        {
+            "congestion": 0.1,
+            "from": 71,
+            "is_bike_allowed": false,
+            "to": 82
+        },
+        {
+            "congestion": 1.0,
+            "from": 72,
+            "is_bike_allowed": true,
+            "to": 73
+        },
+        {
+            "congestion": 1.0,
+            "from": 72,
+            "is_bike_allowed": true,
+            "to": 90
+        },
+        {
+            "congestion": 1.0,
+            "from": 73,
+            "is_bike_allowed": true,
+            "to": 74
+        },
+        {
+            "congestion": 1.0,
+            "from": 74,
+            "is_bike_allowed": true,
+            "to": 75
+        },
+        {
+            "congestion": 1.0,
+            "from": 75,
+            "is_bike_allowed": true,
+            "to": 76
+        },
+        {
+            "congestion": 1.0,
+            "from": 76,
+            "is_bike_allowed": true,
+            "to": 77
+        },
+        {
+            "congestion": 1.0,
+            "from": 76,
+            "is_bike_allowed": true,
+            "to": 87
+        },
+        {
+            "congestion": 1.0,
+            "from": 77,
+            "is_bike_allowed": true,
+            "to": 78
+        },
+        {
+            "congestion": 0.62,
+            "from": 77,
+            "is_bike_allowed": false,
+            "to": 85
+        },
+        {
+            "congestion": 1.0,
+            "from": 78,
+            "is_bike_allowed": true,
+            "to": 79
+        },
+        {
+            "congestion": 1.0,
+            "from": 78,
+            "is_bike_allowed": true,
+            "to": 100
+        },
+        {
+            "congestion": 1.0,
+            "from": 79,
+            "is_bike_allowed": true,
+            "to": 80
+        },
+        {
+            "congestion": 0.92,
+            "from": 79,
+            "is_bike_allowed": false,
+            "to": 91
+        },
+        {
+            "congestion": 1.0,
+            "from": 80,
+            "is_bike_allowed": true,
+            "to": 81
+        },
+        {
+            "congestion": 1.0,
+            "from": 81,
+            "is_bike_allowed": true,
+            "to": 82
+        },
+        {
+            "congestion": 1.0,
+            "from": 82,
+            "is_bike_allowed": true,
+            "to": 83
+        },
+        {
+            "congestion": 1.0,
+            "from": 83,
+            "is_bike_allowed": true,
+            "to": 84
+        },
+        {
+            "congestion": 0.65,
+            "from": 83,
+            "is_bike_allowed": false,
+            "to": 86
+        },
+        {
+            "congestion": 1.0,
+            "from": 84,
+            "is_bike_allowed": true,
+            "to": 151
+        },
+        {
+            "congestion": 0.79,
+            "from": 87,
+            "is_bike_allowed": false,
+            "to": 88
+        },
+        {
+            "congestion": 1.0,
+            "from": 87,
+            "is_bike_allowed": true,
+            "to": 98
+        },
+        {
+            "congestion": 0.95,
+            "from": 89,
+            "is_bike_allowed": false,
+            "to": 90
+        },
+        {
+            "congestion": 1.0,
+            "from": 90,
+            "is_bike_allowed": true,
+            "to": 96
+        },
+        {
+            "congestion": 0.76,
+            "from": 91,
+            "is_bike_allowed": false,
+            "to": 92
+        },
+        {
+            "congestion": 0.62,
+            "from": 91,
+            "is_bike_allowed": false,
+            "to": 102
+        },
+        {
+            "congestion": 0.63,
+            "from": 93,
+            "is_bike_allowed": false,
+            "to": 97
+        },
+        {
+            "congestion": 0.89,
+            "from": 94,
+            "is_bike_allowed": false,
+            "to": 99
+        },
+        {
+            "congestion": 0.58,
+            "from": 95,
+            "is_bike_allowed": false,
+            "to": 96
+        },
+        {
+            "congestion": 0.69,
+            "from": 96,
+            "is_bike_allowed": false,
+            "to": 97
+        },
+        {
+            "congestion": 1.0,
+            "from": 96,
+            "is_bike_allowed": true,
+            "to": 105
+        },
+        {
+            "congestion": 0.82,
+            "from": 97,
+            "is_bike_allowed": false,
+            "to": 98
+        },
+        {
+            "congestion": 0.58,
+            "from": 98,
+            "is_bike_allowed": false,
+            "to": 99
+        },
+        {
+            "congestion": 1.0,
+            "from": 98,
+            "is_bike_allowed": true,
+            "to": 112
+        },
+        {
+            "congestion": 0.93,
+            "from": 99,
+            "is_bike_allowed": false,
+            "to": 100
+        },
+        {
+            "congestion": 0.62,
+            "from": 100,
+            "is_bike_allowed": false,
+            "to": 101
+        },
+        {
+            "congestion": 1.0,
+            "from": 100,
+            "is_bike_allowed": true,
+            "to": 107
+        },
+        {
+            "congestion": 0.53,
+            "from": 101,
+            "is_bike_allowed": false,
+            "to": 102
+        },
+        {
+            "congestion": 0.94,
+            "from": 101,
+            "is_bike_allowed": false,
+            "to": 103
+        },
+        {
+            "congestion": 0.51,
+            "from": 102,
+            "is_bike_allowed": false,
+            "to": 108
+        },
+        {
+            "congestion": 1.0,
+            "from": 104,
+            "is_bike_allowed": true,
+            "to": 105
+        },
+        {
+            "congestion": 1.0,
+            "from": 104,
+            "is_bike_allowed": true,
+            "to": 147
+        },
+        {
+            "congestion": 1.0,
+            "from": 105,
+            "is_bike_allowed": true,
+            "to": 110
+        },
+        {
+            "congestion": 0.79,
+            "from": 106,
+            "is_bike_allowed": false,
+            "to": 107
+        },
+        {
+            "congestion": 1.0,
+            "from": 107,
+            "is_bike_allowed": true,
+            "to": 113
+        },
+        {
+            "congestion": 0.66,
+            "from": 108,
+            "is_bike_allowed": false,
+            "to": 109
+        },
+        {
+            "congestion": 0.52,
+            "from": 108,
+            "is_bike_allowed": false,
+            "to": 114
+        },
+        {
+            "congestion": 0.92,
+            "from": 110,
+            "is_bike_allowed": false,
+            "to": 111
+        },
+        {
+            "congestion": 1.0,
+            "from": 110,
+            "is_bike_allowed": true,
+            "to": 117
+        },
+        {
+            "congestion": 0.8,
+            "from": 111,
+            "is_bike_allowed": false,
+            "to": 112
+        },
+        {
+            "congestion": 0.67,
+            "from": 111,
+            "is_bike_allowed": false,
+            "to": 115
+        },
+        {
+            "congestion": 0.89,
+            "from": 112,
+            "is_bike_allowed": false,
+            "to": 113
+        },
+        {
+            "congestion": 1.0,
+            "from": 112,
+            "is_bike_allowed": true,
+            "to": 121
+        },
+        {
+            "congestion": 0.55,
+            "from": 113,
+            "is_bike_allowed": false,
+            "to": 114
+        },
+        {
+            "congestion": 1.0,
+            "from": 113,
+            "is_bike_allowed": true,
+            "to": 123
+        },
+        {
+            "congestion": 0.99,
+            "from": 114,
+            "is_bike_allowed": false,
+            "to": 125
+        },
+        {
+            "congestion": 0.77,
+            "from": 116,
+            "is_bike_allowed": false,
+            "to": 117
+        },
+        {
+            "congestion": 1.0,
+            "from": 117,
+            "is_bike_allowed": true,
+            "to": 120
+        },
+        {
+            "congestion": 0.59,
+            "from": 118,
+            "is_bike_allowed": false,
+            "to": 122
+        },
+        {
+            "congestion": 0.86,
+            "from": 119,
+            "is_bike_allowed": false,
+            "to": 124
+        },
+        {
+            "congestion": 1.0,
+            "from": 120,
+            "is_bike_allowed": true,
+            "to": 121
+        },
+        {
+            "congestion": 1.0,
+            "from": 121,
+            "is_bike_allowed": true,
+            "to": 122
+        },
+        {
+            "congestion": 1.0,
+            "from": 121,
+            "is_bike_allowed": true,
+            "to": 126
+        },
+        {
+            "congestion": 1.0,
+            "from": 122,
+            "is_bike_allowed": true,
+            "to": 123
+        },
+        {
+            "congestion": 0.53,
+            "from": 123,
+            "is_bike_allowed": false,
+            "to": 124
+        },
+        {
+            "congestion": 0.61,
+            "from": 124,
+            "is_bike_allowed": false,
+            "to": 125
+        },
+        {
+            "congestion": 0.52,
+            "from": 126,
+            "is_bike_allowed": false,
+            "to": 127
+        },
+        {
+            "congestion": 1.0,
+            "from": 126,
+            "is_bike_allowed": true,
+            "to": 131
+        },
+        {
+            "congestion": 0.98,
+            "from": 128,
+            "is_bike_allowed": false,
+            "to": 130
+        },
+        {
+            "congestion": 0.73,
+            "from": 129,
+            "is_bike_allowed": false,
+            "to": 130
+        },
+        {
+            "congestion": 0.82,
+            "from": 129,
+            "is_bike_allowed": false,
+            "to": 134
+        },
+        {
+            "congestion": 0.97,
+            "from": 130,
+            "is_bike_allowed": false,
+            "to": 131
+        },
+        {
+            "congestion": 0.99,
+            "from": 131,
+            "is_bike_allowed": false,
+            "to": 132
+        },
+        {
+            "congestion": 1.0,
+            "from": 131,
+            "is_bike_allowed": true,
+            "to": 137
+        },
+        {
+            "congestion": 0.98,
+            "from": 132,
+            "is_bike_allowed": false,
+            "to": 133
+        },
+        {
+            "congestion": 0.65,
+            "from": 132,
+            "is_bike_allowed": false,
+            "to": 135
+        },
+        {
+            "congestion": 0.52,
+            "from": 133,
+            "is_bike_allowed": false,
+            "to": 138
+        },
+        {
+            "congestion": 0.68,
+            "from": 136,
+            "is_bike_allowed": false,
+            "to": 137
+        },
+        {
+            "congestion": 1.0,
+            "from": 137,
+            "is_bike_allowed": true,
+            "to": 142
+        },
+        {
+            "congestion": 0.98,
+            "from": 138,
+            "is_bike_allowed": false,
+            "to": 139
+        },
+        {
+            "congestion": 0.89,
+            "from": 139,
+            "is_bike_allowed": false,
+            "to": 140
+        },
+        {
+            "congestion": 0.66,
+            "from": 141,
+            "is_bike_allowed": false,
+            "to": 142
+        },
+        {
+            "congestion": 1.0,
+            "from": 142,
+            "is_bike_allowed": true,
+            "to": 143
+        },
+        {
+            "congestion": 1.0,
+            "from": 143,
+            "is_bike_allowed": true,
+            "to": 144
+        },
+        {
+            "congestion": 1.0,
+            "from": 144,
+            "is_bike_allowed": true,
+            "to": 149
+        },
+        {
+            "congestion": 0.8,
+            "from": 145,
+            "is_bike_allowed": false,
+            "to": 148
+        },
+        {
+            "congestion": 0.82,
+            "from": 146,
+            "is_bike_allowed": false,
+            "to": 150
+        },
+        {
+            "congestion": 1.0,
+            "from": 147,
+            "is_bike_allowed": true,
+            "to": 148
+        },
+        {
+            "congestion": 1.0,
+            "from": 148,
+            "is_bike_allowed": true,
+            "to": 149
+        },
+        {
+            "congestion": 1.0,
+            "from": 149,
+            "is_bike_allowed": true,
+            "to": 150
+        },
+        {
+            "congestion": 1.0,
+            "from": 150,
+            "is_bike_allowed": true,
+            "to": 151
+        }
+    ]
+}

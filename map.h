@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include <QPainter>
-#include <QComboBox>
 #include <fstream>
 #include <queue>
 #include "json.hpp"
@@ -37,7 +36,7 @@ struct route_info
     int distance;
     double time;
     bool is_riding = false;
-    Map *on;
+    Map *on = nullptr;
     edge *now = nullptr;
     vector<edge *> edges;
 };

@@ -1,37 +1,11 @@
 #include "mainwindow.h"
 Player *me;
 Map *main_campus, *shahe_campus, *now_show;
-QPushButton *map_switch_btn, *move_cancel_btn, *add_btn, *delete_btn;
+QPushButton *map_switch_btn, *move_cancel_btn, *add_btn, *delete_btn, *route_calcu_btn;
 QDateTime *vtime;
 QLabel *time_display;
 RouteLabel *distance_first_display, *time_first_display, *bike_allowed_display;
-vector<QComboBox*> comboboxs;
-
-void MainWindow::add_combobox()
-{
-    QPoint pos = comboboxs.back()->pos() + QPoint(0, 30);
-    comboboxs.push_back(new QComboBox(this));
-    comboboxs.back()->move(pos);
-    comboboxs.back()->setFixedSize(100, 30);
-    comboboxs.back()->addItems(now_show->list);
-    comboboxs.back()->show();
-    add_btn->move(add_btn->pos() + QPoint(0, 30));
-    delete_btn->move(delete_btn->pos() + QPoint(0, 30));
-    delete_btn->setEnabled(true);
-    if(comboboxs.size() == 5)
-        add_btn->setEnabled(false);
-}
-
-void MainWindow::delete_combobox()
-{
-    delete comboboxs.back();
-    comboboxs.pop_back();
-    add_btn->move(add_btn->pos() - QPoint(0, 30));
-    delete_btn->move(delete_btn->pos() - QPoint(0, 30));
-    add_btn->setEnabled(true);
-    if(comboboxs.size() == 1)
-        delete_btn->setEnabled(false);
-}
+DesWidget *deswidget;
 
 void MainWindow::move_cancel()
 {
@@ -47,8 +21,9 @@ void MainWindow::move_switch(multi_routes *routes)
     bike_allowed_display->enable = false;
     move_cancel_btn->show();
     me->move();
+    deswidget->clear();
     route_calcu();
-    move_cancel_btn->hide();
+    move_cancel_btn->hide(); 
     distance_first_display->enable = true;
     time_first_display->enable = true;
     bike_allowed_display->enable = true;
@@ -57,13 +32,13 @@ void MainWindow::move_switch(multi_routes *routes)
 void MainWindow::route_calcu()
 {
     bool is_valid = false;
-    vector<int> des;
-    for (auto i = comboboxs.begin(); i < comboboxs.end(); i++)
-        for (auto j = me->now_on->vertices.begin(); j < me->now_on->vertices.end(); j++)
-            if (j->name == (*i)->currentText())
+    vector<pair<Map*, int> > des;
+    for (auto i = deswidget->deslist.begin(); i < deswidget->deslist.end(); i++)
+        for (auto j = (*i)->map->vertices.begin(); j < (*i)->map->vertices.end(); j++)
+            if (j->name == (*i)->combobox->currentText())
             {
                 is_valid = true;
-                des.push_back(j - me->now_on->vertices.begin());
+                des.push_back(make_pair((*i)->map, j - (*i)->map->vertices.begin()));
                 break;
             }
     me->navigation(des);
@@ -125,20 +100,38 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     setWindowTitle("CampusGuide");
     setFixedSize(1600, 672);
 
+    deswidget = new DesWidget(this);
+
     main_campus = new Map("main_campus", this);
+    for (auto i = main_campus->vertices.begin(); i < main_campus->vertices.end(); i++)
+    {
+        if (i->name != "Crossing")
+        {
+            BuildingLabel *bl = new BuildingLabel(i->name, i->pos_x, i->pos_y, this);
+            connect(bl, &BuildingLabel::clicked, deswidget, &DesWidget::setComboBox);
+            main_campus->bllist.push_back(bl);
+        }
+    }
     now_show = main_campus;
+
     shahe_campus = new Map("shahe_campus", this);
+    for (auto i = shahe_campus->vertices.begin(); i < shahe_campus->vertices.end(); i++)
+    {
+        if (i->name != "Crossing")
+        {
+            BuildingLabel *bl = new BuildingLabel(i->name, i->pos_x, i->pos_y, this);
+            connect(bl, &BuildingLabel::clicked, deswidget, &DesWidget::setComboBox);
+            shahe_campus->bllist.push_back(bl);
+        }
+    }
     shahe_campus->hide();
     for (auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
         (*i)->hide();
+
     me = new Player(this);
     me->now_on = main_campus;
-
     main_campus->stackUnder(me);
     shahe_campus->stackUnder(me);
-
-    for (auto i = shahe_campus->bllist.begin(); i < shahe_campus->bllist.end(); i++)
-        (*i)->hide();
 
     map_switch_btn = new QPushButton("切换至沙河地图", this);
     map_switch_btn->move(1300, 0);
@@ -148,6 +141,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     move_cancel_btn->move(1200, 150);
     move_cancel_btn->hide();
     connect(move_cancel_btn, &QPushButton::clicked, this, &MainWindow::move_cancel);
+
+    route_calcu_btn = new QPushButton("计算路线", this);
+    route_calcu_btn->move(1300, 100);
+    connect(route_calcu_btn, &QPushButton::clicked, this, &MainWindow::route_calcu);
 
     distance_first_display = new RouteLabel(&me->distance_first, "最短距离", this);
     distance_first_display->move(1100, 120);
@@ -181,39 +178,88 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     time_display->setFont(font);
     time_display->setText("当前时间：" + vtime->toString("yyyy-MM-dd hh:mm:ss ddd"));
     time_display->adjustSize();
-
-    for (auto i = main_campus->vertices.begin(); i < main_campus->vertices.end(); i++)
-    {
-        if (i->name != "Crossing")
-        {
-            BuildingLabel *bl = new BuildingLabel(i->name, i->pos_x, i->pos_y, this);
-            connect(bl, BuildingLabel::hover_in, bl, BuildingLabel::choose);
-            connect(bl, BuildingLabel::hover_out, bl, BuildingLabel::unchoose);
-            main_campus->bllist.push_back(bl);
-        }
-    }
-
-    comboboxs.push_back(new QComboBox(this));
-    comboboxs.back()->move(1100, 0);
-    comboboxs.back()->setFixedSize(100, 30);
-    comboboxs.back()->addItems(main_campus->list);
-    for(auto i = main_campus->bllist.begin(); i < main_campus->bllist.end(); i++)
-        connect(*i, &BuildingLabel::clicked, comboboxs.back(), &QComboBox::setCurrentText);
-    //connect((*i), &QComboBox::currentTextChanged, this, &MainWindow::route_calcu);
-
-    add_btn = new QPushButton("+", parent);
-    add_btn->move(1100, 30);
-    add_btn->setFixedSize(50, 30);
-    connect(add_btn, &QPushButton::clicked, this, &MainWindow::add_combobox);
-
-    delete_btn = new QPushButton("-", parent);
-    delete_btn->move(1150, 30);
-    delete_btn->setFixedSize(50, 30);
-    delete_btn->setEnabled(false);
-    connect(delete_btn, &QPushButton::clicked, this, &MainWindow::delete_combobox);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+DesComboBox::DesComboBox(Map* m, QWidget *parent) : QWidget(parent)
+{
+    map = m;
+    combobox = new QComboBox(this);
+    label = new QLabel(this);
+    combobox->addItems(map->list);
+    if(m->filename == "main_campus")
+        label->setText("本部");
+    else
+        label->setText("沙河");
+    combobox->move(label->pos() + QPoint(30, 0));
+    label->move(label->pos() + QPoint(0, 3));
+    combobox->setFixedSize(100, 25);
+    resize(130, 25);
+}
+
+void DesWidget::addComboBox()
+{
+    if(deslist.size() >= 5)
+        return;
+    QPoint pos;
+    if(!deslist.empty())
+    {
+        pos = deslist.back()->pos() + QPoint(0, 30);
+        deslist.back()->setDisabled(true);
+    }
+    deslist.push_back(new DesComboBox(now_show, this));
+    deslist.back()->move(pos);
+    deslist.back()->show();
+    delete_btn->setEnabled(true);
+    if(deslist.size() >= 5)
+        add_btn->setDisabled(true);
+
+    add_btn->move(add_btn->pos() + QPoint(0, 30));
+    delete_btn->move(delete_btn->pos() + QPoint(0, 30));
+}
+
+void DesWidget::deleteComboBox()
+{
+    delete deslist.back();
+    deslist.pop_back();
+    if(!deslist.empty())
+        deslist.back()->setEnabled(true);
+    add_btn->setEnabled(true);
+    if(deslist.empty())
+        delete_btn->setDisabled(true);
+
+    add_btn->move(add_btn->pos() - QPoint(0, 30));
+    delete_btn->move(delete_btn->pos() - QPoint(0, 30));
+}
+
+void DesWidget::setComboBox(QString text)
+{
+    addComboBox();
+    deslist.back()->combobox->setCurrentText(text);
+}
+
+void DesWidget::clear()
+{
+    while(!deslist.empty())
+        deleteComboBox();
+}
+
+DesWidget::DesWidget(QWidget *parent) : QWidget(parent)
+{
+    move(1100, 0);
+    add_btn = new QPushButton("+", this);
+    add_btn->move(30, 0);
+    add_btn->setFixedSize(50, 30);
+    connect(add_btn, &QPushButton::clicked, this, &DesWidget::addComboBox);
+
+    delete_btn = new QPushButton("-", this);
+    delete_btn->move(80, 0);
+    delete_btn->setFixedSize(50, 30);
+    connect(delete_btn, &QPushButton::clicked, this, &DesWidget::deleteComboBox);
+
+    resize(130, 500);
 }

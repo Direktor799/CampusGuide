@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QTimer>
+#include <QComboBox>
 #include <QDebug>
 #include "./ui_mainwindow.h"
 #include "map.h"
@@ -24,9 +25,38 @@ public:
     void move_switch(multi_routes* routes);
     void move_cancel();
     void timer_update();
-    void add_combobox();
-    void delete_combobox();
 private:
     Ui::MainWindow *ui;
 };
+
+class DesComboBox : public QWidget
+{
+    Q_OBJECT
+
+public:
+    QComboBox* combobox;
+    QLabel* label;
+    Map* map;
+    DesComboBox(Map* m, QWidget *parent = nullptr);
+private:
+
+};
+
+class DesWidget : public QWidget
+{
+    Q_OBJECT
+
+public:
+    vector<DesComboBox*> deslist;
+    QPushButton* add_btn;
+    QPushButton* delete_btn;
+    DesWidget(QWidget *parent = nullptr);
+    void addComboBox();
+    void deleteComboBox();
+    void setComboBox(QString text);
+    void clear();
+private:
+
+};
+
 #endif // MAINWINDOW_H
