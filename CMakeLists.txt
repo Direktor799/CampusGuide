@@ -28,19 +28,19 @@ find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
 set(PROJECT_SOURCES
-        main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
-        functions.h
-        functions.cpp
-        json.hpp
-        map.h
-        map.cpp
-        player.h
-        player.cpp
-        labels.h
-        labels.cpp
+        src/main.cpp
+        src/mainwindow.cpp
+        src/mainwindow.h
+        src/mainwindow.ui
+        src/functions.h
+        src/functions.cpp
+        src/json.hpp
+        src/map.h
+        src/map.cpp
+        src/player.h
+        src/player.cpp
+        src/labels.h
+        src/labels.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

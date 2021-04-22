@@ -58,7 +58,7 @@ void MainWindow::route_calcu()
 
 void MainWindow::map_switch()
 {
-    if (!main_campus->isHidden())
+    if (main_campus->isVisible())
     {
         main_campus->hide();
         for (auto i = main_campus->bllist.begin(); i < main_campus->bllist.end(); i++)
@@ -80,10 +80,6 @@ void MainWindow::map_switch()
             (*i)->show();
         map_switch_btn->setText("切换至沙河地图");
     }
-    if (me->now_on->isHidden())
-        me->hide();
-    else
-        me->show();
 }
 
 void MainWindow::timer_update()

@@ -6,7 +6,7 @@ Map::Map(QString s, QWidget *parent) : QWidget(parent)
     resize(1080, 672);
     filename = s;
     json data, j;
-    ifstream(filename.toStdString() + ".json") >> data;
+    ifstream("../data/" + filename.toStdString() + ".json") >> data;
     j = data["vertices"];
     for (auto i = j.begin(); i < j.end(); i++)
     {
@@ -166,6 +166,6 @@ void Map::paintEvent(QPaintEvent *)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
     QPixmap pix;
-    pix.load(filename + ".png");
+    pix.load("../data/" + filename + ".png");
     painter.drawPixmap(0, 0, pix);
 }

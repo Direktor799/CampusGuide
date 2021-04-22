@@ -282,7 +282,7 @@ void Player::paintEvent(QPaintEvent *)
                                      QPointF(i->on->vertices[(*j)->to].pos_x * my_ratio + my_drift,
                                              i->on->vertices[(*j)->to].pos_y * my_ratio + my_drift));
     QPixmap player_img;
-    player_img.load("me.png");
+    player_img.load("../data/me.png");
     if(now_on->isVisible())
         painter.drawPixmap(pos_x * my_ratio + my_drift - 20, pos_y * my_ratio + my_drift - 30, 40, 40, player_img);
 }
