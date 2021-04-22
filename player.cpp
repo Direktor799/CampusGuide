@@ -248,9 +248,10 @@ void Player::paintEvent(QPaintEvent *)
     pen.setWidth(5);
     pen.setColor(QColor(25, 25, 25));
     painter.setPen(pen);
+    
     if (distance_first.visable)
         for (auto i = distance_first.routes.begin(); i < distance_first.routes.end(); i++)
-            if (!i->on->isHidden())
+            if (i->on->isVisible())
                 for (auto j = i->edges.begin(); j < i->edges.end(); j++)
                     painter.drawLine(QPointF(i->on->vertices[(*j)->from].pos_x * my_ratio + my_drift,
                                              i->on->vertices[(*j)->from].pos_y * my_ratio + my_drift),
@@ -258,7 +259,7 @@ void Player::paintEvent(QPaintEvent *)
                                              i->on->vertices[(*j)->to].pos_y * my_ratio + my_drift));
     if (time_first.visable)
         for (auto i = time_first.routes.begin(); i < time_first.routes.end(); i++)
-            if (!i->on->isHidden())
+            if (i->on->isVisible())
                 for (auto j = i->edges.begin(); j < i->edges.end(); j++)
                     painter.drawLine(QPointF(i->on->vertices[(*j)->from].pos_x * my_ratio + my_drift,
                                              i->on->vertices[(*j)->from].pos_y * my_ratio + my_drift),
@@ -266,7 +267,7 @@ void Player::paintEvent(QPaintEvent *)
                                              i->on->vertices[(*j)->to].pos_y * my_ratio + my_drift));
     if (bike_allowed.visable)
         for (auto i = bike_allowed.routes.begin(); i < bike_allowed.routes.end(); i++)
-            if (!i->on->isHidden())
+            if (i->on->isVisible())
                 for (auto j = i->edges.begin(); j < i->edges.end(); j++)
                     painter.drawLine(QPointF(i->on->vertices[(*j)->from].pos_x * my_ratio + my_drift,
                                              i->on->vertices[(*j)->from].pos_y * my_ratio + my_drift),
@@ -274,7 +275,7 @@ void Player::paintEvent(QPaintEvent *)
                                              i->on->vertices[(*j)->to].pos_y * my_ratio + my_drift));
     if (now_routes.visable)
         for (auto i = now_routes.routes.begin(); i < now_routes.routes.end(); i++)
-            if (!i->on->isHidden())
+            if (i->on->isVisible())
                 for (auto j = i->edges.begin(); j < i->edges.end(); j++)
                     painter.drawLine(QPointF(i->on->vertices[(*j)->from].pos_x * my_ratio + my_drift,
                                              i->on->vertices[(*j)->from].pos_y * my_ratio + my_drift),
@@ -282,6 +283,6 @@ void Player::paintEvent(QPaintEvent *)
                                              i->on->vertices[(*j)->to].pos_y * my_ratio + my_drift));
     QPixmap player_img;
     player_img.load("me.png");
-    if(!now_on->isHidden())
+    if(now_on->isVisible())
         painter.drawPixmap(pos_x * my_ratio + my_drift - 20, pos_y * my_ratio + my_drift - 30, 40, 40, player_img);
 }
