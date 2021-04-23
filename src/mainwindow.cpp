@@ -83,6 +83,11 @@ void MainWindow::map_switch()
             (*i)->show();
         map_switch_btn->setText("切换至沙河地图");
     }
+    if(deswidget->deslist.back()->combobox->currentText() == "")
+    {
+        deswidget->deleteComboBox();
+        deswidget->addComboBox();
+    }
 }
 
 void MainWindow::timer_update()
@@ -110,7 +115,7 @@ void MainWindow::updateListWidget()
     vector<route_info> surrounding = me->checkSurrounding();
     for(auto i = surrounding.begin(); i < surrounding.end() && i < surrounding.begin() + 10; i++)
         listwidget->addItem(me->now_on->vertices[i->edges.back()->to].name + "(" + QString::number(i->distance) + "m)");
-    listwidget->resize(125, listwidget->count() * 18 + 4);
+    listwidget->resize(150, listwidget->count() * 18 + 4);
 }
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -153,6 +158,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     main_campus->stackUnder(me);
     shahe_campus->stackUnder(me);
 
+    deswidget->addComboBox();
+
     map_switch_btn = new QPushButton("切换至沙河地图", this);
     map_switch_btn->move(1300, 0);
     connect(map_switch_btn, &QPushButton::clicked, this, &MainWindow::map_switch);
@@ -188,6 +195,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     listwidget->move(1100, 430);
     updateListWidget();
     connect(me, &Player::moving, this, &MainWindow::updateListWidget);
+    connect(listwidget, &QListWidget::currentTextChanged, deswidget, &DesWidget::setComboBox);
 
     QTimer *timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::timer_update);
@@ -256,22 +264,26 @@ void DesWidget::addComboBox()
     deslist.push_back(new DesComboBox(now_show, this));
     deslist.back()->move(pos);
     deslist.back()->show();
-    delete_btn->setEnabled(true);
+    connect(deslist.back()->combobox, &QComboBox::currentTextChanged, this, &DesWidget::nextAllowed);
+    if(deslist.size() >= 2)
+        delete_btn->setEnabled(true);
     if(deslist.size() >= 5)
         add_btn->setDisabled(true);
 
+    add_btn->setDisabled(true);
     add_btn->move(add_btn->pos() + QPoint(0, 30));
     delete_btn->move(delete_btn->pos() + QPoint(0, 30));
 }
 
 void DesWidget::deleteComboBox()
 {
+    disconnect(deslist.back()->combobox, &QComboBox::currentTextChanged, this, &DesWidget::nextAllowed);
     delete deslist.back();
     deslist.pop_back();
     if(!deslist.empty())
         deslist.back()->setEnabled(true);
     add_btn->setEnabled(true);
-    if(deslist.empty())
+    if(deslist.size() <= 1)
         delete_btn->setDisabled(true);
 
     add_btn->move(add_btn->pos() - QPoint(0, 30));
@@ -280,7 +292,8 @@ void DesWidget::deleteComboBox()
 
 void DesWidget::setComboBox(QString text)
 {
-    addComboBox();
+    text = text.left(text.indexOf("("));
+    if(!deslist.empty() && deslist.back()->map->isVisible())
     deslist.back()->combobox->setCurrentText(text);
 }
 
@@ -290,17 +303,25 @@ void DesWidget::clear()
         deleteComboBox();
 }
 
+void DesWidget::nextAllowed()
+{
+    if(deslist.back()->combobox->currentText() != "" && deslist.size() < 5)
+    add_btn->setEnabled(true);
+}
+
 DesWidget::DesWidget(QWidget *parent) : QWidget(parent)
 {
     move(1100, 0);
     add_btn = new QPushButton("+", this);
     add_btn->move(30, 0);
     add_btn->setFixedSize(50, 30);
+    add_btn->setDisabled(true);
     connect(add_btn, &QPushButton::clicked, this, &DesWidget::addComboBox);
 
     delete_btn = new QPushButton("-", this);
     delete_btn->move(80, 0);
     delete_btn->setFixedSize(50, 30);
+    delete_btn->setDisabled(true);
     connect(delete_btn, &QPushButton::clicked, this, &DesWidget::deleteComboBox);
 
     resize(130, 500);

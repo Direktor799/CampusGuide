@@ -58,6 +58,7 @@ public:
     void deleteComboBox();
     void setComboBox(QString text);
     void clear();
+    void nextAllowed();
 private:
 
 };
