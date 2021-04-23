@@ -41,6 +41,8 @@ set(PROJECT_SOURCES
         src/player.cpp
         src/labels.h
         src/labels.cpp
+        src/deswidget.h
+        src/deswidget.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

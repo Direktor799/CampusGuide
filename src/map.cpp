@@ -1,18 +1,19 @@
 #include "map.h"
 #include <QLabel>
 
-Map::Map(QString s, QWidget *parent) : QWidget(parent)
+Map::Map(QString fn, QString n, QWidget *parent) : QWidget(parent)
 {
     resize(1080, 672);
-    filename = s;
+    filename = fn;
+    name = n;
     json data, j;
-    ifstream("../data/" + filename.toStdString() + ".json") >> data;
+    std::ifstream("../data/" + filename.toStdString() + ".json") >> data;
     j = data["vertices"];
     for (auto i = j.begin(); i < j.end(); i++)
     {
         vertex tmp;
         tmp.number = (*i)["number"];
-        tmp.name = QString::asprintf(string((*i)["name"]).c_str());
+        tmp.name = QString::asprintf(std::string((*i)["name"]).c_str());
         tmp.pos_x = (*i)["pos_x"];
         tmp.pos_y = (*i)["pos_y"];
         vertices.push_back(tmp);
@@ -47,11 +48,11 @@ Map::Map(QString s, QWidget *parent) : QWidget(parent)
 
 route_info Map::distance_first_dijkstra(int src, int des)
 {
-    priority_queue<dij_tmp, vector<dij_tmp>, distance_first_cmp> q;
-    vector<int> dis(vertices.size(), INT32_MAX);
-    vector<double> time(vertices.size(), INT32_MAX);
-    vector<edge *> _path(vertices.size(), NULL);
-    vector<edge *> route;
+    std::priority_queue<dij_tmp, QVector<dij_tmp>, distance_first_cmp> q;
+    QVector<int> dis(vertices.size(), INT32_MAX);
+    QVector<double> time(vertices.size(), INT32_MAX);
+    QVector<edge *> _path(vertices.size(), NULL);
+    QVector<edge *> route;
     dis[src] = 0;
     time[src] = 0;
     for (auto i = vertices[src].adjlist.begin(); i < vertices[src].adjlist.end(); i++)
@@ -71,7 +72,7 @@ route_info Map::distance_first_dijkstra(int src, int des)
     }
     for (int i = des; i != src; i = _path[i]->from)
         route.push_back(_path[i]);
-    reverse(route.begin(), route.end());
+    std::reverse(route.begin(), route.end());
     route_info ret;
     ret.distance = dis[des];
     ret.time = time[des];
@@ -82,11 +83,11 @@ route_info Map::distance_first_dijkstra(int src, int des)
 
 route_info Map::time_first_dijkstra(int src, int des)
 {
-    priority_queue<dij_tmp, vector<dij_tmp>, time_first_cmp> q;
-    vector<int> dis(vertices.size(), INT32_MAX);
-    vector<double> time(vertices.size(), INT32_MAX);
-    vector<edge *> _path(vertices.size(), NULL);
-    vector<edge *> route;
+    std::priority_queue<dij_tmp, QVector<dij_tmp>, time_first_cmp> q;
+    QVector<int> dis(vertices.size(), INT32_MAX);
+    QVector<double> time(vertices.size(), INT32_MAX);
+    QVector<edge *> _path(vertices.size(), NULL);
+    QVector<edge *> route;
     dis[src] = 0;
     time[src] = 0;
     for (auto i = vertices[src].adjlist.begin(); i < vertices[src].adjlist.end(); i++)
@@ -106,7 +107,7 @@ route_info Map::time_first_dijkstra(int src, int des)
     }
     for (int i = des; i != src; i = _path[i]->from)
         route.push_back(_path[i]);
-    reverse(route.begin(), route.end());
+    std::reverse(route.begin(), route.end());
     route_info ret;
     ret.distance = dis[des];
     ret.time = time[des];
@@ -117,11 +118,11 @@ route_info Map::time_first_dijkstra(int src, int des)
 
 route_info Map::bike_allowed_dijkstra(int src, int des)
 {
-    priority_queue<dij_tmp, vector<dij_tmp>, time_first_cmp> q;
-    vector<int> dis(vertices.size(), INT32_MAX);
-    vector<double> time(vertices.size(), INT32_MAX);
-    vector<edge *> _path(vertices.size(), NULL);
-    vector<edge *> route;
+    std::priority_queue<dij_tmp, QVector<dij_tmp>, time_first_cmp> q;
+    QVector<int> dis(vertices.size(), INT32_MAX);
+    QVector<double> time(vertices.size(), INT32_MAX);
+    QVector<edge *> _path(vertices.size(), NULL);
+    QVector<edge *> route;
     dis[src] = 0;
     time[src] = 0;
     for (auto i = vertices[src].adjlist.begin(); i < vertices[src].adjlist.end(); i++)
@@ -151,7 +152,7 @@ route_info Map::bike_allowed_dijkstra(int src, int des)
     }
     for (int i = des; i != src; i = _path[i]->from)
         route.push_back(_path[i]);
-    reverse(route.begin(), route.end());
+    std::reverse(route.begin(), route.end());
     route_info ret;
     ret.distance = dis[des];
     ret.time = time[des];

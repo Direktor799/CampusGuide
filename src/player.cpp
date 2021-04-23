@@ -1,12 +1,13 @@
 #include "player.h"
 
-Player::Player(QWidget *parent) : QWidget(parent)
+Player::Player(QTextStream *textstream, QWidget *parent) : QWidget(parent)
 {
     lower();
     pos_number = 3;
     pos_x = 0;
     pos_y = 0;
     speedfactor = 6;
+    log = textstream;
     resize(1080, 672);
 }
 
@@ -21,7 +22,7 @@ bool Player::is_on_vertex()
     return false;
 }
 
-void Player::navigation(vector<pair<Map *, int>> des)
+void Player::navigation(QVector<QPair<Map *, int>> des)
 {
     if (!is_on_vertex())
     {
@@ -39,7 +40,7 @@ void Player::navigation(vector<pair<Map *, int>> des)
         tmp.length = map_ratio * get_length(pos_x, pos_y, now_on->vertices[tmp.to].pos_x, now_on->vertices[tmp.to].pos_y);
         now_on->vertices.back().adjlist.push_back(tmp);
     }
-    des.insert(des.begin(), make_pair(now_on, pos_number));
+    des.insert(des.begin(), qMakePair(now_on, pos_number));
 
     {
         multi_routes tmp;
@@ -180,9 +181,14 @@ void Player::move()
     for (auto j = now_routes.routes.begin(); j < now_routes.routes.end(); j++)
     {
         now_routes.now = &*j;
+        if(now_routes.now->on != now_on)
+            *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 玩家 " << now_on->name << "->" << now_routes.now->on->name << Qt::endl;
         now_on = now_routes.now->on;
         for (auto i = j->edges.begin(); i < j->edges.end(); i++)
         {
+            if (now_routes.canceled)
+                break;
+            emit moving();
             pos_number = now_on->vertices[(*i)->from].number;
             pos_x = now_on->vertices[(*i)->from].pos_x;
             pos_y = now_on->vertices[(*i)->from].pos_y;
@@ -215,14 +221,16 @@ void Player::move()
                 pos_x += x_move;
                 pos_y += y_move;
                 update();
+                *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 玩家 [" << now_on->name << "(" << pos_x - x_move << "," << pos_y - y_move << ")]";
+                *log << " -> [" << now_on->name << "(" << pos_x << "," << pos_y << ")]" << Qt::endl;
             }
-            if (now_routes.canceled)
-                break;
             pos_number = now_on->vertices[(*i)->to].number;
             pos_x = now_on->vertices[(*i)->to].pos_x;
             pos_y = now_on->vertices[(*i)->to].pos_y;
-            emit moving();
+            if(now_on->vertices[pos_number].name != "Crossing")
+                *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 玩家到达" + now_on->vertices[pos_number].name << "[" << now_on->name << "(" << pos_x << "," << pos_y << ")]" << Qt::endl;
         }
+        emit moving();
     }
     now_routes.visable = false;
     now_routes.canceled = false;
@@ -241,15 +249,15 @@ void Player::hide_route(multi_routes *route)
     update();
 }
 
-vector<route_info> Player::checkSurrounding()
+QVector<route_info> Player::checkSurrounding()
 {
-    vector<route_info> surrounding;
+    QVector<route_info> surrounding;
     for(auto i = now_on->vertices.begin(); i < now_on->vertices.end(); i++)
     {
         if(i->name != "Crossing" && get_distance(pos_x, pos_y, i->pos_x, i->pos_y) * map_ratio <= 200 && i->number != pos_number)
             surrounding.push_back(now_on->distance_first_dijkstra(pos_number, i->number));
     }
-    sort(surrounding.begin(), surrounding.end());
+    std::sort(surrounding.begin(), surrounding.end());
     return surrounding;
 }
 

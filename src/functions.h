@@ -5,8 +5,8 @@
 #include <QTime>
 #include <QApplication>
 #include <QPushButton>
-#include <vector>
-using namespace std;
+#include <QVector>
+
 
 const int walk_speed = 80;
 const int ride_multiplier = 3;
@@ -28,7 +28,7 @@ struct vertex
     int number;
     QString name;
     int pos_x, pos_y;
-    vector<edge> adjlist;
+    QVector<edge> adjlist;
 };
 
 struct dij_tmp
@@ -79,7 +79,7 @@ struct multi_routes
     bool visable = false;
     bool canceled = false;
     route_info* now = nullptr;
-    vector<route_info> routes; 
+    QVector<route_info> routes; 
 };
 
 bool string_less(const QString &s1, const QString &s2);

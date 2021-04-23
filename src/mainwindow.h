@@ -3,13 +3,13 @@
 
 #include <QMainWindow>
 #include <QTimer>
-#include <QComboBox>
 #include <QSlider>
-#include <QListWidget>
+#include <QDir>
 #include "./ui_mainwindow.h"
 #include "map.h"
 #include "player.h"
 #include "labels.h"
+#include "deswidget.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -19,6 +19,19 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    QFile *logfile;
+    QTextStream *log;
+    Player *me;
+    Map *main_campus, *shahe_campus;
+    QPushButton *map_switch_btn, *move_cancel_btn;
+    QDateTime *vtime;
+    QLabel *time_display;
+    RouteLabel *distance_first_display, *time_first_display, *bike_allowed_display;
+    DesWidget *deswidget;
+    QSlider *slider;
+    QLabel *listlabel, *sliderleftlabel, *sliderrightlabel;
+    QListWidget *listwidget;
+    
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void route_calcu();
@@ -30,37 +43,6 @@ public:
     void updateListWidget();
 private:
     Ui::MainWindow *ui;
-};
-
-class DesComboBox : public QWidget
-{
-    Q_OBJECT
-
-public:
-    QComboBox* combobox;
-    QLabel* label;
-    Map* map;
-    DesComboBox(Map* m, QWidget *parent = nullptr);
-private:
-
-};
-
-class DesWidget : public QWidget
-{
-    Q_OBJECT
-
-public:
-    vector<DesComboBox*> deslist;
-    QPushButton* add_btn;
-    QPushButton* delete_btn;
-    DesWidget(QWidget *parent = nullptr);
-    void addComboBox();
-    void deleteComboBox();
-    void setComboBox(QString text);
-    void clear();
-    void nextAllowed();
-private:
-
 };
 
 #endif // MAINWINDOW_H

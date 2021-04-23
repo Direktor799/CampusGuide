@@ -7,6 +7,7 @@ class Player : public QWidget
 {
     Q_OBJECT
 public:
+    QTextStream *log;
     Map* now_on;
     int speedfactor;
     int pos_number;
@@ -16,13 +17,13 @@ public:
     multi_routes bike_allowed;
     multi_routes now_routes;
 
-    Player(QWidget *parent = nullptr);
+    Player(QTextStream *textstream, QWidget *parent = nullptr);
     bool is_on_vertex();
-    void navigation(vector<pair<Map*, int> > des);
+    void navigation(QVector<QPair<Map*, int> > des);
     void move();
     void show_route(multi_routes* routes);
     void hide_route(multi_routes* routes);
-    vector<route_info> checkSurrounding();
+    QVector<route_info> checkSurrounding();
 protected:
     void paintEvent(QPaintEvent *);
 signals:

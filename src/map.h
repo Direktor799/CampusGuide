@@ -3,8 +3,8 @@
 
 #include <QWidget>
 #include <QPainter>
-#include <fstream>
 #include <queue>
+#include <fstream>
 #include "json.hpp"
 #include "functions.h"
 #include "labels.h"
@@ -15,12 +15,13 @@ class Map : public QWidget
     Q_OBJECT
 public:
     QString filename;
+    QString name;
     int vertices_size;
-    vector<vertex> vertices;
-    vector<edge> edges;
+    QVector<vertex> vertices;
+    QVector<edge> edges;
     QStringList list;
-    vector<BuildingLabel *> bllist;
-    Map(QString s, QWidget *parent = nullptr);
+    QVector<BuildingLabel *> bllist;
+    Map(QString fn, QString n, QWidget *parent = nullptr);
     route_info distance_first_dijkstra(int src, int des);
     route_info time_first_dijkstra(int src, int des);
     route_info bike_allowed_dijkstra(int src, int des);
@@ -38,7 +39,7 @@ struct route_info
     bool is_riding = false;
     Map *on = nullptr;
     edge *now = nullptr;
-    vector<edge *> edges;
+    QVector<edge *> edges;
 
     bool operator < (route_info x)
     {
