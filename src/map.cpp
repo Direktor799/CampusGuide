@@ -1,11 +1,6 @@
 #include "map.h"
 #include <QLabel>
-<<<<<<< HEAD
 Map::Map(QString fn, QString n, QDateTime *vtime, QWidget *parent) : QWidget(parent)
-=======
-
-Map::Map(QString fn, QString n, QWidget *parent) : QWidget(parent)
->>>>>>> parent of fd42980 (cross_campus_bus)
 {
     resize(1080, 672);
     filename = fn;
@@ -48,7 +43,6 @@ Map::Map(QString fn, QString n, QWidget *parent) : QWidget(parent)
             list << i->name;
     std::sort(list.begin(), list.end(), string_less);
 
-<<<<<<< HEAD
     //读入校车时刻表
     json bus_data;
     std::ifstream("../data/" + filename.toStdString() + "bus.json") >> bus_data;
@@ -68,8 +62,6 @@ Map::Map(QString fn, QString n, QWidget *parent) : QWidget(parent)
         }
     }
     map_time_ptr = vtime;
-=======
->>>>>>> parent of fd42980 (cross_campus_bus)
 }
 
 route_info Map::distance_first_dijkstra(int src, int des)
@@ -195,7 +187,6 @@ void Map::paintEvent(QPaintEvent *)
     QPixmap pix;
     pix.load("../data/" + filename + ".png");
     painter.drawPixmap(0, 0, pix);
-<<<<<<< HEAD
 }
 
 QVector<route_info> Map::cross_campus(bool flag)
@@ -242,6 +233,4 @@ QVector<route_info> Map::cross_campus(bool flag)
     result.push_back(wait);
     result.push_back(cross);
     return result;
-=======
->>>>>>> parent of fd42980 (cross_campus_bus)
 }
