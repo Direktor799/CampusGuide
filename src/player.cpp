@@ -24,7 +24,7 @@ bool Player::is_on_vertex()
 
 void Player::navigation(QVector<QPair<Map *, int>> des)
 {
-    if (!is_on_vertex()) //如果当前不在顶点上，将当前所在点设为顶点并增加两条边
+    if (!is_on_vertex())
     {
         if (now_on->vertices_size < now_on->vertices.size())
             now_on->vertices.pop_back();
@@ -42,7 +42,6 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
     }
     des.insert(des.begin(), qMakePair(now_on, pos_number));
 
-    //距离优先的路径计算
     {
         multi_routes tmp;
         for (auto i = des.begin(); i < des.end() - 1; i++)
@@ -51,6 +50,7 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
                 tmp.routes.push_back(i->first->distance_first_dijkstra(i->second, (i + 1)->second));
             else
             {
+<<<<<<< HEAD
                 route_info transport[2][4];
                 QVector<route_info> wait_and_cross;//校园之间
                 if (i->first->filename == "main_campus")
@@ -66,10 +66,20 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
                     transport[1][1] = wait_and_cross[0];
                     transport[1][2] = wait_and_cross[1];
                     transport[1][3] = (i + 1)->first->distance_first_dijkstra(88, (i + 1)->second);
+=======
+                route_info transport[2][2];
+                if (i->first->filename == "main_campus")
+                {
+                    transport[0][0] = i->first->distance_first_dijkstra(i->second, 0);
+                    transport[0][1] = (i + 1)->first->distance_first_dijkstra(83, (i + 1)->second);
+                    transport[1][0] = i->first->distance_first_dijkstra(i->second, 116);
+                    transport[1][1] = (i + 1)->first->distance_first_dijkstra(88, (i + 1)->second);
+>>>>>>> parent of fd42980 (cross_campus_bus)
                 }
                 else
                 {
                     transport[0][0] = i->first->distance_first_dijkstra(i->second, 83);
+<<<<<<< HEAD
                     wait_and_cross = now_on->cross_campus(0);
                     transport[0][1] = wait_and_cross[0];
                     transport[0][2] = wait_and_cross[1];
@@ -99,11 +109,26 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
                 {
                     tmp.routes.push_back(transport[0][0]);
                     tmp.routes.push_back(transport[0][3]);
+=======
+                    transport[0][1] = (i + 1)->first->distance_first_dijkstra(0, (i + 1)->second);
+                    transport[1][0] = i->first->distance_first_dijkstra(i->second, 88);
+                    transport[1][1] = (i + 1)->first->distance_first_dijkstra(116, (i + 1)->second);
+                }
+
+                if (transport[0][0].distance + transport[0][1].distance < transport[1][0].distance + transport[1][1].distance)
+                {
+                    tmp.routes.push_back(transport[0][0]);
+                    tmp.routes.push_back(transport[0][1]);
+>>>>>>> parent of fd42980 (cross_campus_bus)
                 }
                 else
                 {
                     tmp.routes.push_back(transport[1][0]);
+<<<<<<< HEAD
                     tmp.routes.push_back(transport[1][3]);
+=======
+                    tmp.routes.push_back(transport[1][1]);
+>>>>>>> parent of fd42980 (cross_campus_bus)
                 }
                 
             }
@@ -116,7 +141,6 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
         distance_first = tmp;
     }
 
-    //时间优先的路径计算
     {
         multi_routes tmp;
         for (auto i = des.begin(); i < des.end() - 1; i++)
@@ -125,6 +149,7 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
                 tmp.routes.push_back(i->first->time_first_dijkstra(i->second, (i + 1)->second));
             else
             {
+<<<<<<< HEAD
                 route_info transport[2][4];
                 QVector<route_info> wait_and_cross;//校园之间
                 if (i->first->filename == "main_campus")
@@ -139,10 +164,20 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
                     transport[1][1] = wait_and_cross[0];
                     transport[1][2] = wait_and_cross[1];
                     transport[1][3] = (i + 1)->first->time_first_dijkstra(88, (i + 1)->second);
+=======
+                route_info transport[2][2];
+                if (i->first->filename == "main_campus")
+                {
+                    transport[0][0] = i->first->time_first_dijkstra(i->second, 0);
+                    transport[0][1] = (i + 1)->first->time_first_dijkstra(83, (i + 1)->second);
+                    transport[1][0] = i->first->time_first_dijkstra(i->second, 116);
+                    transport[1][1] = (i + 1)->first->time_first_dijkstra(88, (i + 1)->second);
+>>>>>>> parent of fd42980 (cross_campus_bus)
                 }
                 else
                 {
                     transport[0][0] = i->first->time_first_dijkstra(i->second, 83);
+<<<<<<< HEAD
                     wait_and_cross = now_on->cross_campus(0);
                     transport[0][1] = wait_and_cross[0];
                     transport[0][2] = wait_and_cross[1];
@@ -165,11 +200,26 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
                 {
                     tmp.routes.push_back(transport[0][0]);
                     tmp.routes.push_back(transport[0][3]);
+=======
+                    transport[0][1] = (i + 1)->first->time_first_dijkstra(0, (i + 1)->second);
+                    transport[1][0] = i->first->time_first_dijkstra(i->second, 88);
+                    transport[1][1] = (i + 1)->first->time_first_dijkstra(116, (i + 1)->second);
+                }
+
+                if (transport[0][0].time + transport[0][1].time < transport[1][0].time + transport[1][1].time)
+                {
+                    tmp.routes.push_back(transport[0][0]);
+                    tmp.routes.push_back(transport[0][1]);
+>>>>>>> parent of fd42980 (cross_campus_bus)
                 }
                 else
                 {
                     tmp.routes.push_back(transport[1][0]);
+<<<<<<< HEAD
                     tmp.routes.push_back(transport[1][3]);
+=======
+                    tmp.routes.push_back(transport[1][1]);
+>>>>>>> parent of fd42980 (cross_campus_bus)
                 }
             }
         }
@@ -181,7 +231,6 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
         time_first = tmp;
     }
 
-    //骑自行车的路径计算
     {
         multi_routes tmp;
         for (auto i = des.begin(); i < des.end() - 1; i++)
@@ -190,6 +239,7 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
                 tmp.routes.push_back(i->first->bike_allowed_dijkstra(i->second, (i + 1)->second));
             else
             {
+<<<<<<< HEAD
                 route_info transport[2][4];
                 QVector<route_info> wait_and_cross;//校园之间
                 if (i->first->filename == "main_campus")
@@ -204,10 +254,20 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
                     transport[1][1] = wait_and_cross[0];
                     transport[1][2] = wait_and_cross[1];
                     transport[1][3] = (i + 1)->first->bike_allowed_dijkstra(88, (i + 1)->second);
+=======
+                route_info transport[2][2];
+                if (i->first->filename == "main_campus")
+                {
+                    transport[0][0] = i->first->bike_allowed_dijkstra(i->second, 0);
+                    transport[0][1] = (i + 1)->first->bike_allowed_dijkstra(83, (i + 1)->second);
+                    transport[1][0] = i->first->bike_allowed_dijkstra(i->second, 116);
+                    transport[1][1] = (i + 1)->first->bike_allowed_dijkstra(88, (i + 1)->second);
+>>>>>>> parent of fd42980 (cross_campus_bus)
                 }
                 else
                 {
                     transport[0][0] = i->first->bike_allowed_dijkstra(i->second, 83);
+<<<<<<< HEAD
                     wait_and_cross = now_on->cross_campus(0);
                     transport[0][1] = wait_and_cross[0];
                     transport[0][2] = wait_and_cross[1];
@@ -229,11 +289,26 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
                 {
                     tmp.routes.push_back(transport[0][0]);
                     tmp.routes.push_back(transport[0][3]);
+=======
+                    transport[0][1] = (i + 1)->first->bike_allowed_dijkstra(0, (i + 1)->second);
+                    transport[1][0] = i->first->bike_allowed_dijkstra(i->second, 88);
+                    transport[1][1] = (i + 1)->first->bike_allowed_dijkstra(116, (i + 1)->second);
+                }
+
+                if (transport[0][0].time + transport[0][1].time < transport[1][0].time + transport[1][1].time)
+                {
+                    tmp.routes.push_back(transport[0][0]);
+                    tmp.routes.push_back(transport[0][1]);
+>>>>>>> parent of fd42980 (cross_campus_bus)
                 }
                 else
                 {
                     tmp.routes.push_back(transport[1][0]);
+<<<<<<< HEAD
                     tmp.routes.push_back(transport[1][3]);
+=======
+                    tmp.routes.push_back(transport[1][1]);
+>>>>>>> parent of fd42980 (cross_campus_bus)
                 }
             }
         }
@@ -252,11 +327,7 @@ void Player::move()
     for (auto j = now_routes.routes.begin(); j < now_routes.routes.end(); j++)
     {
         now_routes.now = &*j;
-        if (now_routes.now->on == nullptr)//跨校区站点与站点间的处理
-        {
-            continue;
-        }
-        if (now_routes.now->on != now_on)
+        if(now_routes.now->on != now_on)
             *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 玩家 " << now_on->name << "->" << now_routes.now->on->name << Qt::endl;
         now_on = now_routes.now->on;
         for (auto i = j->edges.begin(); i < j->edges.end(); i++)
@@ -302,7 +373,7 @@ void Player::move()
             pos_number = now_on->vertices[(*i)->to].number;
             pos_x = now_on->vertices[(*i)->to].pos_x;
             pos_y = now_on->vertices[(*i)->to].pos_y;
-            if (now_on->vertices[pos_number].name != "Crossing")
+            if(now_on->vertices[pos_number].name != "Crossing")
                 *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 玩家到达" + now_on->vertices[pos_number].name << "[" << now_on->name << "(" << pos_x << "," << pos_y << ")]" << Qt::endl;
         }
         emit moving();
@@ -327,9 +398,9 @@ void Player::hide_route(multi_routes *route)
 QVector<route_info> Player::checkSurrounding()
 {
     QVector<route_info> surrounding;
-    for (auto i = now_on->vertices.begin(); i < now_on->vertices.end(); i++)
+    for(auto i = now_on->vertices.begin(); i < now_on->vertices.end(); i++)
     {
-        if (i->name != "Crossing" && get_distance(pos_x, pos_y, i->pos_x, i->pos_y) * map_ratio <= 200 && i->number != pos_number)
+        if(i->name != "Crossing" && get_distance(pos_x, pos_y, i->pos_x, i->pos_y) * map_ratio <= 200 && i->number != pos_number)
             surrounding.push_back(now_on->distance_first_dijkstra(pos_number, i->number));
     }
     std::sort(surrounding.begin(), surrounding.end());
@@ -345,10 +416,10 @@ void Player::paintEvent(QPaintEvent *)
     pen.setWidth(5);
     pen.setColor(QColor(25, 25, 25));
     painter.setPen(pen);
-
+    
     if (distance_first.visable)
         for (auto i = distance_first.routes.begin(); i < distance_first.routes.end(); i++)
-            if (i->on !=nullptr && i->on->isVisible())
+            if (i->on->isVisible())
                 for (auto j = i->edges.begin(); j < i->edges.end(); j++)
                     painter.drawLine(QPointF(i->on->vertices[(*j)->from].pos_x * my_ratio + my_drift,
                                              i->on->vertices[(*j)->from].pos_y * my_ratio + my_drift),
@@ -356,7 +427,7 @@ void Player::paintEvent(QPaintEvent *)
                                              i->on->vertices[(*j)->to].pos_y * my_ratio + my_drift));
     if (time_first.visable)
         for (auto i = time_first.routes.begin(); i < time_first.routes.end(); i++)
-            if (i->on != nullptr && i->on->isVisible())
+            if (i->on->isVisible())
                 for (auto j = i->edges.begin(); j < i->edges.end(); j++)
                     painter.drawLine(QPointF(i->on->vertices[(*j)->from].pos_x * my_ratio + my_drift,
                                              i->on->vertices[(*j)->from].pos_y * my_ratio + my_drift),
@@ -364,7 +435,7 @@ void Player::paintEvent(QPaintEvent *)
                                              i->on->vertices[(*j)->to].pos_y * my_ratio + my_drift));
     if (bike_allowed.visable)
         for (auto i = bike_allowed.routes.begin(); i < bike_allowed.routes.end(); i++)
-            if (i->on != nullptr && i->on->isVisible())
+            if (i->on->isVisible())
                 for (auto j = i->edges.begin(); j < i->edges.end(); j++)
                     painter.drawLine(QPointF(i->on->vertices[(*j)->from].pos_x * my_ratio + my_drift,
                                              i->on->vertices[(*j)->from].pos_y * my_ratio + my_drift),
@@ -380,6 +451,6 @@ void Player::paintEvent(QPaintEvent *)
                                              i->on->vertices[(*j)->to].pos_y * my_ratio + my_drift));
     QPixmap player_img;
     player_img.load("../data/me.png");
-    if (now_on->isVisible())
+    if(now_on->isVisible())
         painter.drawPixmap(pos_x * my_ratio + my_drift - 20, pos_y * my_ratio + my_drift - 30, 40, 40, player_img);
 }
