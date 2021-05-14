@@ -1,6 +1,5 @@
 #include "map.h"
 #include <QLabel>
-#include <iostream>
 Map::Map(QString fn, QString n, QDateTime *vtime, QWidget *parent) : QWidget(parent)
 {
     resize(1080, 672);
@@ -47,12 +46,12 @@ Map::Map(QString fn, QString n, QDateTime *vtime, QWidget *parent) : QWidget(par
     //读入校车时刻表
     json bus_data;
     std::ifstream("../data/" + filename.toStdString() + "bus.json") >> bus_data;
-    bus.resize(5);
-    for (int k = 0; k < 5; k++)
+    bus.resize(7);
+    for (int k = 0; k < 7; k++)
     {
         json week;
         std::string week_num = "";
-        week_num += char(k + '0');
+        week_num += char(k + '0' + 1);
         week = bus_data[week_num];
         for (auto i = week.begin(); i < week.end(); i++)
         {
@@ -190,38 +189,48 @@ void Map::paintEvent(QPaintEvent *)
     painter.drawPixmap(0, 0, pix);
 }
 
-route_info Map::cross_campus(bool flag)
+QVector<route_info> Map::cross_campus(bool flag)
 {
-    route_info cur;
-    cur.distance = 22400;
+    QVector<route_info> result;
+    route_info wait;
+    wait.distance = 0;
+    wait.time = 0;
+    route_info cross;
+    cross.distance = 0;
+    cross.time = 0;
     if (!flag) //flag为0表示地铁,10分钟一趟，最早一班是6：00,最晚是11：50
     {
-        cur.time = 10 - double(map_time_ptr->time().minute() % 10 + map_time_ptr->time().second()) / 60; //算出距离下一个整十分钟要多久
+        wait.time = 10 - double(map_time_ptr->time().minute() % 10 + map_time_ptr->time().second()) / 60; //算出距离下一个整十分钟要多久
         if (map_time_ptr->time().hour() >= 0 && map_time_ptr->time().hour() < 6)                         //如果当前地铁没车，加上要等的小时
-            cur.time += 60 * (6 - map_time_ptr->time().hour());
-        cur.time += 50; //模拟两个地铁站之间50分钟
+            wait.time += 60 * (6 - map_time_ptr->time().hour());
+        wait.distance = 0;
+        cross.time = 50; //模拟两个地铁站之间50分钟
+        cross.distance = 22400;
     }
     else
     {
-        int weekday = map_time_ptr->date().dayOfWeek() - 1;
-        if (weekday == 5 || weekday == 6 || (weekday == 4 && map_time_ptr->time() > bus[4].back().start_time)) //如果已经错过周五最后一班车或者在周六日
+        int today = map_time_ptr->date().dayOfWeek() - 1;
+        int next_bus_gap = 0;
+        while(bus[(today + next_bus_gap) % 7].size() == 0 || (!next_bus_gap && map_time_ptr->time() > bus[today].back().start_time))//如果当天没车，转至有车的一天
         {
-            cur.time = double(map_time_ptr->time().secsTo(bus[0][0].start_time)) / 60 + 24 * 60 * (7 - weekday);
-        }
-        else
-        {
-            if (map_time_ptr->time() < bus[weekday].back().start_time) //如果当天还有车
-                for (int i = 0; i < bus[weekday].size(); i++)
+            next_bus_gap++;
+        };
+        if(!next_bus_gap)
+            for (int i = 0; i < bus[today].size(); i++)
+            {
+                if (bus[today][i].start_time > map_time_ptr->time())
                 {
-                    if (bus[weekday][i].start_time > map_time_ptr->time())
-                    {
-                        cur.time = double(map_time_ptr->time().secsTo(bus[weekday][i].start_time)) / 60;
-                        break;
-                    }
+                    wait.time = double(map_time_ptr->time().secsTo(bus[today][i].start_time)) / 60;
+                    cross.time = double(bus[today][i].start_time.secsTo(bus[today][i].arrival_time));
+                    break;
                 }
-            else
-                cur.time = double(map_time_ptr->time().secsTo(bus[weekday + 1][0].start_time)) / 60 + 24 * 60;
+            }
+        else
+        {   wait.time = double(map_time_ptr->time().secsTo(bus[(today + next_bus_gap) % 7][0].start_time)) / 60 + 24 * 60 * next_bus_gap;
+            cross.time = double(bus[(today + next_bus_gap) % 7][0].start_time.secsTo(bus[(today + next_bus_gap) % 7][0].arrival_time));
         }
     }
-    return cur;
+    result.push_back(wait);
+    result.push_back(cross);
+    return result;
 }
