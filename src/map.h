@@ -33,7 +33,7 @@ public:
     route_info distance_first_dijkstra(int src, int des);
     route_info time_first_dijkstra(int src, int des);
     route_info bike_allowed_dijkstra(int src, int des);
-    QVector<route_info> cross_campus(bool flag);
+    route_info cross_campus(bool flag);
     QDateTime *map_time_ptr;
 
 protected:

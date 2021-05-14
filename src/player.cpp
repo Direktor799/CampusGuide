@@ -51,61 +51,38 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
                 tmp.routes.push_back(i->first->distance_first_dijkstra(i->second, (i + 1)->second));
             else
             {
-                route_info transport[2][4];
-                QVector<route_info> wait_and_cross;//校园之间
+                route_info transport[2][3];
                 if (i->first->filename == "main_campus")
                 {
                     transport[0][0] = i->first->distance_first_dijkstra(i->second, 0);
-                    wait_and_cross = now_on->cross_campus(0);
-                    transport[0][1] = wait_and_cross[0];
-                    transport[0][2] = wait_and_cross[1];
-                    transport[0][3] = (i + 1)->first->distance_first_dijkstra(83, (i + 1)->second);
-
+                    transport[0][1] = now_on->cross_campus(0);
+                    transport[0][2] = (i + 1)->first->distance_first_dijkstra(83, (i + 1)->second);
                     transport[1][0] = i->first->distance_first_dijkstra(i->second, 116);
-                    wait_and_cross = now_on->cross_campus(1);
-                    transport[1][1] = wait_and_cross[0];
-                    transport[1][2] = wait_and_cross[1];
-                    transport[1][3] = (i + 1)->first->distance_first_dijkstra(88, (i + 1)->second);
+                    transport[1][1] = now_on->cross_campus(1);
+                    transport[1][2] = (i + 1)->first->distance_first_dijkstra(88, (i + 1)->second);
                 }
                 else
                 {
                     transport[0][0] = i->first->distance_first_dijkstra(i->second, 83);
-                    wait_and_cross = now_on->cross_campus(0);
-                    transport[0][1] = wait_and_cross[0];
-                    transport[0][2] = wait_and_cross[1];
-                    transport[0][3] = (i + 1)->first->distance_first_dijkstra(0, (i + 1)->second);
-                    
+                    transport[0][1] = now_on->cross_campus(0);
+                    transport[0][2] = (i + 1)->first->distance_first_dijkstra(0, (i + 1)->second);
                     transport[1][0] = i->first->distance_first_dijkstra(i->second, 88);
-                    wait_and_cross = now_on->cross_campus(1);
-                    transport[1][1] = wait_and_cross[0];
-                    transport[1][2] = wait_and_cross[1];
-                    transport[1][3] = (i + 1)->first->distance_first_dijkstra(116, (i + 1)->second);
+                    transport[1][1] = now_on->cross_campus(1);
+                    transport[1][2] = (i + 1)->first->distance_first_dijkstra(116, (i + 1)->second);
                 }
 
-                double bus2bus = 0;
-                double subway2subway = 0;
-                for(int i = 0; i < 4; i++)
-                {
-                    subway2subway += transport[0][i].time;
-                    bus2bus += transport[1][i].time;
-                }
-                // if(subway2subway < bus2bus)
-                //     for(int i = 0; i < 4; i ++)
-                //         tmp.routes.push_back(transport[0][i]);
-                // else
-                //     for(int i = 0; i < 4; i ++)
-                //         tmp.routes.push_back(transport[1][i]);
-                if(subway2subway < bus2bus)
+                if (transport[0][0].distance + transport[0][1].distance + transport[0][2].distance < transport[1][0].distance + transport[1][1].distance + transport[1][2].distance)
                 {
                     tmp.routes.push_back(transport[0][0]);
-                    tmp.routes.push_back(transport[0][3]);
+                    tmp.routes.push_back(transport[0][1]);
+                    tmp.routes.push_back(transport[0][2]);
                 }
                 else
                 {
                     tmp.routes.push_back(transport[1][0]);
-                    tmp.routes.push_back(transport[1][3]);
+                    tmp.routes.push_back(transport[1][1]);
+                    tmp.routes.push_back(transport[1][2]);
                 }
-                
             }
         }
         for (auto i = tmp.routes.begin(); i < tmp.routes.end(); i++)
@@ -125,51 +102,37 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
                 tmp.routes.push_back(i->first->time_first_dijkstra(i->second, (i + 1)->second));
             else
             {
-                route_info transport[2][4];
-                QVector<route_info> wait_and_cross;//校园之间
+                route_info transport[2][3];
                 if (i->first->filename == "main_campus")
                 {
                     transport[0][0] = i->first->time_first_dijkstra(i->second, 0);
-                    wait_and_cross = now_on->cross_campus(0);
-                    transport[0][1] = wait_and_cross[0];
-                    transport[0][2] = wait_and_cross[1];
-                    transport[0][3] = (i + 1)->first->time_first_dijkstra(83, (i + 1)->second);
+                    transport[0][1] = now_on->cross_campus(0);
+                    transport[0][2] = (i + 1)->first->time_first_dijkstra(83, (i + 1)->second);
                     transport[1][0] = i->first->time_first_dijkstra(i->second, 116);
-                    wait_and_cross = now_on->cross_campus(1);
-                    transport[1][1] = wait_and_cross[0];
-                    transport[1][2] = wait_and_cross[1];
-                    transport[1][3] = (i + 1)->first->time_first_dijkstra(88, (i + 1)->second);
+                    transport[1][1] = now_on->cross_campus(1);
+                    transport[1][2] = (i + 1)->first->time_first_dijkstra(88, (i + 1)->second);
                 }
                 else
                 {
                     transport[0][0] = i->first->time_first_dijkstra(i->second, 83);
-                    wait_and_cross = now_on->cross_campus(0);
-                    transport[0][1] = wait_and_cross[0];
-                    transport[0][2] = wait_and_cross[1];
-                    transport[0][3] = (i + 1)->first->time_first_dijkstra(0, (i + 1)->second);
+                    transport[0][1] = now_on->cross_campus(0);
+                    transport[0][2] = (i + 1)->first->time_first_dijkstra(0, (i + 1)->second);
                     transport[1][0] = i->first->time_first_dijkstra(i->second, 88);
-                    wait_and_cross = now_on->cross_campus(1);
-                    transport[1][1] = wait_and_cross[0];
-                    transport[1][2] = wait_and_cross[1];
-                    transport[1][3] = (i + 1)->first->time_first_dijkstra(116, (i + 1)->second);
+                    transport[1][1] = now_on->cross_campus(1);
+                    transport[1][2] = (i + 1)->first->time_first_dijkstra(116, (i + 1)->second);
                 }
 
-                double bus2bus = 0;
-                double subway2subway = 0;
-                for(int i = 0; i < 4; i++)
-                {
-                    subway2subway += transport[0][i].time;
-                    bus2bus += transport[1][i].time;
-                }
-                if(subway2subway < bus2bus)
+                if (transport[0][0].time + transport[0][1].time + transport[0][2].time < transport[1][0].time + transport[1][1].time + transport[1][2].time)
                 {
                     tmp.routes.push_back(transport[0][0]);
-                    tmp.routes.push_back(transport[0][3]);
+                    tmp.routes.push_back(transport[0][1]);
+                    tmp.routes.push_back(transport[0][2]);
                 }
                 else
                 {
                     tmp.routes.push_back(transport[1][0]);
-                    tmp.routes.push_back(transport[1][3]);
+                    tmp.routes.push_back(transport[1][1]);
+                    tmp.routes.push_back(transport[1][2]);
                 }
             }
         }
@@ -190,50 +153,37 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
                 tmp.routes.push_back(i->first->bike_allowed_dijkstra(i->second, (i + 1)->second));
             else
             {
-                route_info transport[2][4];
-                QVector<route_info> wait_and_cross;//校园之间
+                route_info transport[2][3];
                 if (i->first->filename == "main_campus")
                 {
                     transport[0][0] = i->first->bike_allowed_dijkstra(i->second, 0);
-                    wait_and_cross = now_on->cross_campus(0);
-                    transport[0][1] = wait_and_cross[0];
-                    transport[0][2] = wait_and_cross[1];
-                    transport[0][3] = (i + 1)->first->bike_allowed_dijkstra(83, (i + 1)->second);
+                    transport[0][1] = now_on->cross_campus(0);
+                    transport[0][2] = (i + 1)->first->bike_allowed_dijkstra(83, (i + 1)->second);
                     transport[1][0] = i->first->bike_allowed_dijkstra(i->second, 116);
-                    wait_and_cross = now_on->cross_campus(1);
-                    transport[1][1] = wait_and_cross[0];
-                    transport[1][2] = wait_and_cross[1];
-                    transport[1][3] = (i + 1)->first->bike_allowed_dijkstra(88, (i + 1)->second);
+                    transport[1][1] = now_on->cross_campus(1);
+                    transport[1][2] = (i + 1)->first->bike_allowed_dijkstra(88, (i + 1)->second);
                 }
                 else
                 {
                     transport[0][0] = i->first->bike_allowed_dijkstra(i->second, 83);
-                    wait_and_cross = now_on->cross_campus(0);
-                    transport[0][1] = wait_and_cross[0];
-                    transport[0][2] = wait_and_cross[1];
-                    transport[0][3] = (i + 1)->first->bike_allowed_dijkstra(0, (i + 1)->second);
+                    transport[0][1] = now_on->cross_campus(0);
+                    transport[0][2] = (i + 1)->first->bike_allowed_dijkstra(0, (i + 1)->second);
                     transport[1][0] = i->first->bike_allowed_dijkstra(i->second, 88);
-                    wait_and_cross = now_on->cross_campus(1);
-                    transport[1][1] = wait_and_cross[0];
-                    transport[1][2] = wait_and_cross[1];
-                    transport[1][3] = (i + 1)->first->bike_allowed_dijkstra(116, (i + 1)->second);
+                    transport[1][1] = now_on->cross_campus(1);
+                    transport[1][2] = (i + 1)->first->bike_allowed_dijkstra(116, (i + 1)->second);
                 }
-                double bus2bus = 0;
-                double subway2subway = 0;
-                for(int i = 0; i < 4; i++)
-                {
-                    subway2subway += transport[0][i].time;
-                    bus2bus += transport[1][i].time;
-                }
-                if(subway2subway < bus2bus)
+
+                if (transport[0][0].time + transport[0][1].time + transport[0][2].time < transport[1][0].time + transport[1][1].time + transport[1][2].time)
                 {
                     tmp.routes.push_back(transport[0][0]);
-                    tmp.routes.push_back(transport[0][3]);
+                    tmp.routes.push_back(transport[0][1]);
+                    tmp.routes.push_back(transport[0][2]);
                 }
                 else
                 {
                     tmp.routes.push_back(transport[1][0]);
-                    tmp.routes.push_back(transport[1][3]);
+                    tmp.routes.push_back(transport[1][1]);
+                    tmp.routes.push_back(transport[1][2]);
                 }
             }
         }
