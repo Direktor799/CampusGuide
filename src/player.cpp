@@ -186,12 +186,12 @@ void Player::move()
         now_on = now_routes.now->on;
         for (auto i = j->edges.begin(); i < j->edges.end(); i++)
         {
+            if (now_routes.canceled)
+                break;
             pos_number = now_on->vertices[(*i)->from].number;
             pos_x = now_on->vertices[(*i)->from].pos_x;
             pos_y = now_on->vertices[(*i)->from].pos_y;
             now_routes.now->now = *i;
-            if (now_routes.canceled)
-                break;
             emit moving();
             int distance = fabs(now_on->vertices[(*i)->to].pos_x - pos_x) + fabs(now_on->vertices[(*i)->to].pos_y - pos_y);
             int x_move = 0;
@@ -255,10 +255,7 @@ QVector<route_info> Player::checkSurrounding()
     for(auto i = now_on->vertices.begin(); i < now_on->vertices.end(); i++)
     {
         if(i->name != "Crossing" && get_distance(pos_x, pos_y, i->pos_x, i->pos_y) * map_ratio <= 200 && i->number != pos_number)
-        {
-            qDebug() << "vertices.size:" << now_on->vertices.size() << "  src:" << pos_number;
             surrounding.push_back(now_on->distance_first_dijkstra(pos_number, i->number));
-        }
     }
     std::sort(surrounding.begin(), surrounding.end());
     return surrounding;
