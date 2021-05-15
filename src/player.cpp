@@ -25,72 +25,29 @@ bool Player::is_on_vertex()
 void Player::navigation(QVector<QPair<Map *, int>> des)
 {
     des.insert(des.begin(), qMakePair(now_on, pos_number));
+    for(int iter = 0; iter < 3; iter++)
     {
         multi_routes tmp;
         for (auto i = des.begin(); i < des.end() - 1; i++)
         {
             if (i->first == (i + 1)->first)
-                tmp.routes.push_back(i->first->distance_first_dijkstra(i->second, (i + 1)->second));
+                tmp.routes.push_back(i->first->dijkstra(i->second, (i + 1)->second, strat(iter)));
             else
             {
                 route_info transport[2][2];
                 if (i->first->filename == "main_campus")
                 {
-                    transport[0][0] = i->first->distance_first_dijkstra(i->second, 0);
-                    transport[0][1] = (i + 1)->first->distance_first_dijkstra(83, (i + 1)->second);
-                    transport[1][0] = i->first->distance_first_dijkstra(i->second, 116);
-                    transport[1][1] = (i + 1)->first->distance_first_dijkstra(88, (i + 1)->second);
+                    transport[0][0] = i->first->dijkstra(i->second, 152, strat(iter));
+                    transport[0][1] = (i + 1)->first->dijkstra(89, (i + 1)->second, strat(iter));
+                    transport[1][0] = i->first->dijkstra(i->second, 153, strat(iter));
+                    transport[1][1] = (i + 1)->first->dijkstra(90, (i + 1)->second, strat(iter));
                 }
                 else
                 {
-                    transport[0][0] = i->first->distance_first_dijkstra(i->second, 83);
-                    transport[0][1] = (i + 1)->first->distance_first_dijkstra(0, (i + 1)->second);
-                    transport[1][0] = i->first->distance_first_dijkstra(i->second, 88);
-                    transport[1][1] = (i + 1)->first->distance_first_dijkstra(116, (i + 1)->second);
-                }
-
-                if (transport[0][0].distance + transport[0][1].distance < transport[1][0].distance + transport[1][1].distance)
-                {
-                    tmp.routes.push_back(transport[0][0]);
-                    tmp.routes.push_back(transport[0][1]);
-                }
-                else
-                {
-                    tmp.routes.push_back(transport[1][0]);
-                    tmp.routes.push_back(transport[1][1]);
-                }
-            }
-        }
-        for (auto i = tmp.routes.begin(); i < tmp.routes.end(); i++)
-        {
-            tmp.distance += i->distance;
-            tmp.time += i->time;
-        }
-        distance_first = tmp;
-    }
-
-    {
-        multi_routes tmp;
-        for (auto i = des.begin(); i < des.end() - 1; i++)
-        {
-            if (i->first == (i + 1)->first)
-                tmp.routes.push_back(i->first->time_first_dijkstra(i->second, (i + 1)->second));
-            else
-            {
-                route_info transport[2][2];
-                if (i->first->filename == "main_campus")
-                {
-                    transport[0][0] = i->first->time_first_dijkstra(i->second, 0);
-                    transport[0][1] = (i + 1)->first->time_first_dijkstra(83, (i + 1)->second);
-                    transport[1][0] = i->first->time_first_dijkstra(i->second, 116);
-                    transport[1][1] = (i + 1)->first->time_first_dijkstra(88, (i + 1)->second);
-                }
-                else
-                {
-                    transport[0][0] = i->first->time_first_dijkstra(i->second, 83);
-                    transport[0][1] = (i + 1)->first->time_first_dijkstra(0, (i + 1)->second);
-                    transport[1][0] = i->first->time_first_dijkstra(i->second, 88);
-                    transport[1][1] = (i + 1)->first->time_first_dijkstra(116, (i + 1)->second);
+                    transport[0][0] = i->first->dijkstra(i->second, 89, strat(iter));
+                    transport[0][1] = (i + 1)->first->dijkstra(152, (i + 1)->second, strat(iter));
+                    transport[1][0] = i->first->dijkstra(i->second, 90, strat(iter));
+                    transport[1][1] = (i + 1)->first->dijkstra(153, (i + 1)->second, strat(iter));
                 }
 
                 if (transport[0][0].time + transport[0][1].time < transport[1][0].time + transport[1][1].time)
@@ -110,51 +67,7 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
             tmp.distance += i->distance;
             tmp.time += i->time;
         }
-        time_first = tmp;
-    }
-
-    {
-        multi_routes tmp;
-        for (auto i = des.begin(); i < des.end() - 1; i++)
-        {
-            if (i->first == (i + 1)->first)
-                tmp.routes.push_back(i->first->bike_allowed_dijkstra(i->second, (i + 1)->second));
-            else
-            {
-                route_info transport[2][2];
-                if (i->first->filename == "main_campus")
-                {
-                    transport[0][0] = i->first->bike_allowed_dijkstra(i->second, 152);
-                    transport[0][1] = (i + 1)->first->bike_allowed_dijkstra(89, (i + 1)->second);
-                    transport[1][0] = i->first->bike_allowed_dijkstra(i->second, 153);
-                    transport[1][1] = (i + 1)->first->bike_allowed_dijkstra(90, (i + 1)->second);
-                }
-                else
-                {
-                    transport[0][0] = i->first->bike_allowed_dijkstra(i->second, 89);
-                    transport[0][1] = (i + 1)->first->bike_allowed_dijkstra(152, (i + 1)->second);
-                    transport[1][0] = i->first->bike_allowed_dijkstra(i->second, 90);
-                    transport[1][1] = (i + 1)->first->bike_allowed_dijkstra(153, (i + 1)->second);
-                }
-
-                if (transport[0][0].time + transport[0][1].time < transport[1][0].time + transport[1][1].time)
-                {
-                    tmp.routes.push_back(transport[0][0]);
-                    tmp.routes.push_back(transport[0][1]);
-                }
-                else
-                {
-                    tmp.routes.push_back(transport[1][0]);
-                    tmp.routes.push_back(transport[1][1]);
-                }
-            }
-        }
-        for (auto i = tmp.routes.begin(); i < tmp.routes.end(); i++)
-        {
-            tmp.distance += i->distance;
-            tmp.time += i->time;
-        }
-        bike_allowed = tmp;
+        routes_with_strat[iter] = tmp;
     }
 }
 
@@ -259,7 +172,7 @@ QVector<route_info> Player::checkSurrounding()
     for(auto i = now_on->vertices.begin(); i < now_on->vertices.end(); i++)
     {
         if(i->name != "Crossing" && get_distance(pos_x, pos_y, i->pos_x, i->pos_y) * map_ratio <= 200 && i->number != pos_number)
-            surrounding.push_back(now_on->distance_first_dijkstra(pos_number, i->number));
+            surrounding.push_back(now_on->dijkstra(pos_number, i->number, distance_first));
     }
     std::sort(surrounding.begin(), surrounding.end());
     return surrounding;
@@ -274,34 +187,18 @@ void Player::paintEvent(QPaintEvent *)
     pen.setWidth(5);
     pen.setColor(QColor(25, 25, 25));
     painter.setPen(pen);
-    
-    if (distance_first.visable)
-        for (auto i = distance_first.routes.begin(); i < distance_first.routes.end(); i++)
-            if (i->on->isVisible())
-                for (auto j = i->edges.begin(); j < i->edges.end(); j++)
-                    painter.drawLine(QPointF(i->on->vertices[(*j)->from].pos_x * my_ratio + my_drift,
-                                             i->on->vertices[(*j)->from].pos_y * my_ratio + my_drift),
-                                     QPointF(i->on->vertices[(*j)->to].pos_x * my_ratio + my_drift,
-                                             i->on->vertices[(*j)->to].pos_y * my_ratio + my_drift));
-    if (time_first.visable)
-        for (auto i = time_first.routes.begin(); i < time_first.routes.end(); i++)
-            if (i->on->isVisible())
-                for (auto j = i->edges.begin(); j < i->edges.end(); j++)
-                    painter.drawLine(QPointF(i->on->vertices[(*j)->from].pos_x * my_ratio + my_drift,
-                                             i->on->vertices[(*j)->from].pos_y * my_ratio + my_drift),
-                                     QPointF(i->on->vertices[(*j)->to].pos_x * my_ratio + my_drift,
-                                             i->on->vertices[(*j)->to].pos_y * my_ratio + my_drift));
-    if (bike_allowed.visable)
-        for (auto i = bike_allowed.routes.begin(); i < bike_allowed.routes.end(); i++)
-            if (i->on->isVisible())
-                for (auto j = i->edges.begin(); j < i->edges.end(); j++)
-                    painter.drawLine(QPointF(i->on->vertices[(*j)->from].pos_x * my_ratio + my_drift,
-                                             i->on->vertices[(*j)->from].pos_y * my_ratio + my_drift),
-                                     QPointF(i->on->vertices[(*j)->to].pos_x * my_ratio + my_drift,
-                                             i->on->vertices[(*j)->to].pos_y * my_ratio + my_drift));
+    for(int iter = 0; iter < 3; iter++)
+        if (routes_with_strat[iter].visable)
+            for (auto i = routes_with_strat[iter].routes.begin(); i < routes_with_strat[iter].routes.end(); i++)
+                if (&*i != nullptr && i->on->isVisible())
+                    for (auto j = i->edges.begin(); j < i->edges.end(); j++)
+                        painter.drawLine(QPointF(i->on->vertices[(*j)->from].pos_x * my_ratio + my_drift,
+                                                i->on->vertices[(*j)->from].pos_y * my_ratio + my_drift),
+                                        QPointF(i->on->vertices[(*j)->to].pos_x * my_ratio + my_drift,
+                                                i->on->vertices[(*j)->to].pos_y * my_ratio + my_drift));
     if (now_routes.visable)
         for (auto i = now_routes.routes.begin(); i < now_routes.routes.end(); i++)
-            if (i->on->isVisible())
+            if (&*i != nullptr && i->on->isVisible())
                 for (auto j = i->edges.begin(); j < i->edges.end(); j++)
                     painter.drawLine(QPointF(i->on->vertices[(*j)->from].pos_x * my_ratio + my_drift,
                                              i->on->vertices[(*j)->from].pos_y * my_ratio + my_drift),

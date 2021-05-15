@@ -162,6 +162,18 @@ route_info Map::bike_allowed_dijkstra(int src, int des)
     return ret;
 }
 
+route_info Map::dijkstra(int src, int des, strat type)
+{
+    route_info tmp;
+    if(type == distance_first)
+        tmp = distance_first_dijkstra(src, des);
+    else if(type == time_first)
+        tmp = time_first_dijkstra(src, des);
+    else if(type == bike_allowed)
+        tmp = bike_allowed_dijkstra(src, des);
+    return tmp;
+}
+
 void Map::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);

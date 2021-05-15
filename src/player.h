@@ -12,9 +12,7 @@ public:
     int speedfactor;
     int pos_number;
     int pos_x, pos_y;
-    multi_routes distance_first;
-    multi_routes time_first;
-    multi_routes bike_allowed;
+    multi_routes routes_with_strat[3];
     multi_routes now_routes;
 
     Player(QTextStream *textstream, QWidget *parent = nullptr);

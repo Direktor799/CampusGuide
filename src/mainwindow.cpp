@@ -189,19 +189,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     move_cancel_btn->hide();
     connect(move_cancel_btn, &QPushButton::clicked, this, &MainWindow::move_cancel);
 
-    distance_first_display = new RouteLabel(&me->distance_first, "最短距离", this);
+    distance_first_display = new RouteLabel(&me->routes_with_strat[0], "最短距离", this);
     distance_first_display->move(1100, 250);
     connect(distance_first_display, &RouteLabel::hover_in, me, &Player::show_route);
     connect(distance_first_display, &RouteLabel::hover_out, me, &Player::hide_route);
     connect(distance_first_display, &RouteLabel::clicked, this, &MainWindow::move_switch);
 
-    time_first_display = new RouteLabel(&me->time_first, "最短时间", this);
+    time_first_display = new RouteLabel(&me->routes_with_strat[1], "最短时间", this);
     time_first_display->move(1100, 300);
     connect(time_first_display, &RouteLabel::hover_in, me, &Player::show_route);
     connect(time_first_display, &RouteLabel::hover_out, me, &Player::hide_route);
     connect(time_first_display, &RouteLabel::clicked, this, &MainWindow::move_switch);
 
-    bike_allowed_display = new RouteLabel(&me->bike_allowed, "骑车最短时间", this);
+    bike_allowed_display = new RouteLabel(&me->routes_with_strat[2], "骑车最短时间", this);
     bike_allowed_display->move(1100, 350);
     connect(bike_allowed_display, &RouteLabel::hover_in, me, &Player::show_route);
     connect(bike_allowed_display, &RouteLabel::hover_out, me, &Player::hide_route);

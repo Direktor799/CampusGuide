@@ -13,6 +13,12 @@ const int ride_multiplier = 3;
 const int my_ratio = 24;
 const int my_drift = 12;
 const int map_ratio = 18;
+enum strat
+{
+    distance_first = 0,
+    time_first = 1,
+    bike_allowed = 2
+};
 
 struct edge
 {
