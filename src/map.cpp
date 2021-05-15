@@ -43,7 +43,6 @@ Map::Map(QString fn, QString n, QWidget *parent) : QWidget(parent)
         if (i->name != "Crossing")
             list << i->name;
     std::sort(list.begin(), list.end(), string_less);
-
 }
 
 route_info Map::distance_first_dijkstra(int src, int des)
@@ -165,11 +164,11 @@ route_info Map::bike_allowed_dijkstra(int src, int des)
 route_info Map::dijkstra(int src, int des, strat type)
 {
     route_info tmp;
-    if(type == distance_first)
+    if (type == distance_first)
         tmp = distance_first_dijkstra(src, des);
-    else if(type == time_first)
+    else if (type == time_first)
         tmp = time_first_dijkstra(src, des);
-    else if(type == bike_allowed)
+    else if (type == bike_allowed)
         tmp = bike_allowed_dijkstra(src, des);
     return tmp;
 }

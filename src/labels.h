@@ -14,14 +14,15 @@ public:
 
     RouteLabel(multi_routes *tmp, QString string, QWidget *parent = nullptr);
     void display();
+
 protected:
     virtual void mouseReleaseEvent(QMouseEvent *ev);
     virtual void enterEvent(QEnterEvent *ev);
     virtual void leaveEvent(QEvent *ev);
 signals:
-    void clicked(multi_routes* route);
-    void hover_in(multi_routes* route);
-    void hover_out(multi_routes* route);
+    void clicked(multi_routes *route);
+    void hover_in(multi_routes *route);
+    void hover_out(multi_routes *route);
 };
 
 class BuildingLabel : public QLabel
@@ -33,7 +34,7 @@ public:
     int pos_y;
     bool hover;
     BuildingLabel(QString s, int x, int y, QWidget *parent = nullptr);
-    
+
 protected:
     virtual void mouseReleaseEvent(QMouseEvent *ev);
     virtual void enterEvent(QEnterEvent *ev);

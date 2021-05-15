@@ -26,6 +26,7 @@ public:
     route_info time_first_dijkstra(int src, int des);
     route_info bike_allowed_dijkstra(int src, int des);
     route_info dijkstra(int src, int des, strat type);
+
 protected:
     void paintEvent(QPaintEvent *);
 
@@ -41,9 +42,9 @@ struct route_info
     edge *now = nullptr;
     QVector<edge *> edges;
 
-    bool operator < (route_info x)
+    bool operator<(route_info x)
     {
-        if(distance < x.distance)
+        if (distance < x.distance)
             return true;
         else
             return false;

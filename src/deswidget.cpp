@@ -1,6 +1,6 @@
 #include "deswidget.h"
 
-DesComboBox::DesComboBox(Map* m, QWidget *parent) : QWidget(parent)
+DesComboBox::DesComboBox(Map *m, QWidget *parent) : QWidget(parent)
 {
     map = m;
     combobox = new QComboBox(this);
@@ -15,10 +15,10 @@ DesComboBox::DesComboBox(Map* m, QWidget *parent) : QWidget(parent)
 
 void DesWidget::addComboBox()
 {
-    if(deslist.size() >= 5)
+    if (deslist.size() >= 5)
         return;
     QPoint pos;
-    if(!deslist.empty())
+    if (!deslist.empty())
     {
         pos = deslist.back()->pos() + QPoint(0, 30);
         deslist.back()->setDisabled(true);
@@ -28,7 +28,7 @@ void DesWidget::addComboBox()
     deslist.back()->show();
     connect(deslist.back()->combobox, &QComboBox::currentTextChanged, this, &DesWidget::nextAllowed);
     delete_btn->setEnabled(true);
-    if(deslist.size() >= 5)
+    if (deslist.size() >= 5)
         add_btn->setDisabled(true);
 
     add_btn->setDisabled(true);
@@ -43,10 +43,10 @@ void DesWidget::deleteComboBox()
     disconnect(deslist.back()->combobox, &QComboBox::currentTextChanged, this, &DesWidget::nextAllowed);
     delete deslist.back();
     deslist.pop_back();
-    if(!deslist.empty())
+    if (!deslist.empty())
         deslist.back()->setEnabled(true);
     add_btn->setEnabled(true);
-    if(deslist.empty())
+    if (deslist.empty())
         delete_btn->setDisabled(true);
 
     add_btn->move(add_btn->pos() - QPoint(0, 30));
@@ -57,19 +57,19 @@ void DesWidget::deleteComboBox()
 void DesWidget::setComboBox(QString text)
 {
     text = text.left(text.indexOf("("));
-    if(!deslist.empty() && deslist.back()->map->isVisible())
-    deslist.back()->combobox->setCurrentText(text);
+    if (!deslist.empty() && deslist.back()->map->isVisible())
+        deslist.back()->combobox->setCurrentText(text);
 }
 
 void DesWidget::clear()
 {
-    while(!deslist.empty())
+    while (!deslist.empty())
         deleteComboBox();
 }
 
 void DesWidget::resetComboBox(QListWidgetItem *item)
 {
-    if(item->text() == "")
+    if (item->text() == "")
         return;
     clear();
     addComboBox();
@@ -79,13 +79,13 @@ void DesWidget::resetComboBox(QListWidgetItem *item)
 void DesWidget::nextAllowed()
 {
     *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 目的地列表更改为: ";
-    for(auto i = deslist.begin(); i < deslist.end(); i++)
+    for (auto i = deslist.begin(); i < deslist.end(); i++)
         *log << (*i)->combobox->currentText() << " ";
     *log << Qt::endl;
-    if(deslist.back()->combobox->currentText() != "")
+    if (deslist.back()->combobox->currentText() != "")
     {
         route_calcu_btn->setEnabled(true);
-        if(deslist.size() < 5)
+        if (deslist.size() < 5)
             add_btn->setEnabled(true);
     }
 }

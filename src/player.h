@@ -8,7 +8,7 @@ class Player : public QWidget
     Q_OBJECT
 public:
     QTextStream *log;
-    Map* now_on;
+    Map *now_on;
     int speedfactor;
     int pos_number;
     int pos_x, pos_y;
@@ -17,11 +17,12 @@ public:
 
     Player(QTextStream *textstream, QWidget *parent = nullptr);
     bool is_on_vertex();
-    void navigation(QVector<QPair<Map*, int> > des);
+    void navigation(QVector<QPair<Map *, int>> des);
     void move();
-    void show_route(multi_routes* routes);
-    void hide_route(multi_routes* routes);
+    void show_route(multi_routes *routes);
+    void hide_route(multi_routes *routes);
     QVector<route_info> checkSurrounding();
+
 protected:
     void paintEvent(QPaintEvent *);
 signals:

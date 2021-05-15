@@ -25,7 +25,7 @@ bool Player::is_on_vertex()
 void Player::navigation(QVector<QPair<Map *, int>> des)
 {
     des.insert(des.begin(), qMakePair(now_on, pos_number));
-    for(int iter = 0; iter < 3; iter++)
+    for (int iter = 0; iter < 3; iter++)
     {
         multi_routes tmp;
         for (auto i = des.begin(); i < des.end() - 1; i++)
@@ -79,7 +79,7 @@ void Player::move()
         if (now_routes.canceled)
             break;
         now_routes.now = &*j;
-        if(now_routes.now->on != now_on)
+        if (now_routes.now->on != now_on)
             *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 玩家 " << now_on->name << "->" << now_routes.now->on->name << Qt::endl;
         now_on = now_routes.now->on;
         for (auto i = j->edges.begin(); i < j->edges.end(); i++)
@@ -127,7 +127,7 @@ void Player::move()
             pos_number = now_on->vertices[(*i)->to].number;
             pos_x = now_on->vertices[(*i)->to].pos_x;
             pos_y = now_on->vertices[(*i)->to].pos_y;
-            if(now_on->vertices[pos_number].name != "Crossing")
+            if (now_on->vertices[pos_number].name != "Crossing")
                 *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 玩家到达" + now_on->vertices[pos_number].name << "[" << now_on->name << "(" << pos_x << "," << pos_y << ")]" << Qt::endl;
         }
         emit moving();
@@ -169,9 +169,9 @@ void Player::hide_route(multi_routes *route)
 QVector<route_info> Player::checkSurrounding()
 {
     QVector<route_info> surrounding;
-    for(auto i = now_on->vertices.begin(); i < now_on->vertices.end(); i++)
+    for (auto i = now_on->vertices.begin(); i < now_on->vertices.end(); i++)
     {
-        if(i->name != "Crossing" && get_distance(pos_x, pos_y, i->pos_x, i->pos_y) * map_ratio <= 200 && i->number != pos_number)
+        if (i->name != "Crossing" && get_distance(pos_x, pos_y, i->pos_x, i->pos_y) * map_ratio <= 200 && i->number != pos_number)
             surrounding.push_back(now_on->dijkstra(pos_number, i->number, distance_first));
     }
     std::sort(surrounding.begin(), surrounding.end());
@@ -187,15 +187,15 @@ void Player::paintEvent(QPaintEvent *)
     pen.setWidth(5);
     pen.setColor(QColor(25, 25, 25));
     painter.setPen(pen);
-    for(int iter = 0; iter < 3; iter++)
+    for (int iter = 0; iter < 3; iter++)
         if (routes_with_strat[iter].visable)
             for (auto i = routes_with_strat[iter].routes.begin(); i < routes_with_strat[iter].routes.end(); i++)
                 if (&*i != nullptr && i->on->isVisible())
                     for (auto j = i->edges.begin(); j < i->edges.end(); j++)
                         painter.drawLine(QPointF(i->on->vertices[(*j)->from].pos_x * my_ratio + my_drift,
-                                                i->on->vertices[(*j)->from].pos_y * my_ratio + my_drift),
-                                        QPointF(i->on->vertices[(*j)->to].pos_x * my_ratio + my_drift,
-                                                i->on->vertices[(*j)->to].pos_y * my_ratio + my_drift));
+                                                 i->on->vertices[(*j)->from].pos_y * my_ratio + my_drift),
+                                         QPointF(i->on->vertices[(*j)->to].pos_x * my_ratio + my_drift,
+                                                 i->on->vertices[(*j)->to].pos_y * my_ratio + my_drift));
     if (now_routes.visable)
         for (auto i = now_routes.routes.begin(); i < now_routes.routes.end(); i++)
             if (&*i != nullptr && i->on->isVisible())
@@ -206,6 +206,6 @@ void Player::paintEvent(QPaintEvent *)
                                              i->on->vertices[(*j)->to].pos_y * my_ratio + my_drift));
     QPixmap player_img;
     player_img.load("../data/me.png");
-    if(now_on->isVisible())
+    if (now_on->isVisible())
         painter.drawPixmap(pos_x * my_ratio + my_drift - 20, pos_y * my_ratio + my_drift - 30, 40, 40, player_img);
 }

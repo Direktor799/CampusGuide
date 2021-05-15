@@ -11,7 +11,10 @@
 #include "labels.h"
 #include "deswidget.h"
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui
+{
+    class MainWindow;
+}
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
@@ -31,16 +34,17 @@ public:
     QSlider *slider;
     QLabel *listlabel, *sliderleftlabel, *sliderrightlabel;
     QListWidget *listwidget;
-    
+
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void route_calcu();
     void map_switch();
-    void move_switch(multi_routes* routes);
+    void move_switch(multi_routes *routes);
     void move_cancel();
     void timer_update();
     void setFactor();
     void updateListWidget();
+
 private:
     Ui::MainWindow *ui;
 };
