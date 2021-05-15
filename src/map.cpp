@@ -46,7 +46,7 @@ Map::Map(QString fn, QString n, QDateTime *vtime, QWidget *parent) : QWidget(par
 
     json bus_data, day_data;
     std::ifstream("../data/" + filename.toStdString() + "_bus.json") >> bus_data;
-    for (int week = 0; week < 7; week++)
+    for (int week = 1; week <= 7; week++)
     {
         std::string week_index;
         week_index += week + '0';
@@ -189,6 +189,46 @@ route_info Map::dijkstra(int src, int des, strat type)
     else if (type == bike_allowed)
         tmp = bike_allowed_dijkstra(src, des);
     return tmp;
+}
+
+QVector<route_info> Map::cross_campus(double time_passed, transport by)
+{
+    QVector<route_info> result;
+    route_info wait;
+    route_info cross;
+    QDateTime ETA = time_ptr->addSecs(time_passed * 60);
+    if (by == by_subway) //flag为0表示地铁,10分钟一趟，最早一班是6：00,最晚是11：50
+    {
+        wait.time = 10 - (ETA.time().minute() % 10 + double(ETA.time().second()) / 60); //算出距离下一个整十分钟要多久
+        if (ETA.time().hour() >= 0 && ETA.time().hour() < 6)                          //如果当前地铁没车，加上要等的小时
+            wait.time += 60 * (6 - ETA.time().hour());
+        wait.distance = 0;
+        cross.time = 50; //模拟两个地铁站之间50分钟
+        cross.distance = 0;
+    }
+    else if (by == by_bus)
+    {
+        int today = ETA.date().dayOfWeek();
+        bool next_week = false;
+        QList<bus_time>::iterator i;
+        for (i = bus_time_list.begin(); i < bus_time_list.end(); i++)
+        {
+            if ((i->day_of_week == today && i->start_time > ETA.time()) || i->day_of_week > today)
+            {
+                next_week = true;
+                break;
+            }
+        }
+        if(next_week)
+            i = bus_time_list.begin();
+        wait.time = double(ETA.time().secsTo(i->start_time)) / 60;
+        wait.distance = 0;
+        cross.time = double(i->start_time.secsTo(i->arrival_time)) / 60;
+        cross.distance = 0;
+    }
+    result.push_back(wait);
+    result.push_back(cross);
+    return result;
 }
 
 void Map::paintEvent(QPaintEvent *)

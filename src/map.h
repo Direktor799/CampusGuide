@@ -28,6 +28,7 @@ public:
     route_info time_first_dijkstra(int src, int des);
     route_info bike_allowed_dijkstra(int src, int des);
     route_info dijkstra(int src, int des, strat type);
+    QVector<route_info> cross_campus(double time_passed, transport by);
 
 protected:
     void paintEvent(QPaintEvent *);

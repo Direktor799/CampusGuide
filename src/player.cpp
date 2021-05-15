@@ -27,11 +27,15 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
     des.insert(des.begin(), qMakePair(now_on, pos_number));
     for (int iter = 0; iter < 3; iter++)
     {
-        multi_routes tmp;
+        multi_routes new_routes;
         for (auto i = des.begin(); i < des.end() - 1; i++)
         {
             if (i->first == (i + 1)->first)
-                tmp.routes.push_back(i->first->dijkstra(i->second, (i + 1)->second, strat(iter)));
+            {
+                new_routes.routes.push_back(i->first->dijkstra(i->second, (i + 1)->second, strat(iter)));
+                new_routes.distance += new_routes.routes.back().distance;
+                new_routes.time += new_routes.routes.back().time;
+            }
             else
             {
                 route_info subway[4], bus[4];
@@ -50,6 +54,12 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
                     bus[0] = i->first->dijkstra(i->second, 90, strat(iter));
                     bus[3] = (i + 1)->first->dijkstra(153, (i + 1)->second, strat(iter));
                 }
+                QVector<route_info> subway_tmp = i->first->cross_campus(new_routes.time, by_subway);
+                subway[1] = subway_tmp[0];
+                subway[2] = subway_tmp[1];
+                QVector<route_info> bus_tmp = i->first->cross_campus(new_routes.time, by_bus);
+                bus[1] = bus_tmp[0];
+                bus[2] = bus_tmp[1];
                 if (strat(iter) == distance_first)
                     for (int j = 0; j < 4; j++)
                     {
@@ -64,18 +74,18 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
                     }
                 if (cost_of_subway < cost_of_bus)
                     for (int j = 0; j < 4; j++)
-                        tmp.routes.push_back(subway[j]);
+                        new_routes.routes.push_back(subway[j]);
                 else
                     for (int j = 0; j < 4; j++)
-                        tmp.routes.push_back(bus[j]);
+                        new_routes.routes.push_back(bus[j]);
+                for (auto wtf = new_routes.routes.end() - 4; wtf < new_routes.routes.end(); wtf++)
+                {
+                    new_routes.distance += wtf->distance;
+                    new_routes.time += wtf->time;
+                }
             }
         }
-        for (auto i = tmp.routes.begin(); i < tmp.routes.end(); i++)
-        {
-            tmp.distance += i->distance;
-            tmp.time += i->time;
-        }
-        routes_with_strat[iter] = tmp;
+        routes_with_strat[iter] = new_routes;
     }
 }
 
@@ -84,6 +94,11 @@ void Player::move()
     update();
     for (auto j = now_routes.routes.begin(); j < now_routes.routes.end(); j++)
     {
+        if(j->on == nullptr)
+        {
+            qDebug() << "not yet";
+            continue;
+        }
         if (now_routes.canceled)
             break;
         now_routes.now = &*j;
@@ -198,7 +213,7 @@ void Player::paintEvent(QPaintEvent *)
     for (int iter = 0; iter < 3; iter++)
         if (routes_with_strat[iter].visable)
             for (auto i = routes_with_strat[iter].routes.begin(); i < routes_with_strat[iter].routes.end(); i++)
-                if (&*i != nullptr && i->on->isVisible())
+                if (i->on != nullptr && i->on->isVisible())
                     for (auto j = i->edges.begin(); j < i->edges.end(); j++)
                         painter.drawLine(QPointF(i->on->vertices[(*j)->from].pos_x * my_ratio + my_drift,
                                                  i->on->vertices[(*j)->from].pos_y * my_ratio + my_drift),
@@ -206,7 +221,7 @@ void Player::paintEvent(QPaintEvent *)
                                                  i->on->vertices[(*j)->to].pos_y * my_ratio + my_drift));
     if (now_routes.visable)
         for (auto i = now_routes.routes.begin(); i < now_routes.routes.end(); i++)
-            if (&*i != nullptr && i->on->isVisible())
+            if (i->on != nullptr && i->on->isVisible())
                 for (auto j = i->edges.begin(); j < i->edges.end(); j++)
                     painter.drawLine(QPointF(i->on->vertices[(*j)->from].pos_x * my_ratio + my_drift,
                                              i->on->vertices[(*j)->from].pos_y * my_ratio + my_drift),

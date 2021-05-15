@@ -20,6 +20,12 @@ enum strat
     bike_allowed = 2
 };
 
+enum transport
+{
+    by_subway = 0,
+    by_bus = 1
+};
+
 struct edge
 {
     int from;
