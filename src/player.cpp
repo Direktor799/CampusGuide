@@ -188,11 +188,11 @@ void Player::move()
         {
             if (now_routes.canceled)
                 break;
-            emit moving();
             pos_number = now_on->vertices[(*i)->from].number;
             pos_x = now_on->vertices[(*i)->from].pos_x;
             pos_y = now_on->vertices[(*i)->from].pos_y;
             now_routes.now->now = *i;
+            emit moving();
             int distance = fabs(now_on->vertices[(*i)->to].pos_x - pos_x) + fabs(now_on->vertices[(*i)->to].pos_y - pos_y);
             int x_move = 0;
             int y_move = 0;
