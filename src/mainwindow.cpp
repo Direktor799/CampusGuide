@@ -74,7 +74,7 @@ void MainWindow::map_switch()
             (*i)->show();
         deswidget->now_show = main_campus;
     }
-    if(deswidget->deslist.back()->combobox->currentText() == "")
+    if(!deswidget->deslist.empty() && deswidget->deslist.back()->combobox->currentText() == "")
     {
         deswidget->deleteComboBox();
         deswidget->addComboBox();

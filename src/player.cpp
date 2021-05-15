@@ -24,24 +24,7 @@ bool Player::is_on_vertex()
 
 void Player::navigation(QVector<QPair<Map *, int>> des)
 {
-    if (!is_on_vertex())
-    {
-        if (now_on->vertices_size < now_on->vertices.size())
-            now_on->vertices.pop_back();
-        now_on->vertices.push_back({int(now_on->vertices.size()), "Crossing", pos_x, pos_y});
-        pos_number = now_on->vertices.size() - 1;
-
-        edge tmp = *now_routes.now->now;
-        tmp.from = pos_number;
-        tmp.length = map_ratio * get_length(pos_x, pos_y, now_on->vertices[tmp.to].pos_x, now_on->vertices[tmp.to].pos_y);
-        now_on->vertices.back().adjlist.push_back(tmp);
-
-        tmp.to = now_routes.now->now->from;
-        tmp.length = map_ratio * get_length(pos_x, pos_y, now_on->vertices[tmp.to].pos_x, now_on->vertices[tmp.to].pos_y);
-        now_on->vertices.back().adjlist.push_back(tmp);
-    }
     des.insert(des.begin(), qMakePair(now_on, pos_number));
-
     {
         multi_routes tmp;
         for (auto i = des.begin(); i < des.end() - 1; i++)
@@ -141,17 +124,17 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
                 route_info transport[2][2];
                 if (i->first->filename == "main_campus")
                 {
-                    transport[0][0] = i->first->bike_allowed_dijkstra(i->second, 0);
-                    transport[0][1] = (i + 1)->first->bike_allowed_dijkstra(83, (i + 1)->second);
-                    transport[1][0] = i->first->bike_allowed_dijkstra(i->second, 116);
-                    transport[1][1] = (i + 1)->first->bike_allowed_dijkstra(88, (i + 1)->second);
+                    transport[0][0] = i->first->bike_allowed_dijkstra(i->second, 152);
+                    transport[0][1] = (i + 1)->first->bike_allowed_dijkstra(89, (i + 1)->second);
+                    transport[1][0] = i->first->bike_allowed_dijkstra(i->second, 153);
+                    transport[1][1] = (i + 1)->first->bike_allowed_dijkstra(90, (i + 1)->second);
                 }
                 else
                 {
-                    transport[0][0] = i->first->bike_allowed_dijkstra(i->second, 83);
-                    transport[0][1] = (i + 1)->first->bike_allowed_dijkstra(0, (i + 1)->second);
-                    transport[1][0] = i->first->bike_allowed_dijkstra(i->second, 88);
-                    transport[1][1] = (i + 1)->first->bike_allowed_dijkstra(116, (i + 1)->second);
+                    transport[0][0] = i->first->bike_allowed_dijkstra(i->second, 89);
+                    transport[0][1] = (i + 1)->first->bike_allowed_dijkstra(152, (i + 1)->second);
+                    transport[1][0] = i->first->bike_allowed_dijkstra(i->second, 90);
+                    transport[1][1] = (i + 1)->first->bike_allowed_dijkstra(153, (i + 1)->second);
                 }
 
                 if (transport[0][0].time + transport[0][1].time < transport[1][0].time + transport[1][1].time)
@@ -180,18 +163,20 @@ void Player::move()
     update();
     for (auto j = now_routes.routes.begin(); j < now_routes.routes.end(); j++)
     {
+        if (now_routes.canceled)
+            break;
         now_routes.now = &*j;
         if(now_routes.now->on != now_on)
             *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 玩家 " << now_on->name << "->" << now_routes.now->on->name << Qt::endl;
         now_on = now_routes.now->on;
         for (auto i = j->edges.begin(); i < j->edges.end(); i++)
         {
-            if (now_routes.canceled)
-                break;
             pos_number = now_on->vertices[(*i)->from].number;
             pos_x = now_on->vertices[(*i)->from].pos_x;
             pos_y = now_on->vertices[(*i)->from].pos_y;
             now_routes.now->now = *i;
+            if (now_routes.canceled)
+                break;
             emit moving();
             int distance = fabs(now_on->vertices[(*i)->to].pos_x - pos_x) + fabs(now_on->vertices[(*i)->to].pos_y - pos_y);
             int x_move = 0;
@@ -224,6 +209,8 @@ void Player::move()
                 *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 玩家 [" << now_on->name << "(" << pos_x - x_move << "," << pos_y - y_move << ")]";
                 *log << " -> [" << now_on->name << "(" << pos_x << "," << pos_y << ")]" << Qt::endl;
             }
+            if (now_routes.canceled)
+                break;
             pos_number = now_on->vertices[(*i)->to].number;
             pos_x = now_on->vertices[(*i)->to].pos_x;
             pos_y = now_on->vertices[(*i)->to].pos_y;
@@ -234,6 +221,23 @@ void Player::move()
     }
     now_routes.visable = false;
     now_routes.canceled = false;
+    if (!is_on_vertex())
+    {
+        if (now_on->vertices_size < now_on->vertices.size())
+            now_on->vertices.pop_back();
+        now_on->vertices.push_back({int(now_on->vertices.size()), "Crossing", pos_x, pos_y});
+        pos_number = now_on->vertices.size() - 1;
+
+        edge tmp = *now_routes.now->now;
+        tmp.from = pos_number;
+        tmp.length = map_ratio * get_length(pos_x, pos_y, now_on->vertices[tmp.to].pos_x, now_on->vertices[tmp.to].pos_y);
+        now_on->vertices.back().adjlist.push_back(tmp);
+
+        tmp.to = now_routes.now->now->from;
+        tmp.length = map_ratio * get_length(pos_x, pos_y, now_on->vertices[tmp.to].pos_x, now_on->vertices[tmp.to].pos_y);
+        now_on->vertices.back().adjlist.push_back(tmp);
+    }
+    emit moving();
     update();
 }
 

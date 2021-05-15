@@ -27,8 +27,7 @@ void DesWidget::addComboBox()
     deslist.back()->move(pos);
     deslist.back()->show();
     connect(deslist.back()->combobox, &QComboBox::currentTextChanged, this, &DesWidget::nextAllowed);
-    if(deslist.size() >= 2)
-        delete_btn->setEnabled(true);
+    delete_btn->setEnabled(true);
     if(deslist.size() >= 5)
         add_btn->setDisabled(true);
 
@@ -47,7 +46,7 @@ void DesWidget::deleteComboBox()
     if(!deslist.empty())
         deslist.back()->setEnabled(true);
     add_btn->setEnabled(true);
-    if(!deslist.empty())
+    if(deslist.empty())
         delete_btn->setDisabled(true);
 
     add_btn->move(add_btn->pos() - QPoint(0, 30));
