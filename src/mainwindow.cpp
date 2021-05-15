@@ -134,7 +134,20 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     deswidget = new DesWidget(log, this);
     connect(deswidget->route_calcu_btn, &QPushButton::clicked, this, &MainWindow::route_calcu);
 
-    main_campus = new Map("main_campus", "本部", this);
+    QTimer *timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &MainWindow::timer_update);
+    timer->start(100);
+
+    vtime = new QDateTime;
+    *vtime = QDateTime::currentDateTime();
+
+    time_display = new QLabel(this);
+    time_display->move(1100, 650);
+    QFont font;
+    font.setBold(true);
+    time_display->setFont(font);
+
+    main_campus = new Map("main_campus", "本部", vtime, this);
     for (auto i = main_campus->vertices.begin(); i < main_campus->vertices.end(); i++)
     {
         if (i->name != "Crossing")
@@ -145,7 +158,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         }
     }
 
-    shahe_campus = new Map("shahe_campus", "沙河", this);
+    shahe_campus = new Map("shahe_campus", "沙河", vtime, this);
     for (auto i = shahe_campus->vertices.begin(); i < shahe_campus->vertices.end(); i++)
     {
         if (i->name != "Crossing")
@@ -203,19 +216,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     updateListWidget();
     connect(me, &Player::moving, this, &MainWindow::updateListWidget);
     connect(listwidget, &QListWidget::itemClicked, deswidget, &DesWidget::resetComboBox);
-
-    QTimer *timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &MainWindow::timer_update);
-    timer->start(100);
-
-    vtime = new QDateTime;
-    *vtime = QDateTime::currentDateTime();
-
-    time_display = new QLabel(this);
-    time_display->move(1100, 650);
-    QFont font;
-    font.setBold(true);
-    time_display->setFont(font);
 
     sliderleftlabel = new QLabel(this);
     sliderleftlabel->setText("加速倍数：");

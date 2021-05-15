@@ -1,124 +1,124 @@
 {
-    "1":[
+    "1": [
         {
-            "start":"06:50",
-            "arrive":"08:00"
+            "start": "06:50",
+            "arrival": "08:00"
         },
         {
-            "start":"08:30",
-            "arrive":"09:30"
+            "start": "08:30",
+            "arrival": "09:30"
         },
         {
-            "start":"12:00",
-            "arrive":"13:00"
+            "start": "12:00",
+            "arrival": "13:00"
         },
         {
-            "start":"13:30",
-            "arrive":"14:30"
+            "start": "13:30",
+            "arrival": "14:30"
         },
         {
-            "start":"14:20",
-            "arrive":"15:20"
+            "start": "14:20",
+            "arrival": "15:20"
         },
         {
-            "start":"16:50",
-            "arrive":"18:00"
+            "start": "16:50",
+            "arrival": "18:00"
         }
     ],
-    "2":[
+    "2": [
         {
-            "start":"06:50",
-            "arrive":"08:00"
+            "start": "06:50",
+            "arrival": "08:00"
         },
         {
-            "start":"08:30",
-            "arrive":"09:30"
+            "start": "08:30",
+            "arrival": "09:30"
         },
         {
-            "start":"12:00",
-            "arrive":"13:00"
+            "start": "12:00",
+            "arrival": "13:00"
         },
         {
-            "start":"13:30",
-            "arrive":"14:30"
+            "start": "13:30",
+            "arrival": "14:30"
         },
         {
-            "start":"14:20",
-            "arrive":"15:20"
+            "start": "14:20",
+            "arrival": "15:20"
         },
         {
-            "start":"16:50",
-            "arrive":"18:00"
+            "start": "16:50",
+            "arrival": "18:00"
         }
     ],
-    "3":[
+    "3": [
         {
-            "start":"06:50",
-            "arrive":"08:00"
+            "start": "06:50",
+            "arrival": "08:00"
         },
         {
-            "start":"08:30",
-            "arrive":"09:30"
+            "start": "08:30",
+            "arrival": "09:30"
         },
         {
-            "start":"12:00",
-            "arrive":"13:00"
+            "start": "12:00",
+            "arrival": "13:00"
         },
         {
-            "start":"13:30",
-            "arrive":"14:30"
+            "start": "13:30",
+            "arrival": "14:30"
         },
         {
-            "start":"16:50",
-            "arrive":"18:00"
+            "start": "16:50",
+            "arrival": "18:00"
         }
     ],
-    "4":[
+    "4": [
         {
-            "start":"06:50",
-            "arrive":"08:00"
+            "start": "06:50",
+            "arrival": "08:00"
         },
         {
-            "start":"08:30",
-            "arrive":"09:30"
+            "start": "08:30",
+            "arrival": "09:30"
         },
         {
-            "start":"12:00",
-            "arrive":"13:00"
+            "start": "12:00",
+            "arrival": "13:00"
         },
         {
-            "start":"13:30",
-            "arrive":"14:30"
+            "start": "13:30",
+            "arrival": "14:30"
         },
         {
-            "start":"14:20",
-            "arrive":"15:20"
+            "start": "14:20",
+            "arrival": "15:20"
         },
         {
-            "start":"16:50",
-            "arrive":"18:00"
+            "start": "16:50",
+            "arrival": "18:00"
         }
     ],
-    "5":[
+    "5": [
         {
-            "start":"06:50",
-            "arrive":"08:00"
+            "start": "06:50",
+            "arrival": "08:00"
         },
         {
-            "start":"08:30",
-            "arrive":"09:30"
+            "start": "08:30",
+            "arrival": "09:30"
         },
         {
-            "start":"12:00",
-            "arrive":"13:00"
+            "start": "12:00",
+            "arrival": "13:00"
         },
         {
-            "start":"13:30",
-            "arrive":"14:30"
+            "start": "13:30",
+            "arrival": "14:30"
         },
         {
-            "start":"14:20",
-            "arrive":"15:20"
+            "start": "14:20",
+            "arrival": "15:20"
         }
     ]
 }

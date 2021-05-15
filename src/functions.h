@@ -88,6 +88,13 @@ struct multi_routes
     QVector<route_info> routes; 
 };
 
+struct bus_time
+{
+    int day_of_week;
+    QTime start_time;
+    QTime arrival_time;
+};
+
 bool string_less(const QString &s1, const QString &s2);
 bool sleep(unsigned int msec);
 int get_length(int a_pos_x, int a_pos_y, int b_pos_x, int b_pos_y);

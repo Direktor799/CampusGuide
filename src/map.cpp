@@ -1,7 +1,7 @@
 #include "map.h"
 #include <QLabel>
 
-Map::Map(QString fn, QString n, QWidget *parent) : QWidget(parent)
+Map::Map(QString fn, QString n, QDateTime *vtime, QWidget *parent) : QWidget(parent)
 {
     resize(1080, 672);
     filename = fn;
@@ -43,6 +43,25 @@ Map::Map(QString fn, QString n, QWidget *parent) : QWidget(parent)
         if (i->name != "Crossing")
             list << i->name;
     std::sort(list.begin(), list.end(), string_less);
+
+    json bus_data, day_data;
+    std::ifstream("../data/" + filename.toStdString() + "_bus.json") >> bus_data;
+    for (int week = 0; week < 7; week++)
+    {
+        std::string week_index;
+        week_index += week + '0';
+        day_data = bus_data[week_index];
+        for (auto i = day_data.begin(); i < day_data.end(); i++)
+        {
+            bus_time tmp;
+            tmp.day_of_week = week;
+            tmp.start_time = QTime::fromString(QString::asprintf(std::string((*i)["start"]).c_str()), "hh:mm");
+            tmp.arrival_time = QTime::fromString(QString::asprintf(std::string((*i)["arrival"]).c_str()), "hh:mm");
+            qDebug() << tmp.day_of_week << " " << tmp.start_time << " " << tmp.arrival_time;
+            bus_time_list.push_back(tmp);
+        }
+    }
+    time_ptr = vtime;
 }
 
 route_info Map::distance_first_dijkstra(int src, int des)

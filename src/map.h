@@ -16,12 +16,14 @@ class Map : public QWidget
 public:
     QString filename;
     QString name;
+    QDateTime *time_ptr;
     int vertices_size;
     QVector<vertex> vertices;
     QVector<edge> edges;
     QStringList list;
     QVector<BuildingLabel *> bllist;
-    Map(QString fn, QString n, QWidget *parent = nullptr);
+    QVector<bus_time> bus_time_list;
+    Map(QString fn, QString n, QDateTime *vtime, QWidget *parent = nullptr);
     route_info distance_first_dijkstra(int src, int des);
     route_info time_first_dijkstra(int src, int des);
     route_info bike_allowed_dijkstra(int src, int des);
