@@ -34,32 +34,40 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
                 tmp.routes.push_back(i->first->dijkstra(i->second, (i + 1)->second, strat(iter)));
             else
             {
-                route_info transport[2][2];
+                route_info subway[4], bus[4];
+                double cost_of_subway = 0, cost_of_bus = 0;
                 if (i->first->filename == "main_campus")
                 {
-                    transport[0][0] = i->first->dijkstra(i->second, 152, strat(iter));
-                    transport[0][1] = (i + 1)->first->dijkstra(89, (i + 1)->second, strat(iter));
-                    transport[1][0] = i->first->dijkstra(i->second, 153, strat(iter));
-                    transport[1][1] = (i + 1)->first->dijkstra(90, (i + 1)->second, strat(iter));
+                    subway[0] = i->first->dijkstra(i->second, 152, strat(iter));
+                    subway[3] = (i + 1)->first->dijkstra(89, (i + 1)->second, strat(iter));
+                    bus[0] = i->first->dijkstra(i->second, 153, strat(iter));
+                    bus[3] = (i + 1)->first->dijkstra(90, (i + 1)->second, strat(iter));
                 }
                 else
                 {
-                    transport[0][0] = i->first->dijkstra(i->second, 89, strat(iter));
-                    transport[0][1] = (i + 1)->first->dijkstra(152, (i + 1)->second, strat(iter));
-                    transport[1][0] = i->first->dijkstra(i->second, 90, strat(iter));
-                    transport[1][1] = (i + 1)->first->dijkstra(153, (i + 1)->second, strat(iter));
+                    subway[0] = i->first->dijkstra(i->second, 89, strat(iter));
+                    subway[3] = (i + 1)->first->dijkstra(152, (i + 1)->second, strat(iter));
+                    bus[0] = i->first->dijkstra(i->second, 90, strat(iter));
+                    bus[3] = (i + 1)->first->dijkstra(153, (i + 1)->second, strat(iter));
                 }
-
-                if (transport[0][0].time + transport[0][1].time < transport[1][0].time + transport[1][1].time)
-                {
-                    tmp.routes.push_back(transport[0][0]);
-                    tmp.routes.push_back(transport[0][1]);
-                }
+                if (strat(iter) == distance_first)
+                    for (int j = 0; j < 4; j++)
+                    {
+                        cost_of_subway += subway[j].distance;
+                        cost_of_bus += bus[j].distance;
+                    }
                 else
-                {
-                    tmp.routes.push_back(transport[1][0]);
-                    tmp.routes.push_back(transport[1][1]);
-                }
+                    for (int j = 0; j < 4; j++)
+                    {
+                        cost_of_subway += subway[j].time;
+                        cost_of_bus += bus[j].time;
+                    }
+                if (cost_of_subway < cost_of_bus)
+                    for (int j = 0; j < 4; j++)
+                        tmp.routes.push_back(subway[j]);
+                else
+                    for (int j = 0; j < 4; j++)
+                        tmp.routes.push_back(bus[j]);
             }
         }
         for (auto i = tmp.routes.begin(); i < tmp.routes.end(); i++)

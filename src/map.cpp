@@ -57,7 +57,6 @@ Map::Map(QString fn, QString n, QDateTime *vtime, QWidget *parent) : QWidget(par
             tmp.day_of_week = week;
             tmp.start_time = QTime::fromString(QString::asprintf(std::string((*i)["start"]).c_str()), "hh:mm");
             tmp.arrival_time = QTime::fromString(QString::asprintf(std::string((*i)["arrival"]).c_str()), "hh:mm");
-            qDebug() << tmp.day_of_week << " " << tmp.start_time << " " << tmp.arrival_time;
             bus_time_list.push_back(tmp);
         }
     }
