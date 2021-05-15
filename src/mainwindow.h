@@ -26,7 +26,7 @@ public:
     QPushButton *map_switch_btn, *move_cancel_btn;
     QDateTime *vtime;
     QLabel *time_display;
-    RouteLabel *distance_first_display, *time_first_display, *bike_allowed_display;
+    RouteLabel *routes_with_strat_display[3];
     DesWidget *deswidget;
     QSlider *slider;
     QLabel *listlabel, *sliderleftlabel, *sliderrightlabel;
