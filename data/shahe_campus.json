@@ -533,6 +533,18 @@
             "number": 88,
             "pos_x": 26,
             "pos_y": 10
+        },
+        {
+            "name": "Crossing",
+            "number": 89,
+            "pos_x": 0,
+            "pos_y": 27
+        },
+        {
+            "name": "Crossing",
+            "number": 90,
+            "pos_x": 26,
+            "pos_y": 10
         }
     ],
     "edges": [
@@ -1171,6 +1183,18 @@
             "from": 87,
             "is_bike_allowed": true,
             "to": 88
+        },
+        {
+            "congestion": 1.0,
+            "from": 83,
+            "is_bike_allowed": false,
+            "to": 89
+        },
+        {
+            "congestion": 1.0,
+            "from": 88,
+            "is_bike_allowed": false,
+            "to": 90
         }
     ]
 }

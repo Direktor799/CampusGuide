@@ -911,7 +911,19 @@
             "number": 151,
             "pos_x": 44,
             "pos_y": 0
-        }
+        },
+        {
+          "name":"Crossing",
+          "number": 152,
+          "pos_x": 0,
+          "pos_y": 27  
+        },
+        {
+            "name":"Crossing",
+            "number": 153,
+            "pos_x": 30,
+            "pos_y": 26  
+          }
     ],
     "edges": [
         {
@@ -1987,6 +1999,18 @@
             "from": 150,
             "is_bike_allowed": true,
             "to": 151
+        },
+        {
+            "congestion": 1.0,
+            "from": 0,
+            "is_bike_allowed": false,
+            "to": 152
+        },
+        {
+            "congestion": 1.0,
+            "from": 116,
+            "is_bike_allowed": false,
+            "to": 153
         }
     ]
 }
