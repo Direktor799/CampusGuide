@@ -549,649 +549,649 @@
     ],
     "edges": [
         {
-            "congestion": 1.0,
+            "congestion": 0.98,
             "from": 0,
             "is_bike_allowed": true,
             "to": 1
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.55,
             "from": 0,
             "is_bike_allowed": true,
             "to": 35
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.62,
             "from": 1,
             "is_bike_allowed": true,
             "to": 56
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.63,
             "from": 2,
             "is_bike_allowed": false,
             "to": 7
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.94,
             "from": 3,
             "is_bike_allowed": false,
             "to": 4
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.65,
             "from": 3,
             "is_bike_allowed": true,
             "to": 16
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.55,
             "from": 4,
             "is_bike_allowed": false,
             "to": 5
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.93,
             "from": 4,
             "is_bike_allowed": false,
             "to": 10
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.84,
             "from": 5,
             "is_bike_allowed": false,
             "to": 6
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.80,
             "from": 5,
             "is_bike_allowed": true,
             "to": 12
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.53,
             "from": 6,
             "is_bike_allowed": false,
             "to": 7
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.80,
             "from": 6,
             "is_bike_allowed": false,
             "to": 20
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.84,
             "from": 7,
             "is_bike_allowed": false,
             "to": 8
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.66,
             "from": 8,
             "is_bike_allowed": false,
             "to": 9
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.55,
             "from": 8,
             "is_bike_allowed": true,
             "to": 22
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.52,
             "from": 9,
             "is_bike_allowed": false,
             "to": 25
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.96,
             "from": 11,
             "is_bike_allowed": false,
             "to": 12
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.61,
             "from": 12,
             "is_bike_allowed": true,
             "to": 18
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.73,
             "from": 13,
             "is_bike_allowed": false,
             "to": 19
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.82,
             "from": 14,
             "is_bike_allowed": false,
             "to": 21
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.64,
             "from": 15,
             "is_bike_allowed": false,
             "to": 24
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.98,
             "from": 16,
             "is_bike_allowed": false,
             "to": 17
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.92,
             "from": 16,
             "is_bike_allowed": true,
             "to": 39
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.54,
             "from": 17,
             "is_bike_allowed": false,
             "to": 18
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.70,
             "from": 17,
             "is_bike_allowed": false,
             "to": 26
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.98,
             "from": 18,
             "is_bike_allowed": false,
             "to": 19
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.87,
             "from": 18,
             "is_bike_allowed": true,
             "to": 28
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.79,
             "from": 19,
             "is_bike_allowed": false,
             "to": 20
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.50,
             "from": 19,
             "is_bike_allowed": false,
             "to": 29
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.50,
             "from": 20,
             "is_bike_allowed": false,
             "to": 21
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.75,
             "from": 20,
             "is_bike_allowed": false,
             "to": 30
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.70,
             "from": 21,
             "is_bike_allowed": false,
             "to": 22
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.72,
             "from": 22,
             "is_bike_allowed": false,
             "to": 23
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.66,
             "from": 22,
             "is_bike_allowed": true,
             "to": 34
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.72,
             "from": 24,
             "is_bike_allowed": false,
             "to": 25
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.75,
             "from": 25,
             "is_bike_allowed": false,
             "to": 55
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.96,
             "from": 27,
             "is_bike_allowed": false,
             "to": 28
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.84,
             "from": 28,
             "is_bike_allowed": true,
             "to": 51
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.80,
             "from": 30,
             "is_bike_allowed": false,
             "to": 31
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.50,
             "from": 30,
             "is_bike_allowed": false,
             "to": 42
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.65,
             "from": 32,
             "is_bike_allowed": false,
             "to": 36
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.70,
             "from": 33,
             "is_bike_allowed": false,
             "to": 34
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.61,
             "from": 34,
             "is_bike_allowed": true,
             "to": 53
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.69,
             "from": 35,
             "is_bike_allowed": false,
             "to": 36
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.51,
             "from": 35,
             "is_bike_allowed": true,
             "to": 46
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.83,
             "from": 36,
             "is_bike_allowed": false,
             "to": 37
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.89,
             "from": 37,
             "is_bike_allowed": false,
             "to": 48
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.79,
             "from": 38,
             "is_bike_allowed": false,
             "to": 39
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.86,
             "from": 39,
             "is_bike_allowed": true,
             "to": 49
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.63,
             "from": 39,
             "is_bike_allowed": false,
             "to": 40
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.55,
             "from": 41,
             "is_bike_allowed": false,
             "to": 50
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.52,
             "from": 42,
             "is_bike_allowed": false,
             "to": 43
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.88,
             "from": 42,
             "is_bike_allowed": false,
             "to": 52
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.62,
             "from": 44,
             "is_bike_allowed": false,
             "to": 47
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.63,
             "from": 45,
             "is_bike_allowed": false,
             "to": 54
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.80,
             "from": 46,
             "is_bike_allowed": true,
             "to": 47
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.84,
             "from": 46,
             "is_bike_allowed": true,
             "to": 83
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.82,
             "from": 47,
             "is_bike_allowed": true,
             "to": 48
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.97,
             "from": 48,
             "is_bike_allowed": true,
             "to": 49
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.66,
             "from": 49,
             "is_bike_allowed": true,
             "to": 50
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.87,
             "from": 49,
             "is_bike_allowed": false,
             "to": 62
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.84,
             "from": 50,
             "is_bike_allowed": true,
             "to": 51
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.65,
             "from": 51,
             "is_bike_allowed": true,
             "to": 52
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.56,
             "from": 51,
             "is_bike_allowed": true,
             "to": 59
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.94,
             "from": 52,
             "is_bike_allowed": true,
             "to": 87
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.68,
             "from": 53,
             "is_bike_allowed": true,
             "to": 54
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.96,
             "from": 53,
             "is_bike_allowed": true,
             "to": 60
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.56,
             "from": 53,
             "is_bike_allowed": true,
             "to": 87
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.58,
             "from": 54,
             "is_bike_allowed": true,
             "to": 55
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.90,
             "from": 54,
             "is_bike_allowed": false,
             "to": 57
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.57,
             "from": 55,
             "is_bike_allowed": true,
             "to": 56
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.81,
             "from": 55,
             "is_bike_allowed": false,
             "to": 73
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.78,
             "from": 56,
             "is_bike_allowed": true,
             "to": 80
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.66,
             "from": 58,
             "is_bike_allowed": false,
             "to": 59
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.82,
             "from": 59,
             "is_bike_allowed": true,
             "to": 71
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.89,
             "from": 60,
             "is_bike_allowed": false,
             "to": 61
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.75,
             "from": 60,
             "is_bike_allowed": true,
             "to": 64
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.71,
             "from": 62,
             "is_bike_allowed": false,
             "to": 63
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.86,
             "from": 62,
             "is_bike_allowed": false,
             "to": 68
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.59,
             "from": 64,
             "is_bike_allowed": false,
             "to": 65
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.91,
             "from": 64,
             "is_bike_allowed": true,
             "to": 72
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.98,
             "from": 65,
             "is_bike_allowed": false,
             "to": 66
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.87,
             "from": 67,
             "is_bike_allowed": false,
             "to": 70
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.51,
             "from": 68,
             "is_bike_allowed": false,
             "to": 69
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.69,
             "from": 68,
             "is_bike_allowed": false,
             "to": 81
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.67,
             "from": 69,
             "is_bike_allowed": false,
             "to": 70
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.59,
             "from": 69,
             "is_bike_allowed": false,
             "to": 74
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.58,
             "from": 71,
             "is_bike_allowed": false,
             "to": 72
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.70,
             "from": 71,
             "is_bike_allowed": true,
             "to": 77
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.87,
             "from": 72,
             "is_bike_allowed": false,
             "to": 73
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.73,
             "from": 72,
             "is_bike_allowed": true,
             "to": 78
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.87,
             "from": 73,
             "is_bike_allowed": false,
             "to": 79
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.94,
             "from": 74,
             "is_bike_allowed": false,
             "to": 75
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.58,
             "from": 76,
             "is_bike_allowed": false,
             "to": 77
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.90,
             "from": 77,
             "is_bike_allowed": false,
             "to": 78
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.98,
             "from": 77,
             "is_bike_allowed": false,
             "to": 82
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.58,
             "from": 78,
             "is_bike_allowed": false,
             "to": 79
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.98,
             "from": 78,
             "is_bike_allowed": true,
             "to": 84
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.81,
             "from": 79,
             "is_bike_allowed": false,
             "to": 80
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.94,
             "from": 79,
             "is_bike_allowed": false,
             "to": 85
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.79,
             "from": 80,
             "is_bike_allowed": true,
             "to": 86
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.72,
             "from": 81,
             "is_bike_allowed": false,
             "to": 82
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.73,
             "from": 83,
             "is_bike_allowed": true,
             "to": 84
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.60,
             "from": 84,
             "is_bike_allowed": true,
             "to": 85
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.75,
             "from": 85,
             "is_bike_allowed": true,
             "to": 86
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.87,
             "from": 87,
             "is_bike_allowed": true,
             "to": 88
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.57,
             "from": 83,
             "is_bike_allowed": false,
             "to": 89
         },
         {
-            "congestion": 1.0,
+            "congestion": 0.92,
             "from": 88,
             "is_bike_allowed": false,
             "to": 90
