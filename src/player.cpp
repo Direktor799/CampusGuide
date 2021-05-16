@@ -54,10 +54,10 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
                     bus[0] = i->first->dijkstra(i->second, 90, strat(iter));
                     bus[3] = (i + 1)->first->dijkstra(153, (i + 1)->second, strat(iter));
                 }
-                QVector<route_info> subway_tmp = i->first->cross_campus(new_routes.time, by_subway);
+                QVector<route_info> subway_tmp = i->first->cross_campus(new_routes.time + subway[0].time, by_subway);
                 subway[1] = subway_tmp[0];
                 subway[2] = subway_tmp[1];
-                QVector<route_info> bus_tmp = i->first->cross_campus(new_routes.time, by_bus);
+                QVector<route_info> bus_tmp = i->first->cross_campus(new_routes.time + bus[0].time, by_bus);
                 bus[1] = bus_tmp[0];
                 bus[2] = bus_tmp[1];
                 if (strat(iter) == distance_first)

@@ -209,19 +209,22 @@ QVector<route_info> Map::cross_campus(double time_passed, transport by)
     else if (by == by_bus)
     {
         int today = ETA.date().dayOfWeek();
-        bool next_week = false;
+        bool next_week = true;
         QList<bus_time>::iterator i;
         for (i = bus_time_list.begin(); i < bus_time_list.end(); i++)
         {
             if ((i->day_of_week == today && i->start_time > ETA.time()) || i->day_of_week > today)
             {
-                next_week = true;
+                next_week = false;
                 break;
             }
         }
         if(next_week)
             i = bus_time_list.begin();
-        wait.time = double(ETA.time().secsTo(i->start_time)) / 60;
+        int wait_days = i->day_of_week - today;
+        if(wait_days < 0)
+            wait_days += 7;
+        wait.time = double(ETA.time().secsTo(i->start_time)) / 60 + wait_days * 24 * 60;
         wait.distance = 0;
         cross.time = double(i->start_time.secsTo(i->arrival_time)) / 60;
         cross.distance = 0;
