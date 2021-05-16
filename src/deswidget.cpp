@@ -47,10 +47,8 @@ void DesWidget::deleteComboBox()
         deslist.back()->setEnabled(true);
     add_btn->setEnabled(true);
     if (deslist.empty())
-    {
         delete_btn->setDisabled(true);
-        route_calcu_btn->setDisabled(true);
-    }
+
     add_btn->move(add_btn->pos() - QPoint(0, 30));
     delete_btn->move(delete_btn->pos() - QPoint(0, 30));
     route_calcu_btn->move(route_calcu_btn->pos() - QPoint(0, 30));

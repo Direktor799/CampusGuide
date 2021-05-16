@@ -6,12 +6,10 @@ void MainWindow::move_cancel()
     me->now_routes.canceled = true;
 }
 
-void MainWindow::move_switch(multi_routes *routes, strat strategy)
+void MainWindow::move_switch(multi_routes *routes)
 {
-    deswidget->setDisabled(true);
     *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 开始导航" << Qt::endl;
     me->now_routes = *routes;
-    me->now_using = strategy;
     for (int iter = 0; iter < 3; iter++)
         routes_with_strat_display[iter]->enable = false;
     move_cancel_btn->show();
@@ -22,7 +20,6 @@ void MainWindow::move_switch(multi_routes *routes, strat strategy)
     move_cancel_btn->hide();
     for (int iter = 0; iter < 3; iter++)
         routes_with_strat_display[iter]->enable = true;
-    deswidget->setEnabled(true);
 }
 
 void MainWindow::route_calcu()
@@ -181,7 +178,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     me->now_on = main_campus;
     main_campus->stackUnder(me);
     shahe_campus->stackUnder(me);
-    connect(me, &Player::real_time_recalcu, this, &MainWindow::route_calcu);
 
     deswidget->addComboBox();
 
@@ -198,11 +194,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     move_cancel_btn->hide();
     connect(move_cancel_btn, &QPushButton::clicked, this, &MainWindow::move_cancel);
 
-    routes_with_strat_display[0] = new RouteLabel(&me->routes_with_strat[0], "最短距离", distance_first, this);
+    routes_with_strat_display[0] = new RouteLabel(&me->routes_with_strat[0], "最短距离", this);
     routes_with_strat_display[0]->move(1100, 250);
-    routes_with_strat_display[1] = new RouteLabel(&me->routes_with_strat[1], "最短时间", time_first, this);
+    routes_with_strat_display[1] = new RouteLabel(&me->routes_with_strat[1], "最短时间", this);
     routes_with_strat_display[1]->move(1100, 300);
-    routes_with_strat_display[2] = new RouteLabel(&me->routes_with_strat[2], "骑车最短时间", bike_allowed, this);
+    routes_with_strat_display[2] = new RouteLabel(&me->routes_with_strat[2], "骑车最短时间", this);
     routes_with_strat_display[2]->move(1100, 350);
     for (int iter = 0; iter < 3; iter++)
     {

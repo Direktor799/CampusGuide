@@ -15,7 +15,7 @@ public:
     bool waiting;
     multi_routes routes_with_strat[3];
     multi_routes now_routes;
-    strat now_using;
+
     Player(QTextStream *textstream, QWidget *parent = nullptr);
     bool is_on_vertex();
     void navigation(QVector<QPair<Map *, int>> des);
@@ -28,7 +28,6 @@ protected:
     void paintEvent(QPaintEvent *);
 signals:
     void moving();
-    void real_time_recalcu();
 };
 
 #endif // PLAYER_H

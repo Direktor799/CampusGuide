@@ -1,10 +1,9 @@
 #include "labels.h"
 
-RouteLabel::RouteLabel(multi_routes *tmp, QString string, strat s, QWidget *parent) : QLabel(parent)
+RouteLabel::RouteLabel(multi_routes *tmp, QString string, QWidget *parent) : QLabel(parent)
 {
     text = string;
     routes = tmp;
-    strategy = s;
     hover = false;
     enable = true;
     setStyleSheet("border:1px solid black;");
@@ -37,7 +36,7 @@ void RouteLabel::mouseReleaseEvent(QMouseEvent *ev)
 {
     Q_UNUSED(ev)
     if (enable)
-        emit clicked(routes, strategy);
+        emit clicked(routes);
 }
 
 void RouteLabel::display()

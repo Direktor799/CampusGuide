@@ -39,7 +39,7 @@ public:
     ~MainWindow();
     void route_calcu();
     void map_switch();
-    void move_switch(multi_routes *routes, strat strategy);
+    void move_switch(multi_routes *routes);
     void move_cancel();
     void timer_update();
     void setFactor();
