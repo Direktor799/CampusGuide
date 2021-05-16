@@ -7,6 +7,7 @@ Player::Player(QTextStream *textstream, QWidget *parent) : QWidget(parent)
     pos_x = 0;
     pos_y = 0;
     speedfactor = 6;
+    waiting = false;
     log = textstream;
     resize(1080, 672);
 }
@@ -96,6 +97,12 @@ void Player::move()
     {
         if(j->on == nullptr)
         {
+            waiting = true;
+            update();
+            sleep(j->time * 60 * 1000, speedfactor, now_routes.canceled);
+            waiting = false;
+            update();
+            j++;
             qDebug() << "not yet";
             continue;
         }
@@ -133,12 +140,12 @@ void Player::move()
             }
             for (auto k = 0; k < distance; k++)
             {
+                if (now_routes.now->is_riding && now_routes.now->now->is_bike_allowed)
+                    sleep(map_ratio * 1.0 / (now_routes.now->now->congestion * walk_speed / 60 * ride_multiplier) * 1000, speedfactor, now_routes.canceled);
+                else
+                    sleep(map_ratio * 1.0 / (now_routes.now->now->congestion * walk_speed / 60) * 1000, speedfactor, now_routes.canceled);
                 if (now_routes.canceled)
                     break;
-                if (now_routes.now->is_riding && now_routes.now->now->is_bike_allowed)
-                    sleep(map_ratio * 1.0 / (now_routes.now->now->congestion * walk_speed / 60 * ride_multiplier) * 1000, speedfactor);
-                else
-                    sleep(map_ratio * 1.0 / (now_routes.now->now->congestion * walk_speed / 60) * 1000, speedfactor);
                 pos_x += x_move;
                 pos_y += y_move;
                 update();
@@ -230,5 +237,11 @@ void Player::paintEvent(QPaintEvent *)
     QPixmap player_img;
     player_img.load("../data/me.png");
     if (now_on->isVisible())
+    {
         painter.drawPixmap(pos_x * my_ratio + my_drift - 20, pos_y * my_ratio + my_drift - 30, 40, 40, player_img);
+        if (waiting)
+        {
+            painter.drawText(pos_x * my_ratio + my_drift - 20, pos_y * my_ratio + my_drift - 30, "等待中");
+        }
+    }
 }

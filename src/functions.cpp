@@ -5,10 +5,12 @@ bool string_less(const QString &s1, const QString &s2)
     return (s1.localeAwareCompare(s2) < 0);
 }
 
-void sleep(int msec, int &speedfactor)
+void sleep(int msec, int &speedfactor, bool &cancel)
 {
     while (msec > 0)
     {
+        if(cancel)
+            return;
         _tinysleep100ms();
         msec -= 100 * speedfactor;
     }

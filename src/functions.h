@@ -102,7 +102,7 @@ struct bus_time
 };
 
 bool string_less(const QString &s1, const QString &s2);
-void sleep(int msec, int &speedfactor);
+void sleep(int msec, int &speedfactor, bool &cancel);
 void _tinysleep100ms();
 int get_length(int a_pos_x, int a_pos_y, int b_pos_x, int b_pos_y);
 int get_distance(int a_pos_x, int a_pos_y, int b_pos_x, int b_pos_y);
