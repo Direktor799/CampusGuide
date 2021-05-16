@@ -28,6 +28,7 @@ protected:
     void paintEvent(QPaintEvent *);
 signals:
     void moving();
+    void playAnimation(transport by);
 };
 
 #endif // PLAYER_H

@@ -2,6 +2,7 @@
 #define LABELS_H
 
 #include <QLabel>
+#include <QPropertyAnimation>
 #include "functions.h"
 class RouteLabel : public QLabel
 {
@@ -40,6 +41,16 @@ protected:
     virtual void leaveEvent(QEvent *ev);
 signals:
     void clicked(QString text);
+};
+
+class AnimationLabel : public QLabel
+{
+    Q_OBJECT
+public:
+    QPropertyAnimation *bus_animation;
+    QPropertyAnimation *subway_animation;
+    AnimationLabel(QWidget *parent = nullptr);
+    void play(transport by);
 };
 
 #endif // LABELS_H

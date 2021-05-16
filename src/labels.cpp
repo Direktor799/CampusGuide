@@ -92,3 +92,50 @@ void BuildingLabel::mouseReleaseEvent(QMouseEvent *ev)
     Q_UNUSED(ev)
     emit clicked(name);
 }
+
+AnimationLabel::AnimationLabel(QWidget *parent) : QLabel(parent)
+{
+    resize(1080, 672);
+
+    QLabel *background = new QLabel(this);
+    QPixmap background_pic(1080, 300);
+    background_pic.fill(QColor("White"));
+    background->setPixmap(background_pic);
+    background->move(0, 150);
+
+    QLabel *bus = new QLabel(this);
+    QPixmap bus_pic;
+    bus_pic.load("../data/bus.png");
+    bus->setPixmap(bus_pic);
+    bus->adjustSize();
+    bus->move(QPoint(-400, 150));
+    bus_animation = new QPropertyAnimation(bus, "pos");
+    bus_animation->setDuration(1500);
+    bus_animation->setStartValue(QPoint(-400, 150));
+    bus_animation->setEndValue(QPoint(1100, 150));
+
+    QLabel *subway = new QLabel(this);
+    QPixmap subway_pic;
+    subway_pic.load("../data/subway.png");
+    subway->setPixmap(subway_pic);
+    subway->adjustSize();
+    subway->move(QPoint(-2400, 250));
+    subway_animation = new QPropertyAnimation(subway, "pos");
+    subway_animation->setDuration(1500);
+    subway_animation->setStartValue(QPoint(-2400, 250));
+    subway_animation->setEndValue(QPoint(2000, 250));
+    hide();
+}
+
+void AnimationLabel::play(transport by)
+{
+    raise();
+    show();
+    update();
+    if (by == by_bus)
+        bus_animation->start();
+    else if (by == by_subway)
+        subway_animation->start();
+    QTest::qWait(1500);
+    hide();
+}

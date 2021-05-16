@@ -148,7 +148,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     timer->start(100);
 
     vtime = new QDateTime;
-    *vtime = QDateTime::currentDateTime();
+    *vtime = QDateTime::currentDateTime().addSecs(60 * 60 * 6.5);//testtttttttttttttttttttttttttttttttttttttttttttttttt
 
     time_display = new QLabel(this);
     time_display->move(1100, 650);
@@ -242,7 +242,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     slider->setPageStep(1);
     slider->setValue(1);
     connect(slider, &QSlider::valueChanged, this, &MainWindow::setFactor);
-
+    AnimationLabel *animation = new AnimationLabel(this);
+    connect(me, &Player::playAnimation, animation, &AnimationLabel::play);
     *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 初始化完毕" << Qt::endl;
 }
 

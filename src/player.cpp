@@ -95,6 +95,8 @@ void Player::move()
     update();
     for (auto j = now_routes.routes.begin(); j < now_routes.routes.end(); j++)
     {
+        if (now_routes.canceled)
+            break;
         if(j->on == nullptr)
         {
             waiting = true;
@@ -103,11 +105,13 @@ void Player::move()
             waiting = false;
             update();
             j++;
-            qDebug() << "not yet";
+            if (((now_on->filename == "main_campus" && pos_number == 153)) || (now_on->filename == "shahe_campus" && pos_number == 90)) //如果在乘车处
+                emit playAnimation(by_bus);
+            else
+                emit playAnimation(by_subway);
+            *now_on->time_ptr = now_on->time_ptr->addSecs(j->time * 60);
             continue;
         }
-        if (now_routes.canceled)
-            break;
         now_routes.now = &*j;
         if (now_routes.now->on != now_on)
             *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 玩家 " << now_on->name << "->" << now_routes.now->on->name << Qt::endl;
