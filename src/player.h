@@ -28,7 +28,6 @@ protected:
     void paintEvent(QPaintEvent *);
 signals:
     void moving();
-    void real_time_recalcu();
 };
 
 #endif // PLAYER_H

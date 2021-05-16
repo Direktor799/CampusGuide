@@ -8,12 +8,13 @@ void MainWindow::move_cancel()
 
 void MainWindow::move_switch(multi_routes *routes, strat strategy)
 {
-    deswidget->setDisabled(true);
     *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 开始导航" << Qt::endl;
     me->now_routes = *routes;
     me->now_using = strategy;
     for (int iter = 0; iter < 3; iter++)
-        routes_with_strat_display[iter]->enable = false;
+        routes_with_strat_display[iter]->setDisabled(true);
+    deswidget->setDisabled(true);
+    listwidget->setDisabled(true);
     move_cancel_btn->show();
     me->move();
     deswidget->clear();
@@ -21,8 +22,9 @@ void MainWindow::move_switch(multi_routes *routes, strat strategy)
     route_calcu();
     move_cancel_btn->hide();
     for (int iter = 0; iter < 3; iter++)
-        routes_with_strat_display[iter]->enable = true;
+        routes_with_strat_display[iter]->setEnabled(true);
     deswidget->setEnabled(true);
+    listwidget->setEnabled(true);
 }
 
 void MainWindow::route_calcu()
@@ -41,7 +43,11 @@ void MainWindow::route_calcu()
     me->navigation(des);
     if (is_valid)
         for (int iter = 0; iter < 3; iter++)
+        {
+            routes_with_strat_display[iter]->hover = false;
+            routes_with_strat_display[iter]->setStyleSheet("border:1px solid black;");
             routes_with_strat_display[iter]->display();
+        }
     else
         for (int iter = 0; iter < 3; iter++)
             routes_with_strat_display[iter]->hide();
@@ -181,7 +187,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     me->now_on = main_campus;
     main_campus->stackUnder(me);
     shahe_campus->stackUnder(me);
-    connect(me, &Player::real_time_recalcu, this, &MainWindow::route_calcu);
 
     deswidget->addComboBox();
 

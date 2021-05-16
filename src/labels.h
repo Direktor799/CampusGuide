@@ -10,7 +10,6 @@ public:
     multi_routes *routes;
     QString text;
     bool hover;
-    bool enable;
     strat strategy;
     RouteLabel(multi_routes *tmp, QString string, strat s, QWidget *parent = nullptr);
     void display();
