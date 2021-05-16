@@ -12,9 +12,10 @@ RouteLabel::RouteLabel(multi_routes *tmp, QString string, QWidget *parent) : QLa
 
 void RouteLabel::enterEvent(QEnterEvent *ev)
 {
-    if (!hover)
+    if (enable && !hover)
     {
         hover = true;
+        setStyleSheet("border:2px solid black;");
         emit hover_in(routes);
     }
     QLabel::enterEvent(ev);
@@ -22,9 +23,10 @@ void RouteLabel::enterEvent(QEnterEvent *ev)
 
 void RouteLabel::leaveEvent(QEvent *ev)
 {
-    if (hover)
+    if (enable && hover)
     {
         hover = false;
+        setStyleSheet("border:1px solid black;");
         emit hover_out(routes);
     }
     QLabel::leaveEvent(ev);

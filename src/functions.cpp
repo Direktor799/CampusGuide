@@ -5,12 +5,22 @@ bool string_less(const QString &s1, const QString &s2)
     return (s1.localeAwareCompare(s2) < 0);
 }
 
-bool sleep(unsigned int msec)
+void sleep(int msec, int &speedfactor)
 {
-    QTime dieTime = QTime::currentTime().addMSecs(msec);
+    while (msec > 0)
+    {
+        _tinysleep100ms();
+        msec -= 100 * speedfactor;
+    }
+    return;
+}
+
+void _tinysleep100ms()
+{
+    QTime dieTime = QTime::currentTime().addMSecs(100);
     while (QTime::currentTime() < dieTime)
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-    return true;
+    return;
 }
 
 int get_length(int a_pos_x, int a_pos_y, int b_pos_x, int b_pos_y)
