@@ -34,6 +34,7 @@ public:
     QSlider *slider;
     QLabel *listlabel, *sliderleftlabel, *sliderrightlabel;
     QListWidget *listwidget;
+    AnimationLabel *animation;
     bool keep_calcu;
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -44,7 +45,8 @@ public:
     void timer_update();
     void setFactor();
     void updateListWidget();
-    void map_auto_change(Map* from);
+    void map_auto_change(Map *from);
+
 private:
     Ui::MainWindow *ui;
 };

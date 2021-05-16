@@ -46,7 +46,7 @@ struct vertex
 
 struct dij_tmp
 {
-    edge* edge_ptr;
+    edge *edge_ptr;
     int total_dis;
     double total_time;
 };
@@ -56,13 +56,13 @@ class distance_first_cmp
 public:
     bool operator()(dij_tmp a, dij_tmp b)
     {
-        if(a.total_dis > b.total_dis)
+        if (a.total_dis > b.total_dis)
             return true;
-        if(a.total_dis == b.total_dis && a.total_time > b.total_time)
+        if (a.total_dis == b.total_dis && a.total_time > b.total_time)
             return true;
-        if(a.total_dis == b.total_dis && a.total_time == b.total_time&& a.edge_ptr->from > b.edge_ptr->from)
+        if (a.total_dis == b.total_dis && a.total_time == b.total_time && a.edge_ptr->from > b.edge_ptr->from)
             return true;
-        if(a.total_dis == b.total_dis && a.total_time == b.total_time&& a.edge_ptr->from == b.edge_ptr->from && a.edge_ptr->to > b.edge_ptr->to)
+        if (a.total_dis == b.total_dis && a.total_time == b.total_time && a.edge_ptr->from == b.edge_ptr->from && a.edge_ptr->to > b.edge_ptr->to)
             return true;
         return false;
     }
@@ -73,11 +73,11 @@ class time_first_cmp
 public:
     bool operator()(dij_tmp a, dij_tmp b)
     {
-        if(a.total_time > b.total_time)
+        if (a.total_time > b.total_time)
             return true;
-        if(a.total_time == b.total_time && a.edge_ptr->from > b.edge_ptr->from)
+        if (a.total_time == b.total_time && a.edge_ptr->from > b.edge_ptr->from)
             return true;
-        if(a.total_time == b.total_time && a.edge_ptr->from == b.edge_ptr->from && a.edge_ptr->to > b.edge_ptr->to)
+        if (a.total_time == b.total_time && a.edge_ptr->from == b.edge_ptr->from && a.edge_ptr->to > b.edge_ptr->to)
             return true;
         return false;
     }
@@ -91,8 +91,8 @@ struct multi_routes
     double time = 0;
     bool visable = false;
     bool canceled = false;
-    route_info* now = nullptr;
-    QVector<route_info> routes; 
+    route_info *now = nullptr;
+    QVector<route_info> routes;
 };
 
 struct bus_time

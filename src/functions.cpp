@@ -9,7 +9,7 @@ void sleep(int msec, int &speedfactor, bool &cancel)
 {
     while (msec > 0)
     {
-        if(cancel)
+        if (cancel)
             return;
         QTest::qWait(100);
         msec -= 100 * speedfactor;

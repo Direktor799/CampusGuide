@@ -97,7 +97,7 @@ void Player::move()
     {
         if (now_routes.canceled)
             break;
-        if(j->on == nullptr)
+        if (j->on == nullptr)
         {
             waiting = true;
             update();

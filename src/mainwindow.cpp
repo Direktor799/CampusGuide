@@ -248,7 +248,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     slider->setPageStep(1);
     slider->setValue(1);
     connect(slider, &QSlider::valueChanged, this, &MainWindow::setFactor);
-    AnimationLabel *animation = new AnimationLabel(this);
+    animation = new AnimationLabel(this);
     connect(me, &Player::playAnimation, animation, &AnimationLabel::play);
     connect(me, &Player::changeMapFrom, this, &MainWindow::map_auto_change);
     *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 初始化完毕" << Qt::endl;
