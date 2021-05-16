@@ -9,7 +9,6 @@ void MainWindow::move_cancel()
 void MainWindow::move_switch(multi_routes *routes, strat strategy)
 {
     *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 开始导航" << Qt::endl;
-    keep_calcu = false;
     me->now_routes = *routes;
     me->now_routes.visable = true;
     me->now_using = strategy;
@@ -18,26 +17,17 @@ void MainWindow::move_switch(multi_routes *routes, strat strategy)
     deswidget->setDisabled(true);
     listwidget->setDisabled(true);
     move_cancel_btn->show();
+    keep_calcu = false;
     me->move();
     deswidget->clear();
     deswidget->addComboBox();
     route_calcu();
-    move_cancel_btn->hide();
     for (int iter = 0; iter < 3; iter++)
         routes_with_strat_display[iter]->setEnabled(true);
     deswidget->setEnabled(true);
     listwidget->setEnabled(true);
-}
-
-void MainWindow::route_calcu_loop()
-{
-    route_calcu();
+    move_cancel_btn->hide();
     keep_calcu = true;
-    while(keep_calcu)
-    {
-        QTest::qWait(500);
-        route_calcu();
-    }
 }
 
 void MainWindow::route_calcu()
@@ -108,6 +98,8 @@ void MainWindow::timer_update()
     time_display->setText(vtime->toString("yyyy-MM-dd hh:mm:ss ddd"));
     time_display->adjustSize();
     time_display->update();
+    if (keep_calcu)
+        route_calcu();
 }
 
 void MainWindow::setFactor()
@@ -143,14 +135,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     logfile->open(QIODevice::WriteOnly | QIODevice::Text);
     log = new QTextStream(logfile);
     *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 程序启动" << Qt::endl;
-    keep_calcu = false;
+    keep_calcu = true;
     ui->setupUi(this);
 
     setWindowTitle("CampusGuide");
     setFixedSize(1280, 672);
 
     deswidget = new DesWidget(log, this);
-    connect(deswidget->route_calcu_btn, &QPushButton::clicked, this, &MainWindow::route_calcu_loop);
 
     QTimer *timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::timer_update);

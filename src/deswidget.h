@@ -29,7 +29,6 @@ public:
     QVector<DesComboBox*> deslist;
     QPushButton* add_btn;
     QPushButton* delete_btn;
-    QPushButton* route_calcu_btn;
     DesWidget(QTextStream *textstream, QWidget *parent = nullptr);
     void addComboBox();
     void deleteComboBox();

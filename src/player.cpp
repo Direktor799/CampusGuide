@@ -241,7 +241,11 @@ void Player::paintEvent(QPaintEvent *)
         painter.drawPixmap(pos_x * my_ratio + my_drift - 20, pos_y * my_ratio + my_drift - 30, 40, 40, player_img);
         if (waiting)
         {
-            painter.drawText(pos_x * my_ratio + my_drift - 20, pos_y * my_ratio + my_drift - 30, "等待中");
+            if (((now_on->filename == "main_campus" && pos_number == 153)) || (now_on->filename == "shahe_campus" && pos_number == 90)) //如果在乘车处
+                player_img.load("../data/waiting_bus.png");
+            else
+                player_img.load("../data/waiting_subway.png");
+            painter.drawPixmap(pos_x * my_ratio + my_drift - 50, pos_y * my_ratio + my_drift - 120, 100, 100, player_img);
         }
     }
 }

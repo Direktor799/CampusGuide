@@ -32,10 +32,8 @@ void DesWidget::addComboBox()
         add_btn->setDisabled(true);
 
     add_btn->setDisabled(true);
-    route_calcu_btn->setDisabled(true);
     add_btn->move(add_btn->pos() + QPoint(0, 30));
     delete_btn->move(delete_btn->pos() + QPoint(0, 30));
-    route_calcu_btn->move(route_calcu_btn->pos() + QPoint(0, 30));
 }
 
 void DesWidget::deleteComboBox()
@@ -47,13 +45,9 @@ void DesWidget::deleteComboBox()
         deslist.back()->setEnabled(true);
     add_btn->setEnabled(true);
     if (deslist.empty())
-    {
         delete_btn->setDisabled(true);
-        route_calcu_btn->setDisabled(true);
-    }
     add_btn->move(add_btn->pos() - QPoint(0, 30));
     delete_btn->move(delete_btn->pos() - QPoint(0, 30));
-    route_calcu_btn->move(route_calcu_btn->pos() - QPoint(0, 30));
 }
 
 void DesWidget::setComboBox(QString text)
@@ -86,7 +80,6 @@ void DesWidget::nextAllowed()
     *log << Qt::endl;
     if (deslist.back()->combobox->currentText() != "")
     {
-        route_calcu_btn->setEnabled(true);
         if (deslist.size() < 5)
             add_btn->setEnabled(true);
     }
@@ -106,11 +99,6 @@ DesWidget::DesWidget(QTextStream *textstream, QWidget *parent) : QWidget(parent)
     delete_btn->move(80, 0);
     delete_btn->setFixedSize(50, 30);
     connect(delete_btn, &QPushButton::clicked, this, &DesWidget::deleteComboBox);
-
-    route_calcu_btn = new QPushButton("计算路线", this);
-    route_calcu_btn->move(30, 30);
-    route_calcu_btn->setFixedSize(100, 30);
-    route_calcu_btn->setDisabled(true);
 
     resize(130, 500);
 }
