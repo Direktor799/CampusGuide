@@ -11,17 +11,9 @@ void sleep(int msec, int &speedfactor, bool &cancel)
     {
         if(cancel)
             return;
-        _tinysleep100ms();
+        QTest::qWait(100);
         msec -= 100 * speedfactor;
     }
-    return;
-}
-
-void _tinysleep100ms()
-{
-    QTime dieTime = QTime::currentTime().addMSecs(100);
-    while (QTime::currentTime() < dieTime)
-    //    QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
     return;
 }
 

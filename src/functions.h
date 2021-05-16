@@ -6,6 +6,7 @@
 #include <QApplication>
 #include <QPushButton>
 #include <QVector>
+#include <QTest>
 
 const int walk_speed = 80;
 const int ride_multiplier = 3;

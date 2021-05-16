@@ -11,6 +11,7 @@ void MainWindow::move_switch(multi_routes *routes, strat strategy)
     *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 开始导航" << Qt::endl;
     keep_calcu = false;
     me->now_routes = *routes;
+    me->now_routes.visable = true;
     me->now_using = strategy;
     for (int iter = 0; iter < 3; iter++)
         routes_with_strat_display[iter]->setDisabled(true);
@@ -34,8 +35,7 @@ void MainWindow::route_calcu_loop()
     keep_calcu = true;
     while(keep_calcu)
     {
-        for(int i = 0; i < 10 && keep_calcu; i++)
-            _tinysleep100ms();
+        QTest::qWait(500);
         route_calcu();
     }
 }
@@ -56,11 +56,7 @@ void MainWindow::route_calcu()
     me->navigation(des);
     if (is_valid)
         for (int iter = 0; iter < 3; iter++)
-        {
-            routes_with_strat_display[iter]->hover = false;
-            routes_with_strat_display[iter]->setStyleSheet("border:1px solid black;");
             routes_with_strat_display[iter]->display();
-        }
     else
         for (int iter = 0; iter < 3; iter++)
             routes_with_strat_display[iter]->hide();

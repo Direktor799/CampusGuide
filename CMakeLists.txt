@@ -26,6 +26,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
+find_package(Qt6 COMPONENTS Test REQUIRED) 
 
 set(PROJECT_SOURCES
         src/main.cpp
@@ -62,3 +63,4 @@ else()
 endif()
 
 target_link_libraries(21_DSCourseProject_CampusGuide PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(21_DSCourseProject_CampusGuide PRIVATE Qt${QT_VERSION_MAJOR}::Test)

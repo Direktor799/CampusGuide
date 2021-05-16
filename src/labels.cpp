@@ -12,7 +12,7 @@ RouteLabel::RouteLabel(multi_routes *tmp, QString string, strat s, QWidget *pare
 
 void RouteLabel::enterEvent(QEnterEvent *ev)
 {
-    if (this->isEnabled() && !hover)
+    if (!hover)
     {
         hover = true;
         setStyleSheet("border:2px solid black;");
@@ -23,7 +23,7 @@ void RouteLabel::enterEvent(QEnterEvent *ev)
 
 void RouteLabel::leaveEvent(QEvent *ev)
 {
-    if (this->isEnabled() && hover)
+    if (hover)
     {
         hover = false;
         setStyleSheet("border:1px solid black;");
@@ -35,8 +35,7 @@ void RouteLabel::leaveEvent(QEvent *ev)
 void RouteLabel::mouseReleaseEvent(QMouseEvent *ev)
 {
     Q_UNUSED(ev)
-    if (this->isEnabled())
-        emit clicked(routes, strategy);
+    emit clicked(routes, strategy);
 }
 
 void RouteLabel::display()
