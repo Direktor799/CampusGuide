@@ -201,7 +201,7 @@ QVector<route_info> Map::cross_campus(double time_passed, transport by)
     {
         wait.time = 10 - (ETA.time().minute() % 10 + double(ETA.time().second()) / 60); //算出距离下一个整十分钟要多久
         if (ETA.time().hour() >= 0 && ETA.time().hour() < 6)                            //如果当前地铁没车，加上要等的小时
-            wait.time += 60 * (6 - ETA.time().hour());
+            wait.time += 60 * (6 - ETA.time().hour()) - ETA.time().minute();
         wait.distance = 0;
         cross.time = 50; //模拟两个地铁站之间50分钟
         cross.distance = 0;
