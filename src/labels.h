@@ -11,8 +11,8 @@ public:
     QString text;
     bool hover;
     bool enable;
-
-    RouteLabel(multi_routes *tmp, QString string, QWidget *parent = nullptr);
+    strat strategy;
+    RouteLabel(multi_routes *tmp, QString string, strat s, QWidget *parent = nullptr);
     void display();
 
 protected:
@@ -20,7 +20,7 @@ protected:
     virtual void enterEvent(QEnterEvent *ev);
     virtual void leaveEvent(QEvent *ev);
 signals:
-    void clicked(multi_routes *route);
+    void clicked(multi_routes *route, strat s);
     void hover_in(multi_routes *route);
     void hover_out(multi_routes *route);
 };

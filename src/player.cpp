@@ -93,7 +93,7 @@ void Player::navigation(QVector<QPair<Map *, int>> des)
 void Player::move()
 {
     update();
-    for (auto j = now_routes.routes.begin(); j < now_routes.routes.end(); j++)
+    for (auto j = now_routes.routes.begin(); j < now_routes.routes.end();)
     {
         if(j->on == nullptr)
         {
@@ -159,8 +159,15 @@ void Player::move()
             pos_y = now_on->vertices[(*i)->to].pos_y;
             if (now_on->vertices[pos_number].name != "Crossing")
                 *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 玩家到达" + now_on->vertices[pos_number].name << "[" << now_on->name << "(" << pos_x << "," << pos_y << ")]" << Qt::endl;
+            emit real_time_recalcu();
+            now_routes = routes_with_strat[now_using];
+            now_routes.visable = true;
+            j = now_routes.routes.begin();
+            break;
         }
         emit moving();
+        if(j->distance == 0 && j->on != nullptr)
+            break;
     }
     now_routes.visable = false;
     now_routes.canceled = false;
