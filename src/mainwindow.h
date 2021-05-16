@@ -44,7 +44,7 @@ public:
     void timer_update();
     void setFactor();
     void updateListWidget();
-    
+    void map_auto_change(Map* from);
 private:
     Ui::MainWindow *ui;
 };

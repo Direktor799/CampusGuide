@@ -11,12 +11,12 @@ class DesComboBox : public QWidget
     Q_OBJECT
 
 public:
-    QComboBox* combobox;
-    QLabel* label;
-    Map* map;
-    DesComboBox(Map* m, QWidget *parent = nullptr);
-private:
+    QComboBox *combobox;
+    QLabel *label;
+    Map *map;
+    DesComboBox(Map *m, QWidget *parent = nullptr);
 
+private:
 };
 
 class DesWidget : public QWidget
@@ -25,10 +25,10 @@ class DesWidget : public QWidget
 
 public:
     QTextStream *log;
-    Map* now_show;
-    QVector<DesComboBox*> deslist;
-    QPushButton* add_btn;
-    QPushButton* delete_btn;
+    Map *now_show;
+    QVector<DesComboBox *> deslist;
+    QPushButton *add_btn;
+    QPushButton *delete_btn;
     DesWidget(QTextStream *textstream, QWidget *parent = nullptr);
     void addComboBox();
     void deleteComboBox();
@@ -36,8 +36,8 @@ public:
     void resetComboBox(QListWidgetItem *item);
     void clear();
     void nextAllowed();
-private:
 
+private:
 };
 
 #endif // DESWIDGET_H

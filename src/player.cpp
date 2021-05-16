@@ -110,6 +110,7 @@ void Player::move()
             else
                 emit playAnimation(by_subway);
             *now_on->time_ptr = now_on->time_ptr->addSecs(j->time * 60);
+            emit changeMapFrom(now_on);
             continue;
         }
         now_routes.now = &*j;
@@ -246,9 +247,9 @@ void Player::paintEvent(QPaintEvent *)
         if (waiting)
         {
             if (((now_on->filename == "main_campus" && pos_number == 153)) || (now_on->filename == "shahe_campus" && pos_number == 90)) //如果在乘车处
-                player_img.load("../data/bus.png");
+                player_img.load("../data/waiting_bus.png");
             else
-                player_img.load("../data/subway.png");
+                player_img.load("../data/waiting_subway.png");
             painter.drawPixmap(pos_x * my_ratio + my_drift + 10, pos_y * my_ratio + my_drift - 100, 100, 100, player_img);
         }
     }

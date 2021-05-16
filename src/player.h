@@ -29,6 +29,7 @@ protected:
 signals:
     void moving();
     void playAnimation(transport by);
+    void changeMapFrom(Map *from);
 };
 
 #endif // PLAYER_H

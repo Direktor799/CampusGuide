@@ -92,6 +92,12 @@ void MainWindow::map_switch()
     *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 切换地图至" << deswidget->now_show->name << Qt::endl;
 }
 
+void MainWindow::map_auto_change(Map *from)
+{
+    if (from == deswidget->now_show)
+        map_switch();
+}
+
 void MainWindow::timer_update()
 {
     *vtime = vtime->addMSecs(100 * me->speedfactor);
@@ -148,7 +154,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     timer->start(100);
 
     vtime = new QDateTime;
-    *vtime = QDateTime::currentDateTime().addSecs(60 * 60 * 6.5);//testtttttttttttttttttttttttttttttttttttttttttttttttt
+    *vtime = QDateTime::currentDateTime();
 
     time_display = new QLabel(this);
     time_display->move(1100, 650);
@@ -244,6 +250,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(slider, &QSlider::valueChanged, this, &MainWindow::setFactor);
     AnimationLabel *animation = new AnimationLabel(this);
     connect(me, &Player::playAnimation, animation, &AnimationLabel::play);
+    connect(me, &Player::changeMapFrom, this, &MainWindow::map_auto_change);
     *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 初始化完毕" << Qt::endl;
 }
 
