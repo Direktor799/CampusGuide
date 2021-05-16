@@ -34,9 +34,10 @@ public:
     QSlider *slider;
     QLabel *listlabel, *sliderleftlabel, *sliderrightlabel;
     QListWidget *listwidget;
-
+    bool keep_calcu;
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void route_calcu_loop();
     void route_calcu();
     void map_switch();
     void move_switch(multi_routes *routes, strat strategy);

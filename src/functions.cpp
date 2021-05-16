@@ -21,7 +21,7 @@ void _tinysleep100ms()
 {
     QTime dieTime = QTime::currentTime().addMSecs(100);
     while (QTime::currentTime() < dieTime)
-        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+    //    QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
     return;
 }
 

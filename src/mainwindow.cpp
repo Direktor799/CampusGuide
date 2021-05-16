@@ -9,6 +9,7 @@ void MainWindow::move_cancel()
 void MainWindow::move_switch(multi_routes *routes, strat strategy)
 {
     *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 开始导航" << Qt::endl;
+    keep_calcu = false;
     me->now_routes = *routes;
     me->now_using = strategy;
     for (int iter = 0; iter < 3; iter++)
@@ -25,6 +26,18 @@ void MainWindow::move_switch(multi_routes *routes, strat strategy)
         routes_with_strat_display[iter]->setEnabled(true);
     deswidget->setEnabled(true);
     listwidget->setEnabled(true);
+}
+
+void MainWindow::route_calcu_loop()
+{
+    route_calcu();
+    keep_calcu = true;
+    while(keep_calcu)
+    {
+        for(int i = 0; i < 10 && keep_calcu; i++)
+            _tinysleep100ms();
+        route_calcu();
+    }
 }
 
 void MainWindow::route_calcu()
@@ -134,14 +147,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     logfile->open(QIODevice::WriteOnly | QIODevice::Text);
     log = new QTextStream(logfile);
     *log << QTime::currentTime().toString("hh:mm:ss:zzz") << " > 程序启动" << Qt::endl;
-
+    keep_calcu = false;
     ui->setupUi(this);
 
     setWindowTitle("CampusGuide");
     setFixedSize(1280, 672);
 
     deswidget = new DesWidget(log, this);
-    connect(deswidget->route_calcu_btn, &QPushButton::clicked, this, &MainWindow::route_calcu);
+    connect(deswidget->route_calcu_btn, &QPushButton::clicked, this, &MainWindow::route_calcu_loop);
 
     QTimer *timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::timer_update);
