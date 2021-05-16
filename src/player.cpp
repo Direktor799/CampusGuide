@@ -246,10 +246,10 @@ void Player::paintEvent(QPaintEvent *)
         if (waiting)
         {
             if (((now_on->filename == "main_campus" && pos_number == 153)) || (now_on->filename == "shahe_campus" && pos_number == 90)) //如果在乘车处
-                player_img.load("../data/waiting_bus.png");
+                player_img.load("../data/bus.png");
             else
-                player_img.load("../data/waiting_subway.png");
-            painter.drawPixmap(pos_x * my_ratio + my_drift - 50, pos_y * my_ratio + my_drift - 120, 100, 100, player_img);
+                player_img.load("../data/subway.png");
+            painter.drawPixmap(pos_x * my_ratio + my_drift + 10, pos_y * my_ratio + my_drift - 100, 100, 100, player_img);
         }
     }
 }
