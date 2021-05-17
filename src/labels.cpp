@@ -98,10 +98,10 @@ AnimationLabel::AnimationLabel(QWidget *parent) : QLabel(parent)
     resize(1080, 672);
 
     QLabel *background = new QLabel(this);
-    QPixmap background_pic(1080, 300);
-    background_pic.fill(QColor("White"));
+    QPixmap background_pic(1080, 200);
+    background_pic.fill(QColor(240,240,240));
     background->setPixmap(background_pic);
-    background->move(0, 150);
+    background->move(0, 220);
 
     QLabel *bus = new QLabel(this);
     QPixmap bus_pic;
