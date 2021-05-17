@@ -97,11 +97,26 @@ AnimationLabel::AnimationLabel(QWidget *parent) : QLabel(parent)
 {
     resize(1080, 672);
 
+    QLabel *filter = new QLabel(this);
+    QPixmap filter_pic(1080, 672);
+    filter_pic.fill(QColor("Black"));
+    filter->setPixmap(filter_pic);
+
+    QGraphicsOpacityEffect *eff = new QGraphicsOpacityEffect(filter);
+    filter->setGraphicsEffect(eff);
+    filter_animation = new QPropertyAnimation(eff,"opacity");
+    filter_animation->setDuration(500);
+    filter_animation->setStartValue(0);
+    filter_animation->setEndValue(0.5);
+
     QLabel *background = new QLabel(this);
     QPixmap background_pic(1080, 300);
     background_pic.fill(QColor("White"));
     background->setPixmap(background_pic);
-    background->move(0, 150);
+    background_animation = new QPropertyAnimation(background, "geometry");
+    background_animation->setDuration(500);
+    background_animation->setStartValue(QRect(-500, 336, 0, 0));
+    background_animation->setEndValue(QRect(0, 186, 1080, 300));
 
     QLabel *bus = new QLabel(this);
     QPixmap bus_pic;
@@ -111,8 +126,8 @@ AnimationLabel::AnimationLabel(QWidget *parent) : QLabel(parent)
     bus->move(QPoint(-400, 150));
     bus_animation = new QPropertyAnimation(bus, "pos");
     bus_animation->setDuration(1500);
-    bus_animation->setStartValue(QPoint(-400, 150));
-    bus_animation->setEndValue(QPoint(1100, 150));
+    bus_animation->setStartValue(QPoint(-400, 175));
+    bus_animation->setEndValue(QPoint(1100, 175));
 
     QLabel *subway = new QLabel(this);
     QPixmap subway_pic;
@@ -124,6 +139,8 @@ AnimationLabel::AnimationLabel(QWidget *parent) : QLabel(parent)
     subway_animation->setDuration(1500);
     subway_animation->setStartValue(QPoint(-2400, 250));
     subway_animation->setEndValue(QPoint(2000, 250));
+
+    filter->stackUnder(background);
     hide();
 }
 
@@ -132,6 +149,9 @@ void AnimationLabel::play(transport by)
     raise();
     show();
     update();
+    background_animation->start();
+    filter_animation->start();
+    QTest::qWait(500);
     if (by == by_bus)
         bus_animation->start();
     else if (by == by_subway)

@@ -3,6 +3,7 @@
 
 #include <QLabel>
 #include <QPropertyAnimation>
+#include <QGraphicsOpacityEffect>
 #include "functions.h"
 class RouteLabel : public QLabel
 {
@@ -47,6 +48,8 @@ class AnimationLabel : public QLabel
 {
     Q_OBJECT
 public:
+    QPropertyAnimation *filter_animation;
+    QPropertyAnimation *background_animation;
     QPropertyAnimation *bus_animation;
     QPropertyAnimation *subway_animation;
     AnimationLabel(QWidget *parent = nullptr);
